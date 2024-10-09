@@ -52,7 +52,7 @@
     </nav>
 
 	<div id="main-section">
-        <h1 class="kana-h1">Hiragana Chart</h1>
+        <h1 class="kana-h1">Chart</h1>
         <p class="kana-p">The Hiragana chart provides a foundational guide to learning the basic Japanese syllabary.
             Each character in Hiragana represents a specific syllable, typically combining a consonant and a vowel.
             These characters are used for native Japanese words and grammatical particles. Learning the Hiragana chart
@@ -61,7 +61,11 @@
             your vocabulary as you progress in your studies.</p>
         <img src="images/kana/hiragana_chart.png" alt="Hiragana Chart" class="chart">
 
-        <h1 class="kana-h1">Hiragana Mnemonics & Stroke Order</h1>
+        <h1 class="kana-h1">Mnemonics & Stroke Order</h1>
+        <p class="kana-p">Mnemonics help by creating easy-to-remember images or stories for each character,
+            making them stick in your mind. Stroke order, on the other hand, helps you write the characters more
+            naturally and neatly. By practicing both, you'll improve your reading and writing skills while remembering
+            the kana more easily.</p>
         <div th:each="hiragana : ${hiraganaList}" class="kana-section">
             <h2 th:text="${hiragana.letter} + ' (' + ${hiragana.romaji} + ')'"></h2>
             <button class="audio-button" th:data-audio="${hiragana.audio}" onclick="playAudio(this.dataset.audio)">🔊</button>

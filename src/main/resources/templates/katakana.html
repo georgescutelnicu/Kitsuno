@@ -21,8 +21,8 @@
         </div>
         <ul class="nav-links">
             <li><a href="#"><img src="images/navbar/home_icon.png" alt="Home Icon"> <span>Home</span></a></li>
+            <li><a href="#"><img src="images/navbar/hiragana_icon.png" alt="Hiragana Icon"> <span>Hiragana</span></a></li>
             <li class="active"><a href="#"><img src="images/navbar/katakana_icon.png" alt="Katakana Icon"> <span>Katakana</span></a></li>
-            <li><a href="#"><img src="images/navbar/katakana_icon.png" alt="Katakana Icon"> <span>Katakana</span></a></li>
             <li><a href="#"><img src="images/navbar/kanji_icon.png" alt="Kanji Icon"> <span>Kanji</span></a></li>
             <li><a href="#"><img src="images/navbar/flashcard_icon.png" alt="Flashcards Icon"> <span>Flashcards</span></a></li>
             <li><a href="#"><img src="images/navbar/vocabulary_icon.png" alt="Vocabulary Icon"> <span>Vocabulary</span></a></li>
@@ -43,8 +43,8 @@
     <nav class="bottom-navbar">
         <ul class="nav-links">
             <li><a href="#"><img src="images/navbar/home_icon.png" alt="Home Icon"> <span>Home</span></a></li>
+            <li><a href="#"><img src="images/navbar/hiragana_icon.png" alt="Hiragana Icon"> <span>Hiragana</span></a></li>
             <li class="active"><a href="#"><img src="images/navbar/katakana_icon.png" alt="Katakana Icon"> <span>Katakana</span></a></li>
-            <li><a href="#"><img src="images/navbar/katakana_icon.png" alt="Katakana Icon"> <span>Katakana</span></a></li>
             <li><a href="#"><img src="images/navbar/kanji_icon.png" alt="Kanji Icon"> <span>Kanji</span></a></li>
             <li><a href="#"><img src="images/navbar/flashcard_icon.png" alt="Flashcards Icon"> <span>Flashcards</span></a></li>
             <li><a href="#"><img src="images/navbar/vocabulary_icon.png" alt="Vocabulary Icon"> <span>Vocabulary</span></a></li>
@@ -52,7 +52,7 @@
     </nav>
 
 	<div id="main-section">
-        <h1 class="kana-h1">Katakana Chart</h1>
+        <h1 class="kana-h1">Chart</h1>
         <p class="kana-p">The Katakana chart consists of characters used primarily for foreign loanwords, onomatopoeia,
             and technical or scientific terms in Japanese. Each Katakana character represents a syllable, just like
             Hiragana, but Katakana has a more angular and block-like style. This syllabary is crucial for writing
@@ -61,7 +61,11 @@
             foreign-origin terms, which are increasingly common in everyday life in Japan.</p>
         <img src="images/kana/katakana_chart.png" alt="Katakana Chart" class="chart">
 
-        <h1 class="kana-h1">Katakana Mnemonics & Stroke Order</h1>
+        <h1 class="kana-h1">Mnemonics & Stroke Order</h1>
+        <p class="kana-p">Mnemonics help by creating easy-to-remember images or stories for each character,
+            making them stick in your mind. Stroke order, on the other hand, helps you write the characters more
+            naturally and neatly. By practicing both, you'll improve your reading and writing skills while remembering
+            the kana more easily.</p>
         <div th:each="katakana : ${katakanaList}" class="kana-section">
             <h2 th:text="${katakana.letter} + ' (' + ${katakana.romaji} + ')'"></h2>
             <button class="audio-button" th:data-audio="${katakana.audio}" onclick="playAudio(this.dataset.audio)">🔊</button>
