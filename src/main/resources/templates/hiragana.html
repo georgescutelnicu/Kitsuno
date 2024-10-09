@@ -61,11 +61,6 @@
         <div th:each="hiragana : ${hiraganaList}" class="kana-section">
             <h2 th:text="${hiragana.letter} + ' (' + ${hiragana.romaji} + ')'"></h2>
             <button class="audio-button" th:data-audio="${hiragana.audio}" onclick="playAudio(this.dataset.audio)">🔊</button>
-            <audio id="audio">
-                <source th:src="${hiragana.audio}" type="audio/mp3">
-                Your browser does not support the audio element.
-            </audio>
-
             <div class="flip-container">
                 <div class="flipper">
                     <div class="front">
