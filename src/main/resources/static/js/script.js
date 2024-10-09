@@ -30,3 +30,8 @@ document.addEventListener('DOMContentLoaded', function () {
 });
 
 
+// Play audio in Kana pages
+function playAudio() {
+    const audio = document.getElementById("audio");
+    audio.play();
+}
