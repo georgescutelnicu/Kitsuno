@@ -20,10 +20,10 @@ public class KatakanaDAOImpl implements KatakanaDAO {
 
     @Override
     public List<Katakana> findAll() {
-        TypedQuery<Katakana> query = entityManager.createQuery("FROM Hiragana", Katakana.class);
+        TypedQuery<Katakana> query = entityManager.createQuery("SELECT k FROM Katakana k", Katakana.class);
 
-        List<Katakana> hiraganaList = query.getResultList();
+        List<Katakana> katakanaList = query.getResultList();
 
-        return hiraganaList;
+        return katakanaList;
     }
 }
