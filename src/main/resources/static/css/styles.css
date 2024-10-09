@@ -349,6 +349,14 @@ body {
 	margin-top: 56px;
 }
 
+.kana-p {
+    font-size: 15px;
+    margin-bottom: 4%;
+    font-weight: 500;
+    max-width: 80%;
+    text-align: center;
+}
+
 .chart {
 	max-width: 80%;
 	margin-bottom: 80px%;
