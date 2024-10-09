@@ -16,11 +16,7 @@ button {
 /* Body */
 body {
 	margin: 0px;
-	background-image: url('/images/background.png');
-	background-attachment: fixed;
-	background-size: cover;
-	background-repeat: no-repeat;
-	background-position: center;
+    background-color: #f2f2f2;
 }
 
 
@@ -116,7 +112,7 @@ body {
     width: 200px;
     background-color: white;
     border-radius: 10px;
-    box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.1); /* Light shadow for depth */
+    box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.1);
     z-index: 1;
     list-style: none;
     padding: 0;
@@ -254,7 +250,7 @@ body {
 }
 
 .api-image img {
-	width: 15vw;
+	width: 12.5vw;
 }
 
 .resources-image {
@@ -264,7 +260,7 @@ body {
 }
 
 .resources-image img {
-	width: 15vw;
+	width: 12.5vw;
 }
 
 .api-image img:hover {
@@ -288,7 +284,7 @@ body {
     padding: 20px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
     position: relative;
-    margin-top: -27.5%;
+    margin-top: -22.5%;
 }
 
 .whats-new-list {
@@ -416,9 +412,9 @@ body {
 
 .front {
     display: flex;
-    justify-content: center; /* Center the image */
-    align-items: center; /* Center the image */
-    flex-direction: column; /* Stack image and text vertically */
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
 }
 
 .front img {
