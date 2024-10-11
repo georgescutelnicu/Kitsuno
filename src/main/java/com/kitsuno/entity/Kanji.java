@@ -58,7 +58,7 @@ public class Kanji {
         return id;
     }
 
-    public String getcharacter() {
+    public String getCharacter() {
         return character;
     }
 
