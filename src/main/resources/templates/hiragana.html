@@ -67,16 +67,16 @@
             naturally and neatly. By practicing both, you'll improve your reading and writing skills while remembering
             the kana more easily.</p>
         <div th:each="hiragana : ${hiraganaList}" class="kana-section">
-            <h2 th:text="${hiragana.letter} + ' (' + ${hiragana.romaji} + ')'"></h2>
+            <h2 th:text="${hiragana.character} + ' (' + ${hiragana.romaji} + ')'"></h2>
             <button class="audio-button" th:data-audio="${hiragana.audio}" onclick="playAudio(this.dataset.audio)">🔊</button>
             <div class="flip-container">
                 <div class="flipper">
                     <div class="front">
-                        <img th:src="${hiragana.mnemonic}" alt="Mnemonic for ${hiragana.letter}">
+                        <img th:src="${hiragana.mnemonic}" alt="Mnemonic for ${hiragana.character}">
                         <p class="mnemonic-text" th:text="${hiragana.story}"></p>
                     </div>
                     <div class="back">
-                        <img th:src="${hiragana.strokeOrder}" alt="Stroke Order for ${hiragana.letter}">
+                        <img th:src="${hiragana.strokeOrder}" alt="Stroke Order for ${hiragana.character}">
                     </div>
                 </div>
             </div>

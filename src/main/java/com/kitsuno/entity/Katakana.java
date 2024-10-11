@@ -11,8 +11,8 @@ public class Katakana {
     @Column(name = "id")
     private int id;
 
-    @Column(name = "letter")
-    private String letter;
+    @Column(name = "character")
+    private String character;
 
     @Column(name = "romaji")
     private String romaji;
@@ -32,10 +32,10 @@ public class Katakana {
     public Katakana() {
     }
 
-    public Katakana(int id, String letter, String romaji, String audio,
+    public Katakana(int id, String character, String romaji, String audio,
                     String mnemonic, String story,String strokeOrder) {
         this.id = id;
-        this.letter = letter;
+        this.character = character;
         this.romaji = romaji;
         this.audio = audio;
         this.mnemonic = mnemonic;
@@ -47,8 +47,8 @@ public class Katakana {
         return id;
     }
 
-    public String getLetter() {
-        return letter;
+    public String getCharacter() {
+        return character;
     }
 
     public String getRomaji() {

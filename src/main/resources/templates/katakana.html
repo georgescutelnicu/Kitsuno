@@ -67,16 +67,16 @@
             naturally and neatly. By practicing both, you'll improve your reading and writing skills while remembering
             the kana more easily.</p>
         <div th:each="katakana : ${katakanaList}" class="kana-section">
-            <h2 th:text="${katakana.letter} + ' (' + ${katakana.romaji} + ')'"></h2>
+            <h2 th:text="${katakana.character} + ' (' + ${katakana.romaji} + ')'"></h2>
             <button class="audio-button" th:data-audio="${katakana.audio}" onclick="playAudio(this.dataset.audio)">🔊</button>
             <div class="flip-container">
                 <div class="flipper">
                     <div class="front">
-                        <img th:src="${katakana.mnemonic}" alt="Mnemonic for ${katakana.letter}">
+                        <img th:src="${katakana.mnemonic}" alt="Mnemonic for ${katakana.character}">
                         <p class="mnemonic-text" th:text="${katakana.story}"></p>
                     </div>
                     <div class="back">
-                        <img th:src="${katakana.strokeOrder}" alt="Stroke Order for ${katakana.letter}">
+                        <img th:src="${katakana.strokeOrder}" alt="Stroke Order for ${katakana.character}">
                     </div>
                 </div>
             </div>
