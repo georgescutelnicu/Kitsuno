@@ -7,5 +7,6 @@ import java.util.List;
 
 public interface KanjiService {
 
+    Kanji findKanjiByCharacter(String character);
     Map<String, List<Kanji>> findAllGroupedByCategory();
 }

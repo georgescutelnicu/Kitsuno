@@ -6,5 +6,6 @@ import java.util.List;
 
 public interface KanjiDAO {
 
+    Kanji findKanjiByCharacter(String character);
     List<Kanji> findAll();
 }

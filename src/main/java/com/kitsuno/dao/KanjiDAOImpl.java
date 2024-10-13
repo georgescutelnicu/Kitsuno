@@ -19,6 +19,17 @@ public class KanjiDAOImpl implements KanjiDAO {
     }
 
     @Override
+    public Kanji findKanjiByCharacter(String character) {
+        TypedQuery<Kanji> query = entityManager.createQuery("FROM Kanji k WHERE k.character =: character",
+                Kanji.class);
+        query.setParameter("character", character);
+
+        Kanji kanji = query.getSingleResult();
+
+        return kanji;
+    }
+
+    @Override
     public List<Kanji> findAll() {
         TypedQuery<Kanji> query = entityManager.createQuery("Select k from Kanji k", Kanji.class);
 
