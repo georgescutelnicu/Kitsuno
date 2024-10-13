@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <meta charset="utf-8">
+        <meta content="width=device-width, initial-scale=1" name="viewport">
+        <title>Kitsuno</title>
+
+        <link href="https://fonts.googleapis.com" rel="preconnect">
+        <link crossorigin href="https://fonts.gstatic.com" rel="preconnect">
+        <link href="https://fonts.googleapis.com/css2?family=Kalam:wght@300;400;700&family=Poppins:ital,wght@0,100;0,400;0,500;0,600;1,400;1,500;1,600&family=Quicksand:wght@300..700&display=swap"
+              rel="stylesheet">
+
+        <link rel="stylesheet" th:href="@{/css/styles.css}"/>
+
+    </head>
+    <body>
+        <nav class="navbar">
+            <div class="logo">
+                <a href="#">
+                    <img alt="Logo" th:src="@{/images/navbar/logo.png}">
+                </a>
+            </div>
+            <ul class="nav-links">
+                <li><a href="#"><img alt="Home Icon" th:src="@{/images/navbar/home_icon.png}"> <span>Home</span></a>
+                </li>
+                <li><a href="#"><img alt="Hiragana Icon" th:src="@{/images/navbar/hiragana_icon.png}">
+                    <span>Hiragana</span></a>
+                </li>
+                <li><a href="#"><img alt="Katakana Icon" th:src="@{/images/navbar/katakana_icon.png}">
+                    <span>Katakana</span></a>
+                </li>
+                <li class="active"><a href="#"><img alt="Kanji Icon" th:src="@{/images/navbar/kanji_icon.png}">
+                    <span>Kanji</span></a></li>
+                <li><a href="#"><img alt="Flashcards Icon" th:src="@{/images/navbar/flashcard_icon.png}">
+                    <span>Flashcards</span></a></li>
+                <li><a href="#"><img alt="Vocabulary Icon" th:src="@{/images/navbar/vocabulary_icon.png}">
+                    <span>Vocabulary</span></a></li>
+            </ul>
+            <div class="user-section">
+                <a class="user-link" href="#">
+                    <h6>Hi Guest!</h6>
+                    <img alt="User Icon" class="user-icon" th:src="@{/images/navbar/user_icon.png}">
+                </a>
+                <ul class="user-dropdown">
+                    <li><a href="#"><img alt="Login Icon" th:src="@{/images/navbar/login.png}"> Login</a></li>
+                    <li><a href="#"><img alt="SignUP Icon" th:src="@{/images/navbar/signup.png}"> Sign Up</a></li>
+                    <li><a href="#"><img alt="Settings Icon" th:src="@{/images/navbar/settings.png}"> Settings</a></li>
+                </ul>
+            </div>
+        </nav>
+
+        <nav class="bottom-navbar">
+            <ul class="nav-links">
+                <li><a href="#"><img alt="Home Icon" th:src="@{/images/navbar/home_icon.png}"> <span>Home</span></a>
+                </li>
+                <li><a href="#"><img alt="Hiragana Icon" th:src="@{/images/navbar/hiragana_icon.png}">
+                    <span>Hiragana</span></a>
+                </li>
+                <li><a href="#"><img alt="Katakana Icon" th:src="@{/images/navbar/katakana_icon.png}">
+                    <span>Katakana</span></a>
+                </li>
+                <li class="active"><a href="#"><img alt="Kanji Icon" th:src="@{/images/navbar/kanji_icon.png}">
+                    <span>Kanji</span></a></li>
+                <li><a href="#"><img alt="Flashcards Icon" th:src="@{/images/navbar/flashcard_icon.png}">
+                    <span>Flashcards</span></a></li>
+                <li><a href="#"><img alt="Vocabulary Icon" th:src="@{/images/navbar/vocabulary_icon.png}">
+                    <span>Vocabulary</span></a></li>
+            </ul>
+        </nav>
+
+        <div id="main-section">
+            <h1 th:text="${kanji.character}"></h1>
+        </div>
+
+        <script th:src="@{/js/script.js}"></script>
+    </body>
+</html>

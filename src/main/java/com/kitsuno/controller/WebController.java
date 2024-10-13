@@ -9,6 +9,7 @@ import com.kitsuno.service.KatakanaService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 
 import java.util.List;
 import java.util.Map;
@@ -54,5 +55,12 @@ public class WebController {
         Map<String, List<Kanji>> kanjiMap = kanjiService.findAllGroupedByCategory();
         model.addAttribute("kanjiMap", kanjiMap);
         return "kanji";
+    }
+
+    @GetMapping("/kanji/{character}")
+    public String showKanjiDetails(@PathVariable("character") String character, Model model) {
+        Kanji kanji = kanjiService.findKanjiByCharacter(character);
+        model.addAttribute("kanji", kanji);
+        return "kanji-details";
     }
 }
