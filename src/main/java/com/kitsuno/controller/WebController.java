@@ -1,23 +1,28 @@
 package com.kitsuno.controller;
 
 import com.kitsuno.entity.Hiragana;
+import com.kitsuno.entity.Kanji;
 import com.kitsuno.entity.Katakana;
 import com.kitsuno.service.HiraganaService;
+import com.kitsuno.service.KanjiService;
 import com.kitsuno.service.KatakanaService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
 import java.util.List;
+import java.util.Map;
 
 @Controller
 public class WebController {
     private HiraganaService hiraganaService;
     private KatakanaService katakanaService;
+    private KanjiService kanjiService;
 
-    public WebController(HiraganaService hiraganaService, KatakanaService katakanaService) {
+    public WebController(HiraganaService hiraganaService, KatakanaService katakanaService, KanjiService kanjiService) {
         this.hiraganaService = hiraganaService;
         this.katakanaService = katakanaService;
+        this.kanjiService = kanjiService;
     }
 
     @GetMapping("/")
@@ -42,5 +47,12 @@ public class WebController {
         List<Katakana> katakanaList = this.katakanaService.findAll();
         model.addAttribute("katakanaList", katakanaList);
         return "katakana";
+    }
+
+    @GetMapping("/kanji")
+    public String showKanji(Model model) {
+        Map<String, List<Kanji>> kanjiMap = kanjiService.findAllGroupedByCategory();
+        model.addAttribute("kanjiMap", kanjiMap);
+        return "kanji";
     }
 }
