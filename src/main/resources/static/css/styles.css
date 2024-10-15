@@ -511,3 +511,156 @@ body {
         height: 44px;
     }
 }
+
+
+/* Kanji info page */
+.back-button {
+    font-size: 0px;
+    background-color: black;
+    border: 2px solid black;
+    border-radius: 100%;
+    margin-right: 85%;
+    position: relative;
+    top: 50px;
+}
+
+.back-button:hover {
+    border: 2px solid  #ffcc00;
+    transform: scale(1.1);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.back-button img {
+    width: 32px;
+    transform: rotate(90deg);
+}
+
+.kanji-character h1 {
+    font-size: 150px;
+    color: #333;
+    border: 1px solid #333;
+    height: 225px;
+    width: 225px;
+    margin: 100px auto 0;
+    cursor: default;
+}
+
+.kanji-character h1:hover {
+    border: 1px solid #007BFF;
+}
+
+.kanji-meaning {
+    font-size: 24px;
+    color: #333;
+    text-align: center;
+    margin: 24px 48px;
+}
+
+.readings {
+    display: flex;
+}
+
+.readings h3 {
+    background-color: white;
+    color: brown;
+    padding: 0;
+    margin: 0;
+    position: relative;
+    display: inline;
+    left: 150px;
+    top: 32px;
+    font-size: 12px;
+}
+
+.reading-box {
+    width: 200px;
+    font-size: 14px;
+    margin: 22px 32px;
+    padding: 12px 40px;
+    border-radius: 25px;
+    color: brown;
+    text-align: center;
+    background-color: #fff5cc;
+    border: 1px solid #ffcc00;
+}
+
+.related-words {
+    margin-top: 5%;
+    width: 100%;
+}
+
+.related-words h3 {
+    margin-left: 20px;
+}
+
+.related-words-p {
+    font-size: 13px;
+    color: gray;
+    margin-bottom: 40px;
+    margin-left: 20px;
+}
+
+.vocab-item {
+    margin-bottom: 10px;
+}
+
+.kanji-word {
+    font-size: 20px;
+    color: #333;
+}
+
+.vocabulary-list {
+    margin-left: 20px;
+}
+
+.vocab-item .meaning {
+    font-size: 14px;
+    color: #007BFF;
+}
+
+hr {
+    border: 1px solid #eee;
+    width: 95%;
+    margin-left: 0;
+}
+
+.hr-header {
+    margin-left: 20px;
+}
+
+.button-container {
+    text-align: center;
+    margin-top: 30px;
+}
+
+.flashcard-button {
+    background-color: #fff;
+    color: #007BFF;
+    border: 1px solid #e0e0e0;
+    box-shadow: 0 4px 0 0 #e0e0e0;
+    border-radius: 15px;
+    padding: 12px 30px;
+    margin-bottom: 24px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.flashcard-button:hover {
+    background-color: #f5f5f5;
+    border-color: #dcdcdc;
+    box-shadow: 0 4px 0 0 #dcdcdc;
+}
+
+.flashcard-button:active {
+    transform: translateY(4px);
+    box-shadow: none;
+    background-color: #f0f0f0;
+    border-color: #c0c0c0;
+}
+
+@media (max-width: 1068px) {
+    .readings {
+        flex-direction: column;
+        align-items: center;
+    }
+}

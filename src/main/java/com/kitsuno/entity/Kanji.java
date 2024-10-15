@@ -21,16 +21,17 @@ public class Kanji {
     private String meanings;
 
     @Column(name = "onyomi_readings")
-    private String onyomiReadings;
+    private String[] onyomiReadings;
 
     @Column(name = "kunyomi_readings")
-    private String kunyomiReadings;
+    private String[] kunyomiReadings;
 
+    // Change the type from String to String[] for arrays
     @Column(name = "onyomi_vocab")
-    private String onyomiVocab;
+    private String[] onyomiVocab;
 
     @Column(name = "kunyomi_vocab")
-    private String kunyomiVocab;
+    private String[] kunyomiVocab;
 
     @Column(name = "category")
     private String category;
@@ -41,8 +42,8 @@ public class Kanji {
     public Kanji() {
     }
 
-    public Kanji(String character, String jlpt, String meanings, String onyomiReadings, String kunyomiReadings,
-                 String onyomiVocab, String kunyomiVocab, String category, int strokeCount) {
+    public Kanji(String character, String jlpt, String meanings, String[] onyomiReadings, String[] kunyomiReadings,
+                 String[] onyomiVocab, String[] kunyomiVocab, String category, int strokeCount) {
         this.character = character;
         this.jlpt = jlpt;
         this.meanings = meanings;
@@ -70,19 +71,19 @@ public class Kanji {
         return meanings;
     }
 
-    public String getOnyomiReadings() {
+    public String[] getOnyomiReadings() {
         return onyomiReadings;
     }
 
-    public String getKunyomiReadings() {
+    public String[] getKunyomiReadings() {
         return kunyomiReadings;
     }
 
-    public String getOnyomiVocab() {
+    public String[] getOnyomiVocab() {
         return onyomiVocab;
     }
 
-    public String getKunyomiVocab() {
+    public String[] getKunyomiVocab() {
         return kunyomiVocab;
     }
 

@@ -69,7 +69,78 @@
         </nav>
 
         <div id="main-section">
-            <h1 th:text="${kanji.character}"></h1>
+            <a href="#" class="back-button"><img th:src=@{/images/kanji/arrow.png}></a>
+
+            <div class="kanji-character">
+
+                <h1 th:text="${kanji.character}"></h1>
+
+                <h2 class="kanji-meaning" th:text="${kanji.meanings}"></h2>
+            </div>
+
+            <div class="readings">
+                <div>
+                    <h3>Onyomi</h3>
+                    <p class="reading-box">
+                        <span th:if="${kanji.onyomiReadings == null}">-</span>
+                        <span th:if="${kanji.onyomiReadings != null}" th:each="onyomi, stat : ${kanji.onyomiReadings}">
+                <span th:text="${onyomi}"></span>
+                <span th:if="${!stat.last}"> &nbsp; </span>
+            </span>
+                    </p>
+                </div>
+
+                <div>
+                    <h3>Kunyomi</h3>
+                    <p class="reading-box">
+                        <span th:if="${kanji.kunyomiReadings == null}">-</span>
+                        <span th:if="${kanji.kunyomiReadings != null}"
+                              th:each="kunyomi, stat : ${kanji.kunyomiReadings}">
+                <span th:text="${kunyomi}"></span>
+                <span th:if="${!stat.last}"> &nbsp; </span>
+            </span>
+                    </p>
+                </div>
+            </div>
+
+            <div class="button-container">
+                <a href="#">
+                    <button class="flashcard-button">Create Flashcard</button>
+                </a>
+            </div>
+
+            <div class="related-words">
+                <hr class="hr-header">
+                <h3>Vocabulary</h3>
+                <p class="related-words-p">Common vocabulary and meanings related to the kanji character '<span
+                        th:text="${kanji.character}"></span>'</p>
+
+                <div class="vocabulary-list">
+                    <div th:if="${kanji.onyomiVocab.length > 1}">
+                        <div th:each="vocabItem : ${kanji.onyomiVocab}">
+                            <div class="vocab-item">
+                                <p class="kanji-word" th:if="${vocabItem.contains('】')}"
+                                   th:text="${#strings.arraySplit(vocabItem, '】')[0] + '】'}"></p>
+                                <p class="meaning" th:if="${vocabItem.contains('】')}"
+                                   th:text="${#strings.arraySplit(vocabItem, '】')[1]}"></p>
+                            </div>
+                            <hr>
+                        </div>
+                    </div>
+
+                    <div th:if="${kanji.onyomiVocab.length > 1}">
+                        <div th:each="vocabItem : ${kanji.kunyomiVocab}">
+                            <div class="vocab-item">
+                                <p class="kanji-word" th:if="${vocabItem.contains('】')}"
+                                   th:text="${#strings.arraySplit(vocabItem, '】')[0] + '】'}"></p>
+                                <p class="meaning" th:if="${vocabItem.contains('】')}"
+                                   th:text="${#strings.arraySplit(vocabItem, '】')[1]}"></p>
+                            </div>
+                            <hr>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
 
         <script th:src="@{/js/script.js}"></script>
