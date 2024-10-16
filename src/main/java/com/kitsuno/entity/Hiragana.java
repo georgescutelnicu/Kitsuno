@@ -4,7 +4,7 @@ import jakarta.persistence.*;
 
 @Entity
 @Table(name = "hiragana")
-public class Hiragana {
+public class Hiragana implements Kana {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
