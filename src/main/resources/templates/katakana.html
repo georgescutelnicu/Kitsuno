@@ -63,13 +63,18 @@
         <div id="main-section">
             <h1 class="kana-h1">Chart</h1>
             <div class="grid-container">
-                <button th:each="katakana : ${katakanaList}"
-                        class="kana-button"
-                        th:title="${katakana.character}"
-                        th:attr="onclick=|showInfo('${katakana.character}', '${katakana.romaji}', '${katakana.audio}', '${#strings.escapeJavaScript(katakana.story)}', '${katakana.mnemonic}', '${katakana.strokeOrder}')|">
-                    <span th:text="${katakana.character}"></span>
-                    <span class="romaji" th:text="${katakana.romaji}"></span>
-                </button>
+                <div th:each="katakana : ${katakanaList}">
+                    <div>
+                        <button class="kana-button"
+                                th:if="${katakana.romaji != null}"
+                                th:title="${katakana.character}"
+                                th:attr="onclick=|showInfo('${katakana.character}', '${katakana.romaji}', '${katakana.audio}', '${#strings.escapeJavaScript(katakana.story)}', '${katakana.mnemonic}', '${katakana.strokeOrder}')|">
+                            <span th:text="${katakana.character}"></span>
+                            <span class="romaji" th:text="${katakana.romaji}"></span>
+                        </button>
+                    </div>
+                    <div th:if="${katakana.romaji == null}" class="empty"></div>
+                </div>
             </div>
 
             <h1 class="kana-h1">Dakuten and Handakuten</h1>

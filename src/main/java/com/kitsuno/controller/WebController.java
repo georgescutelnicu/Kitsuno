@@ -6,6 +6,7 @@ import com.kitsuno.entity.Katakana;
 import com.kitsuno.service.HiraganaService;
 import com.kitsuno.service.KanjiService;
 import com.kitsuno.service.KatakanaService;
+import com.kitsuno.utils.Utils;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -39,14 +40,16 @@ public class WebController {
     @GetMapping("/hiragana")
     public String showHiragana(Model model) {
         List<Hiragana> hiraganaList = this.hiraganaService.findAll();
-        model.addAttribute("hiraganaList", hiraganaList);
+        List<Hiragana> formattedHiraganaList = Utils.formatKana(hiraganaList);
+        model.addAttribute("hiraganaList", formattedHiraganaList);
         return "hiragana";
     }
 
     @GetMapping("/katakana")
     public String showKatakana(Model model) {
         List<Katakana> katakanaList = this.katakanaService.findAll();
-        model.addAttribute("katakanaList", katakanaList);
+        List<Katakana> formattedKatakanaList = Utils.formatKana(katakanaList);
+        model.addAttribute("katakanaList", formattedKatakanaList);
         return "katakana";
     }
 

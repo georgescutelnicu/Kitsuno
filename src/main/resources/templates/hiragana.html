@@ -62,14 +62,20 @@
         <div id="main-section">
             <h1 class="kana-h1">Chart</h1>
             <div class="grid-container">
-                <button th:each="hiragana : ${hiraganaList}"
-                        class="kana-button"
-                        th:title="${hiragana.character}"
-                        th:attr="onclick=|showInfo('${hiragana.character}', '${hiragana.romaji}', '${hiragana.audio}', '${#strings.escapeJavaScript(hiragana.story)}', '${hiragana.mnemonic}', '${hiragana.strokeOrder}')|">
-                    <span th:text="${hiragana.character}"></span>
-                    <span class="romaji" th:text="${hiragana.romaji}"></span>
-                </button>
+                <div th:each="hiragana : ${hiraganaList}">
+                    <div>
+                    <button class="kana-button"
+                            th:if="${hiragana.romaji != null}"
+                            th:title="${hiragana.character}"
+                            th:attr="onclick=|showInfo('${hiragana.character}', '${hiragana.romaji}', '${hiragana.audio}', '${#strings.escapeJavaScript(hiragana.story)}', '${hiragana.mnemonic}', '${hiragana.strokeOrder}')|">
+                        <span th:text="${hiragana.character}"></span>
+                        <span class="romaji" th:text="${hiragana.romaji}"></span>
+                    </button>
+                    </div>
+                    <div th:if="${hiragana.romaji == null}" class="empty"></div>
+                </div>
             </div>
+
 
             <h1 class="kana-h1">Dakuten and Handakuten</h1>
             <p class="kana-p"> Dakuten (濁点) and Handakuten (半濁点) are diacritical marks used in Japanese to modify
