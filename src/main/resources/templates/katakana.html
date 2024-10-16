@@ -1,104 +1,96 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" lang="en">
-<head>
-	<meta charset="utf-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>Kitsuno</title>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Kitsuno</title>
 
-	<link rel="preconnect" href="https://fonts.googleapis.com">
-	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-	<link href="https://fonts.googleapis.com/css2?family=Kalam:wght@300;400;700&family=Poppins:ital,wght@0,100;0,400;0,500;0,600;1,400;1,500;1,600&family=Quicksand:wght@300..700&display=swap" rel="stylesheet">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Kalam:wght@300;400;700&family=Poppins:ital,wght@0,100;0,400;0,500;0,600;1,400;1,500;1,600&family=Quicksand:wght@300..700&display=swap"
+              rel="stylesheet">
 
-	<link rel="stylesheet" href="css/styles.css">
+        <link rel="stylesheet" href="css/styles.css">
 
-</head>
-<body>
-    <nav class="navbar">
-        <div class="logo">
-            <a href="#">
-            	<img src="images/navbar/logo.png" alt="Logo">
-        	</a>
-        </div>
-        <ul class="nav-links">
-            <li><a href="#"><img src="images/navbar/home_icon.png" alt="Home Icon"> <span>Home</span></a></li>
-            <li><a href="#"><img src="images/navbar/hiragana_icon.png" alt="Hiragana Icon"> <span>Hiragana</span></a></li>
-            <li class="active"><a href="#"><img src="images/navbar/katakana_icon.png" alt="Katakana Icon"> <span>Katakana</span></a></li>
-            <li><a href="#"><img src="images/navbar/kanji_icon.png" alt="Kanji Icon"> <span>Kanji</span></a></li>
-            <li><a href="#"><img src="images/navbar/flashcard_icon.png" alt="Flashcards Icon"> <span>Flashcards</span></a></li>
-            <li><a href="#"><img src="images/navbar/vocabulary_icon.png" alt="Vocabulary Icon"> <span>Vocabulary</span></a></li>
-        </ul>
-        <div class="user-section">
-            <a href="#" class="user-link">
-                <h6>Hi Guest!</h6>
-                <img src="images/navbar/user_icon.png" alt="User Icon" class="user-icon">
-            </a>
-            <ul class="user-dropdown">
-                <li><a href="#"><img src="images/navbar/login.png" alt="Login Icon"> Login</a></li>
-                <li><a href="#"><img src="images/navbar/signup.png" alt="SignUP Icon"> Sign Up</a></li>
-                <li><a href="#"><img src="images/navbar/settings.png" alt="Settings Icon"> Settings</a></li>
-            </ul>
-        </div>
-    </nav>
-
-    <nav class="bottom-navbar">
-        <ul class="nav-links">
-            <li><a href="#"><img src="images/navbar/home_icon.png" alt="Home Icon"> <span>Home</span></a></li>
-            <li><a href="#"><img src="images/navbar/hiragana_icon.png" alt="Hiragana Icon"> <span>Hiragana</span></a></li>
-            <li class="active"><a href="#"><img src="images/navbar/katakana_icon.png" alt="Katakana Icon"> <span>Katakana</span></a></li>
-            <li><a href="#"><img src="images/navbar/kanji_icon.png" alt="Kanji Icon"> <span>Kanji</span></a></li>
-            <li><a href="#"><img src="images/navbar/flashcard_icon.png" alt="Flashcards Icon"> <span>Flashcards</span></a></li>
-            <li><a href="#"><img src="images/navbar/vocabulary_icon.png" alt="Vocabulary Icon"> <span>Vocabulary</span></a></li>
-        </ul>
-    </nav>
-
-	<div id="main-section">
-        <h1 class="kana-h1">Chart</h1>
-        <p class="kana-p">The Katakana chart consists of characters used primarily for foreign loanwords, onomatopoeia,
-            and technical or scientific terms in Japanese. Each Katakana character represents a syllable, just like
-            Hiragana, but Katakana has a more angular and block-like style. This syllabary is crucial for writing
-            non-Japanese names, places, and foreign words, making it an important part of mastering written Japanese.
-            Familiarizing yourself with the Katakana chart will help you read signs, menus, and text that incorporates
-            foreign-origin terms, which are increasingly common in everyday life in Japan.</p>
-        <img src="images/kana/katakana_chart.png" alt="Katakana Chart" class="chart">
-
-        <h1 class="kana-h1">Mnemonics & Stroke Order</h1>
-        <p class="kana-p">Mnemonics help by creating easy-to-remember images or stories for each character,
-            making them stick in your mind. Stroke order, on the other hand, helps you write the characters more
-            naturally and neatly. By practicing both, you'll improve your reading and writing skills while remembering
-            the kana more easily.</p>
-        <div th:each="katakana : ${katakanaList}" class="kana-section">
-            <h2 th:text="${katakana.character} + ' (' + ${katakana.romaji} + ')'"></h2>
-            <button class="audio-button" th:data-audio="${katakana.audio}" onclick="playAudio(this.dataset.audio)">🔊</button>
-            <div class="flip-container">
-                <div class="flipper">
-                    <div class="front">
-                        <img th:src="${katakana.mnemonic}" alt="Mnemonic for ${katakana.character}">
-                        <p class="mnemonic-text" th:text="${katakana.story}"></p>
-                    </div>
-                    <div class="back">
-                        <img th:src="${katakana.strokeOrder}" alt="Stroke Order for ${katakana.character}">
-                    </div>
-                </div>
+    </head>
+    <body>
+        <nav class="navbar">
+            <div class="logo">
+                <a href="#">
+                    <img src="images/navbar/logo.png" alt="Logo">
+                </a>
             </div>
+            <ul class="nav-links">
+                <li><a href="#"><img src="images/navbar/home_icon.png" alt="Home Icon"> <span>Home</span></a></li>
+                <li><a href="#"><img src="images/navbar/hiragana_icon.png" alt="Hiragana Icon">
+                    <span>Hiragana</span></a></li>
+                <li class="active"><a href="#"><img src="images/navbar/katakana_icon.png" alt="Katakana Icon"> <span>Katakana</span></a>
+                </li>
+                <li><a href="#"><img src="images/navbar/kanji_icon.png" alt="Kanji Icon"> <span>Kanji</span></a></li>
+                <li><a href="#"><img src="images/navbar/flashcard_icon.png" alt="Flashcards Icon">
+                    <span>Flashcards</span></a></li>
+                <li><a href="#"><img src="images/navbar/vocabulary_icon.png" alt="Vocabulary Icon">
+                    <span>Vocabulary</span></a></li>
+            </ul>
+            <div class="user-section">
+                <a href="#" class="user-link">
+                    <h6>Hi Guest!</h6>
+                    <img src="images/navbar/user_icon.png" alt="User Icon" class="user-icon">
+                </a>
+                <ul class="user-dropdown">
+                    <li><a href="#"><img src="images/navbar/login.png" alt="Login Icon"> Login</a></li>
+                    <li><a href="#"><img src="images/navbar/signup.png" alt="SignUP Icon"> Sign Up</a></li>
+                    <li><a href="#"><img src="images/navbar/settings.png" alt="Settings Icon"> Settings</a></li>
+                </ul>
+            </div>
+        </nav>
+
+        <nav class="bottom-navbar">
+            <ul class="nav-links">
+                <li><a href="#"><img src="images/navbar/home_icon.png" alt="Home Icon"> <span>Home</span></a></li>
+                <li><a href="#"><img src="images/navbar/hiragana_icon.png" alt="Hiragana Icon">
+                    <span>Hiragana</span></a></li>
+                <li class="active"><a href="#"><img src="images/navbar/katakana_icon.png" alt="Katakana Icon"> <span>Katakana</span></a>
+                </li>
+                <li><a href="#"><img src="images/navbar/kanji_icon.png" alt="Kanji Icon"> <span>Kanji</span></a></li>
+                <li><a href="#"><img src="images/navbar/flashcard_icon.png" alt="Flashcards Icon">
+                    <span>Flashcards</span></a></li>
+                <li><a href="#"><img src="images/navbar/vocabulary_icon.png" alt="Vocabulary Icon">
+                    <span>Vocabulary</span></a></li>
+            </ul>
+        </nav>
+
+        <div id="main-section">
+            <h1 class="kana-h1">Chart</h1>
+            <div class="grid-container">
+                <button th:each="katakana : ${katakanaList}"
+                        class="kana-button"
+                        th:title="${katakana.character}"
+                        th:attr="onclick=|showInfo('${katakana.character}', '${katakana.romaji}', '${katakana.audio}', '${#strings.escapeJavaScript(katakana.story)}', '${katakana.mnemonic}', '${katakana.strokeOrder}')|">
+                    <span th:text="${katakana.character}"></span>
+                    <span class="romaji" th:text="${katakana.romaji}"></span>
+                </button>
+            </div>
+
+            <h1 class="kana-h1">Dakuten and Handakuten</h1>
+            <p class="kana-p">Just like Hiragana, Katakana characters can be modified with Dakuten (゛) and Handakuten
+                (゜)
+                marks to create additional sounds. For example, "カ" (ka) becomes "ガ" (ga) with a Dakuten, and "ハ" (ha)
+                becomes "パ" (pa) with a Handakuten. These modifications allow for voiced and semi-voiced sounds in words
+                borrowed from other languages, expanding the range of Katakana’s use. By understanding these
+                transformations, you'll be better equipped to read and write loanwords and names in Japanese.</p>
+            <img src="images/kana/katakana_dakuten.png" alt="Katakana Dakuten" class="chart">
+
+            <h1 class="kana-h1">Yōon</h1>
+            <p class="kana-p">Yōon in Katakana follows the same principle as in Hiragana. A smaller "ャ" (ya), "ュ" (yu),
+                or "ョ" (yo) is combined with a character to create blended sounds like "キャ" (kya) or "シュ" (shu).
+                This is especially common in representing sounds from foreign languages that are not native to Japanese.
+                Yōon combinations are crucial for accurately representing these sounds, making it important to grasp
+                their
+                use when reading and writing in Katakana.</p>
+            <img src="images/kana/katakana_yoon.png" alt="Katakana Yoon" class="chart">
         </div>
 
-        <h1 class="kana-h1">Dakuten and Handakuten</h1>
-        <p class="kana-p">Just like Hiragana, Katakana characters can be modified with Dakuten (゛) and Handakuten (゜)
-            marks to create additional sounds. For example, "カ" (ka) becomes "ガ" (ga) with a Dakuten, and "ハ" (ha)
-            becomes "パ" (pa) with a Handakuten. These modifications allow for voiced and semi-voiced sounds in words
-            borrowed from other languages, expanding the range of Katakana’s use. By understanding these
-            transformations, you'll be better equipped to read and write loanwords and names in Japanese.</p>
-        <img src="images/kana/katakana_dakuten.png" alt="Katakana Dakuten" class="chart">
-
-        <h1 class="kana-h1">Yōon</h1>
-        <p class="kana-p">Yōon in Katakana follows the same principle as in Hiragana. A smaller "ャ" (ya), "ュ" (yu),
-            or "ョ" (yo) is combined with a character to create blended sounds like "キャ" (kya) or "シュ" (shu).
-            This is especially common in representing sounds from foreign languages that are not native to Japanese.
-            Yōon combinations are crucial for accurately representing these sounds, making it important to grasp their
-            use when reading and writing in Katakana.</p>
-        <img src="images/kana/katakana_yoon.png" alt="Katakana Yoon" class="chart">
-    </div>
-
-	<script src="js/script.js"></script>
-</body>
+        <script src="js/script.js"></script>
+    </body>
 </html>

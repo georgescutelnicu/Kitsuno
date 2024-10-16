@@ -63,7 +63,7 @@
             <h1 class="kana-h1">Chart</h1>
             <div class="grid-container">
                 <button th:each="hiragana : ${hiraganaList}"
-                        class="hiragana-button"
+                        class="kana-button"
                         th:title="${hiragana.character}"
                         th:attr="onclick=|showInfo('${hiragana.character}', '${hiragana.romaji}', '${hiragana.audio}', '${#strings.escapeJavaScript(hiragana.story)}', '${hiragana.mnemonic}', '${hiragana.strokeOrder}')|">
                     <span th:text="${hiragana.character}"></span>

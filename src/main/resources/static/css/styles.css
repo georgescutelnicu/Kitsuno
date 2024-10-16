@@ -383,7 +383,7 @@ body {
     margin-top: 18px;
 }
 
-.hiragana-button {
+.kana-button {
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -402,11 +402,11 @@ body {
     padding: 2.5%;
 }
 
-.hiragana-button:hover {
+.kana-button:hover {
     background-color: #ffcc00;
 }
 
-.hiragana-button:active {
+.kana-button:active {
     background-color: #ffd966;
     transform: scale(0.95);
 }
