@@ -1,105 +1,98 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" lang="en">
-<head>
-	<meta charset="utf-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>Kitsuno</title>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Kitsuno</title>
 
-	<link rel="preconnect" href="https://fonts.googleapis.com">
-	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-	<link href="https://fonts.googleapis.com/css2?family=Kalam:wght@300;400;700&family=Poppins:ital,wght@0,100;0,400;0,500;0,600;1,400;1,500;1,600&family=Quicksand:wght@300..700&display=swap" rel="stylesheet">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Kalam:wght@300;400;700&family=Poppins:ital,wght@0,100;0,400;0,500;0,600;1,400;1,500;1,600&family=Quicksand:wght@300..700&display=swap"
+              rel="stylesheet">
 
-	<link rel="stylesheet" href="css/styles.css">
-
-</head>
-<body>
-    <nav class="navbar">
-        <div class="logo">
-            <a href="#">
-            	<img src="images/navbar/logo.png" alt="Logo">
-        	</a>
-        </div>
-        <ul class="nav-links">
-            <li><a href="#"><img src="images/navbar/home_icon.png" alt="Home Icon"> <span>Home</span></a></li>
-            <li class="active"><a href="#"><img src="images/navbar/hiragana_icon.png" alt="Hiragana Icon"> <span>Hiragana</span></a></li>
-            <li><a href="#"><img src="images/navbar/katakana_icon.png" alt="Katakana Icon"> <span>Katakana</span></a></li>
-            <li><a href="#"><img src="images/navbar/kanji_icon.png" alt="Kanji Icon"> <span>Kanji</span></a></li>
-            <li><a href="#"><img src="images/navbar/flashcard_icon.png" alt="Flashcards Icon"> <span>Flashcards</span></a></li>
-            <li><a href="#"><img src="images/navbar/vocabulary_icon.png" alt="Vocabulary Icon"> <span>Vocabulary</span></a></li>
-        </ul>
-        <div class="user-section">
-            <a href="#" class="user-link">
-                <h6>Hi Guest!</h6>
-                <img src="images/navbar/user_icon.png" alt="User Icon" class="user-icon">
-            </a>
-            <ul class="user-dropdown">
-                <li><a href="#"><img src="images/navbar/login.png" alt="Login Icon"> Login</a></li>
-                <li><a href="#"><img src="images/navbar/signup.png" alt="SignUP Icon"> Sign Up</a></li>
-                <li><a href="#"><img src="images/navbar/settings.png" alt="Settings Icon"> Settings</a></li>
-            </ul>
-        </div>
-    </nav>
-
-    <nav class="bottom-navbar">
-        <ul class="nav-links">
-            <li><a href="#"><img src="images/navbar/home_icon.png" alt="Home Icon"> <span>Home</span></a></li>
-            <li class="active"><a href="#"><img src="images/navbar/hiragana_icon.png" alt="Hiragana Icon"> <span>Hiragana</span></a></li>
-            <li><a href="#"><img src="images/navbar/katakana_icon.png" alt="Katakana Icon"> <span>Katakana</span></a></li>
-            <li><a href="#"><img src="images/navbar/kanji_icon.png" alt="Kanji Icon"> <span>Kanji</span></a></li>
-            <li><a href="#"><img src="images/navbar/flashcard_icon.png" alt="Flashcards Icon"> <span>Flashcards</span></a></li>
-            <li><a href="#"><img src="images/navbar/vocabulary_icon.png" alt="Vocabulary Icon"> <span>Vocabulary</span></a></li>
-        </ul>
-    </nav>
-
-	<div id="main-section">
-        <h1 class="kana-h1">Chart</h1>
-        <p class="kana-p">The Hiragana chart provides a foundational guide to learning the basic Japanese syllabary.
-            Each character in Hiragana represents a specific syllable, typically combining a consonant and a vowel.
-            These characters are used for native Japanese words and grammatical particles. Learning the Hiragana chart
-            is essential for beginners, as it lays the groundwork for reading and writing in Japanese. By familiarizing
-            yourself with the characters and their corresponding sounds, you'll be able to read simple texts and expand
-            your vocabulary as you progress in your studies.</p>
-        <img src="images/kana/hiragana_chart.png" alt="Hiragana Chart" class="chart">
-
-        <h1 class="kana-h1">Mnemonics & Stroke Order</h1>
-        <p class="kana-p">Mnemonics help by creating easy-to-remember images or stories for each character,
-            making them stick in your mind. Stroke order, on the other hand, helps you write the characters more
-            naturally and neatly. By practicing both, you'll improve your reading and writing skills while remembering
-            the kana more easily.</p>
-        <div th:each="hiragana : ${hiraganaList}" class="kana-section">
-            <h2 th:text="${hiragana.character} + ' (' + ${hiragana.romaji} + ')'"></h2>
-            <button class="audio-button" th:data-audio="${hiragana.audio}" onclick="playAudio(this.dataset.audio)">🔊</button>
-            <div class="flip-container">
-                <div class="flipper">
-                    <div class="front">
-                        <img th:src="${hiragana.mnemonic}" alt="Mnemonic for ${hiragana.character}">
-                        <p class="mnemonic-text" th:text="${hiragana.story}"></p>
-                    </div>
-                    <div class="back">
-                        <img th:src="${hiragana.strokeOrder}" alt="Stroke Order for ${hiragana.character}">
-                    </div>
-                </div>
+        <link rel="stylesheet" href="css/styles.css">
+    </head>
+    <body>
+        <nav class="navbar">
+            <div class="logo">
+                <a href="#">
+                    <img src="images/navbar/logo.png" alt="Logo">
+                </a>
             </div>
+            <ul class="nav-links">
+                <li><a href="#"><img src="images/navbar/home_icon.png" alt="Home Icon"> <span>Home</span></a></li>
+                <li class="active"><a href="#"><img src="images/navbar/hiragana_icon.png" alt="Hiragana Icon"> <span>Hiragana</span></a>
+                </li>
+                <li><a href="#"><img src="images/navbar/katakana_icon.png" alt="Katakana Icon">
+                    <span>Katakana</span></a></li>
+                <li><a href="#"><img src="images/navbar/kanji_icon.png" alt="Kanji Icon"> <span>Kanji</span></a></li>
+                <li><a href="#"><img src="images/navbar/flashcard_icon.png" alt="Flashcards Icon">
+                    <span>Flashcards</span></a></li>
+                <li><a href="#"><img src="images/navbar/vocabulary_icon.png" alt="Vocabulary Icon">
+                    <span>Vocabulary</span></a></li>
+            </ul>
+            <div class="user-section">
+                <a href="#" class="user-link">
+                    <h6>Hi Guest!</h6>
+                    <img src="images/navbar/user_icon.png" alt="User Icon" class="user-icon">
+                </a>
+                <ul class="user-dropdown">
+                    <li><a href="#"><img src="images/navbar/login.png" alt="Login Icon"> Login</a></li>
+                    <li><a href="#"><img src="images/navbar/signup.png" alt="SignUP Icon"> Sign Up</a></li>
+                    <li><a href="#"><img src="images/navbar/settings.png" alt="Settings Icon"> Settings</a></li>
+                </ul>
+            </div>
+        </nav>
+
+        <nav class="bottom-navbar">
+            <ul class="nav-links">
+                <li><a href="#"><img src="images/navbar/home_icon.png" alt="Home Icon"> <span>Home</span></a></li>
+                <li class="active"><a href="#"><img src="images/navbar/hiragana_icon.png" alt="Hiragana Icon"> <span>Hiragana</span></a>
+                </li>
+                <li><a href="#"><img src="images/navbar/katakana_icon.png" alt="Katakana Icon">
+                    <span>Katakana</span></a></li>
+                <li><a href="#"><img src="images/navbar/kanji_icon.png" alt="Kanji Icon"> <span>Kanji</span></a></li>
+                <li><a href="#"><img src="images/navbar/flashcard_icon.png" alt="Flashcards Icon">
+                    <span>Flashcards</span></a></li>
+                <li><a href="#"><img src="images/navbar/vocabulary_icon.png" alt="Vocabulary Icon">
+                    <span>Vocabulary</span></a></li>
+            </ul>
+        </nav>
+
+        <div id="main-section">
+            <h1 class="kana-h1">Chart</h1>
+            <div class="grid-container">
+                <button th:each="hiragana : ${hiraganaList}"
+                        class="hiragana-button"
+                        th:title="${hiragana.character}"
+                        th:attr="onclick=|showInfo('${hiragana.character}', '${hiragana.romaji}', '${hiragana.audio}', '${#strings.escapeJavaScript(hiragana.story)}', '${hiragana.mnemonic}', '${hiragana.strokeOrder}')|">
+                    <span th:text="${hiragana.character}"></span>
+                    <span class="romaji" th:text="${hiragana.romaji}"></span>
+                </button>
+            </div>
+
+            <h1 class="kana-h1">Dakuten and Handakuten</h1>
+            <p class="kana-p"> Dakuten (濁点) and Handakuten (半濁点) are diacritical marks used in Japanese to modify
+                certain
+                hiragana characters. The addition of a dakuten, which looks like two small lines (゛), transforms
+                voiceless
+                consonants into their voiced counterparts. For example, "か" (ka) becomes "が" (ga) and "さ" (sa) becomes
+                "ざ" (za). Handakuten, represented by a small circle (゜), is only used with the "h" row to create a "p"
+                sound. For example, "は" (ha) becomes "ぱ" (pa). These modifications expand the range of sounds in
+                Japanese,
+                allowing for clearer pronunciation and greater expressiveness.</p>
+            <img src="images/kana/hiragana_dakuten.png" alt="Hiragana Dakuten" class="chart">
+
+            <h1 class="kana-h1">Yōon</h1>
+            <p class="kana-p">Yōon (拗音) refers to the combination of a consonant followed by a smaller version of the
+                "ya"
+                (や), "yu" (ゆ), or "yo" (よ) syllables to create blended sounds. For example, "き" (ki) combined with small
+                "や" (ゃ) creates "きゃ" (kya), and "し" (shi) with small "ゅ" (ゅ) forms "しゅ" (shu). Yōon combinations are
+                common in many words and allow for more complex and nuanced pronunciation in Japanese, making them
+                essential for mastering the language's phonetic structure.</p>
+            <img src="images/kana/hiragana_yoon.png" alt="Hiragana Yoon" class="chart">
         </div>
 
-        <h1 class="kana-h1">Dakuten and Handakuten</h1>
-        <p class="kana-p"> Dakuten (濁点) and Handakuten (半濁点) are diacritical marks used in Japanese to modify certain
-            hiragana characters. The addition of a dakuten, which looks like two small lines (゛), transforms voiceless
-            consonants into their voiced counterparts. For example, "か" (ka) becomes "が" (ga) and "さ" (sa) becomes
-            "ざ" (za). Handakuten, represented by a small circle (゜), is only used with the "h" row to create a "p"
-            sound. For example, "は" (ha) becomes "ぱ" (pa). These modifications expand the range of sounds in Japanese,
-            allowing for clearer pronunciation and greater expressiveness.</p>
-        <img src="images/kana/hiragana_dakuten.png" alt="Hiragana Dakuten" class="chart">
-
-        <h1 class="kana-h1">Yōon</h1>
-        <p class="kana-p">Yōon (拗音) refers to the combination of a consonant followed by a smaller version of the "ya"
-            (や), "yu" (ゆ), or "yo" (よ) syllables to create blended sounds. For example, "き" (ki) combined with small
-            "や" (ゃ) creates "きゃ" (kya), and "し" (shi) with small "ゅ" (ゅ) forms "しゅ" (shu). Yōon combinations are
-            common in many words and allow for more complex and nuanced pronunciation in Japanese, making them
-            essential for mastering the language's phonetic structure.</p>
-        <img src="images/kana/hiragana_yoon.png" alt="Hiragana Yoon" class="chart">
-    </div>
-
-	<script src="js/script.js"></script>
-</body>
+        <script src="js/script.js"></script>
+    </body>
 </html>
