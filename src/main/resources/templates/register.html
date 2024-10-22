@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/spring-security">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Create an Account | Kitsuno</title>
+
+        <link rel="icon" href="/images/favicon/favicon-32x32.png" sizes="32x32" type="image/png">
+        <link rel="icon" href="/images/favicon/favicon-64x64.png" sizes="64x64" type="image/png">
+
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Kalam:wght@300;400;700&family=Poppins:ital,wght@0,100;0,400;0,500;0,600;1,400;1,500;1,600&family=Quicksand:wght@300..700&display=swap"
+              rel="stylesheet">
+
+        <link rel="stylesheet" href="css/styles.css">
+
+    </head>
+    <body>
+        <nav class="navbar">
+            <div class="logo">
+                <a href="#">
+                    <img src="images/navbar/logo.png" alt="Logo">
+                </a>
+            </div>
+            <ul class="nav-links">
+                <li><a href="#"><img src="images/navbar/home_icon.png" alt="Home Icon"> <span>Home</span></a></li>
+                <li><a href="#"><img src="images/navbar/hiragana_icon.png" alt="Hiragana Icon">
+                    <span>Hiragana</span></a></li>
+                <li><a href="#"><img src="images/navbar/katakana_icon.png" alt="Katakana Icon">
+                    <span>Katakana</span></a></li>
+                <li><a href="#"><img src="images/navbar/kanji_icon.png" alt="Kanji Icon"> <span>Kanji</span></a></li>
+                <li><a href="#"><img src="images/navbar/flashcard_icon.png" alt="Flashcards Icon">
+                    <span>Flashcards</span></a></li>
+                <li><a href="#"><img src="images/navbar/vocabulary_icon.png" alt="Vocabulary Icon">
+                    <span>Vocabulary</span></a></li>
+            </ul>
+            <div class="user-section">
+                <a href="#" class="user-link">
+                    <h6 sec:authorize="isAuthenticated()">Hi <span sec:authentication="name">!</span></h6>
+                    <h6 sec:authorize="!isAuthenticated()">Hi Guest!</h6>
+                    <img src="images/navbar/user_icon.png" alt="User Icon" class="user-icon">
+                </a>
+                <ul class="user-dropdown">
+                    <li sec:authorize="!isAuthenticated()">
+                        <a href="/login"><img src="images/navbar/login.png" alt="Login Icon"> LogIn</a>
+                    </li>
+                    <li sec:authorize="!isAuthenticated()">
+                        <a href="/signup"><img src="images/navbar/signup.png" alt="SignUp Icon"> SignUp</a>
+                    </li>
+                    <li sec:authorize="isAuthenticated()">
+                        <a href="/profile"><img src="images/navbar/settings.png" alt="Settings Icon"> Profile</a>
+                    </li>
+                    <li sec:authorize="isAuthenticated()">
+                        <a href="/logout"><img src="images/navbar/signout.png" alt="SignOut Icon"> LogOut</a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+
+        <div id="form-section">
+            <div id="signup-form" class="form-container">
+                <h2>Sign Up</h2>
+
+                <form th:action="@{/register}" th:object="${user}" method="post">
+                    <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+                    <div class="input-group">
+                        <label for="signup-username">Username</label>
+                        <input type="text" id="signup-username" name="username" required
+                               th:field="*{username}"/>
+                        <div th:if="${#fields.hasErrors('username')}" class="error">
+                            <span th:errors="*{username}"></span>
+                        </div>
+                    </div>
+                    <div class="input-group">
+                        <label for="signup-email">Email</label>
+                        <input type="email" id="signup-email" name="email" required
+                               th:field="*{email}"/>
+                        <div th:if="${#fields.hasErrors('email')}" class="error">
+                            <span th:errors="*{email}"></span>
+                        </div>
+                    </div>
+                    <div class="input-group">
+                        <label for="signup-password">Password</label>
+                        <input type="password" id="signup-password" name="password" required
+                               th:field="*{password}"/>
+                        <div th:if="${#fields.hasErrors('password')}" class="error">
+                            <span th:errors="*{password}"></span>
+                        </div>
+                    </div>
+                    <div class="input-group">
+                        <label for="confirm-password">Re-enter Password</label>
+                        <input type="password" id="confirm-password" name="confirmPassword" required
+                               th:field="*{confirmPassword}"/>
+                        <div th:if="${#fields.hasErrors('confirmPassword')}" class="error">
+                            <span th:errors="*{confirmPassword}"></span>
+                        </div>
+                    </div>
+                    <button type="submit" class="submit">Sign Up</button>
+                </form>
+                <p>Already have an account? <a href="/login">Login here</a></p>
+            </div>
+        </div>
+
+        <script src="js/script.js"></script>
+    </body>
+</html>
