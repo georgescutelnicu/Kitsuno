@@ -5,6 +5,8 @@ import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 
+import java.util.List;
+
 @Entity
 @Table(name = "users")
 public class User {
@@ -32,6 +34,9 @@ public class User {
     @Column(name = "enabled")
     private boolean enabled = true;
 
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Flashcard> flashcards;
+
     public User() {
     }
 
@@ -40,6 +45,18 @@ public class User {
         this.email = email;
         this.password = password;
         this.enabled = enabled;
+    }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "id=" + id +
+                ", username='" + username + '\'' +
+                ", email='" + email + '\'' +
+                ", password='" + password + '\'' +
+                ", enabled=" + enabled +
+                ", flashcards=" + flashcards +
+                '}';
     }
 
     public int getId() {
@@ -56,6 +73,10 @@ public class User {
 
     public String getPassword() {
         return password;
+    }
+
+    public List<Flashcard> getFlashcards() {
+        return flashcards;
     }
 
     public boolean isEnabled() {
@@ -80,5 +101,9 @@ public class User {
 
     public void setEnabled(boolean enabled) {
         this.enabled = enabled;
+    }
+
+    public void setFlashcards(List<Flashcard> flashcards) {
+        this.flashcards = flashcards;
     }
 }

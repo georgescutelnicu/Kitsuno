@@ -2,6 +2,8 @@ package com.kitsuno.entity;
 
 import jakarta.persistence.*;
 
+import java.util.Arrays;
+
 @Entity
 @Table(name = "flashcards")
 public class Flashcard {
@@ -34,6 +36,17 @@ public class Flashcard {
         this.notes = notes;
         this.kanji = kanji;
         this.user = user;
+    }
+
+    @Override
+    public String toString() {
+        return "Flashcard{" +
+                "id=" + id +
+                ", vocabulary=" + Arrays.toString(vocabulary) +
+                ", notes='" + notes + '\'' +
+                ", kanji=" + kanji +
+                ", user=" + user +
+                '}';
     }
 
     public int getId() {

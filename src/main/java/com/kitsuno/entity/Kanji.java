@@ -2,6 +2,8 @@ package com.kitsuno.entity;
 
 import jakarta.persistence.*;
 
+import java.util.Arrays;
+
 @Entity
 @Table(name = "kanji")
 public class Kanji {
@@ -26,7 +28,6 @@ public class Kanji {
     @Column(name = "kunyomi_readings")
     private String[] kunyomiReadings;
 
-    // Change the type from String to String[] for arrays
     @Column(name = "onyomi_vocab")
     private String[] onyomiVocab;
 
@@ -53,6 +54,22 @@ public class Kanji {
         this.kunyomiVocab = kunyomiVocab;
         this.category = category;
         this.strokeCount = strokeCount;
+    }
+
+    @Override
+    public String toString() {
+        return "Kanji{" +
+                "id=" + id +
+                ", character='" + character + '\'' +
+                ", jlpt='" + jlpt + '\'' +
+                ", meanings='" + meanings + '\'' +
+                ", onyomiReadings=" + Arrays.toString(onyomiReadings) +
+                ", kunyomiReadings=" + Arrays.toString(kunyomiReadings) +
+                ", onyomiVocab=" + Arrays.toString(onyomiVocab) +
+                ", kunyomiVocab=" + Arrays.toString(kunyomiVocab) +
+                ", category='" + category + '\'' +
+                ", strokeCount=" + strokeCount +
+                '}';
     }
 
     public int getId() {
