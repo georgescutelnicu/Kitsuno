@@ -1,6 +1,7 @@
 package com.kitsuno.service;
 
 import com.kitsuno.dao.KanjiDAO;
+import com.kitsuno.entity.Flashcard;
 import com.kitsuno.entity.Kanji;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -18,6 +19,11 @@ public class KanjiServiceImpl implements KanjiService {
     @Autowired
     public KanjiServiceImpl(KanjiDAO kanjiDAO) {
         this.kanjiDAO = kanjiDAO;
+    }
+
+    @Override
+    public Kanji findKanjiById(int id) {
+        return kanjiDAO.findKanjiById(id);
     }
 
     @Override

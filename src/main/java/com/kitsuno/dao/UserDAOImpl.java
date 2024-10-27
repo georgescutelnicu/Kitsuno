@@ -23,6 +23,12 @@ public class UserDAOImpl implements UserDAO {
     }
 
     @Override
+    public Optional<User> findById(int id) {
+        User user = entityManager.find(User.class, id);
+        return Optional.ofNullable(user);
+    }
+
+    @Override
     public Optional<User> findByUsername(String username) {
         TypedQuery<User> query = entityManager.createQuery("SELECT u FROM User u WHERE u.username = :username", User.class);
 

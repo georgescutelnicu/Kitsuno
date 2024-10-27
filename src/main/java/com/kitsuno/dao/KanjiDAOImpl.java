@@ -1,5 +1,6 @@
 package com.kitsuno.dao;
 
+import com.kitsuno.entity.Flashcard;
 import com.kitsuno.entity.Kanji;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.TypedQuery;
@@ -18,6 +19,12 @@ public class KanjiDAOImpl implements KanjiDAO {
         this.entityManager = entityManager;
     }
 
+
+    @Override
+    public Kanji findKanjiById(int id) {
+        return entityManager.find(Kanji.class, id);
+    }
+
     @Override
     public Kanji findKanjiByCharacter(String character) {
         TypedQuery<Kanji> query = entityManager.createQuery("FROM Kanji k WHERE k.character =: character",
@@ -31,7 +38,7 @@ public class KanjiDAOImpl implements KanjiDAO {
 
     @Override
     public List<Kanji> findAll() {
-        TypedQuery<Kanji> query = entityManager.createQuery("Select k from Kanji k", Kanji.class);
+        TypedQuery<Kanji> query = entityManager.createQuery("Select k from Kanji k ORDER BY k.id", Kanji.class);
 
         List<Kanji> kanjiList = query.getResultList();
 

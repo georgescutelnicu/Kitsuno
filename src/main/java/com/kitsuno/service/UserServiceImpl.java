@@ -2,6 +2,7 @@ package com.kitsuno.service;
 
 import com.kitsuno.dao.UserDAO;
 import com.kitsuno.dto.UserDTO;
+import com.kitsuno.entity.Kanji;
 import com.kitsuno.entity.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.BindingResult;
@@ -20,6 +21,11 @@ public class UserServiceImpl implements UserService {
     public UserServiceImpl(UserDAO userDAO, PasswordEncoder passwordEncoder) {
         this.userDAO = userDAO;
         this.passwordEncoder = passwordEncoder;
+    }
+
+    @Override
+    public Optional<User> findById(int id) {
+        return userDAO.findById(id);
     }
 
     @Override
