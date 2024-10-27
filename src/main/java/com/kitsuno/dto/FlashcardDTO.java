@@ -131,7 +131,7 @@ public class FlashcardDTO {
         this.userId = userId;
     }
 
-    public String getVocabularyAsJsonString() {
+    public String[] getVocabularyAsArray() {
         List<String> vocabList = new ArrayList<>();
 
         String[] vocabWords = {vocabWord1, vocabWord2, vocabWord3, vocabWord4};
@@ -144,12 +144,13 @@ public class FlashcardDTO {
                 String cleanWord = vocabWords[i].trim().replaceAll("\\s+", "");
                 String cleanMeaning = vocabMeanings[i].trim().replaceAll("\\s+", " ");
 
-                vocabList.add("\"" + cleanWord + " " + cleanMeaning + "\"");
+                vocabList.add(cleanWord + " " + cleanMeaning);
             }
         }
 
-        return "{" + String.join(",", vocabList) + "}";
+        return vocabList.toArray(new String[0]);
     }
+
 
     public boolean hasAtLeastOneVocabPair() {
         return (vocabWord1 != null && !vocabWord1.isEmpty() && vocabMeaning1 != null && !vocabMeaning1.isEmpty()) ||
