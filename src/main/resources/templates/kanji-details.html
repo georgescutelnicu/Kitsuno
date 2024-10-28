@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
     <head>
         <meta charset="utf-8">
         <meta content="width=device-width, initial-scale=1" name="viewport">
@@ -37,14 +38,32 @@
                     <span>Vocabulary</span></a></li>
             </ul>
             <div class="user-section">
-                <a class="user-link" href="#">
-                    <h6>Hi Guest!</h6>
-                    <img alt="User Icon" class="user-icon" th:src="@{/images/navbar/user_icon.png}">
+                <a href="#" class="user-link">
+                    <h6 sec:authorize="isAuthenticated()">Hi <span sec:authentication="name">!</span></h6>
+                    <h6 sec:authorize="!isAuthenticated()">Hi Guest!</h6>
+                    <img th:src="@{/images/navbar/user_icon.png}" alt="User Icon" class="user-icon">
                 </a>
                 <ul class="user-dropdown">
-                    <li><a href="#"><img alt="Login Icon" th:src="@{/images/navbar/login.png}"> Login</a></li>
-                    <li><a href="#"><img alt="SignUP Icon" th:src="@{/images/navbar/signup.png}"> Sign Up</a></li>
-                    <li><a href="#"><img alt="Settings Icon" th:src="@{/images/navbar/settings.png}"> Settings</a></li>
+                    <li sec:authorize="!isAuthenticated()">
+                        <a href="/login">
+                            <img th:src="@{/images/navbar/login.png}" alt="Login Icon"> LogIn
+                        </a>
+                    </li>
+                    <li sec:authorize="!isAuthenticated()">
+                        <a href="/register">
+                            <img th:src="@{/images/navbar/signup.png}" alt="SignUp Icon"> SignUp
+                        </a>
+                    </li>
+                    <li sec:authorize="isAuthenticated()">
+                        <a href="/profile">
+                            <img th:src="@{/images/navbar/settings.png}" alt="Settings Icon"> Profile
+                        </a>
+                    </li>
+                    <li sec:authorize="isAuthenticated()">
+                        <a href="/logout">
+                            <img th:src="@{/images/navbar/signout.png}" alt="SignOut Icon"> LogOut
+                        </a>
+                    </li>
                 </ul>
             </div>
         </nav>
@@ -104,9 +123,73 @@
             </div>
 
             <div class="button-container">
-                <a href="#">
-                    <button class="flashcard-button">Create Flashcard</button>
-                </a>
+                <div sec:authorize="isAuthenticated()">
+                    <button class="flashcard-button flashcard-button-form" th:style="${hasError} ? 'color: red;' : ''"
+                            onclick="showFlashcardForm()">Create
+                        Flashcard
+                    </button>
+                </div>
+                <div sec:authorize="!isAuthenticated()">
+                    <button class="flashcard-button flashcard-button-form" onclick="flashcardError()">Create Flashcard
+                    </button>
+                    <p id="flashcard-error" class="hidden">Login required!</p>
+                </div>
+            </div>
+
+            <div id="flashcard-form" class="hidden">
+                <h1>Creating Flashcard</h1>
+
+                <form th:action="@{/kanji/{character}(character=${kanji.character})}"
+                      th:object="${flashcardDTO}" method="post">
+
+                    <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+                    <input type="hidden" name="kanjiCharacter" th:value="${kanji.character}"/>
+                    <input type="hidden" name="kanjiId" th:value="${kanji.id}"/>
+                    <input type="hidden" name="userId" th:value="6"/>
+
+                    <div th:if="${#fields.hasErrors()}" class="alert alert-danger">
+                        <p th:each="err : ${#fields.errors()}" th:text="${err}" class="create-flashcard-error"></p>
+                    </div>
+
+                    <div class="vocabulary-grid">
+                        <div class="vocab-input">
+                            <label><h3>#1</h3></label>
+                            <input type="text" th:field="*{vocabWord1}" placeholder="Word" maxlength="14">
+                            <input type="text" th:field="*{vocabMeaning1}" placeholder="Meaning" maxlength="42">
+
+                        </div>
+
+                        <div class="vocab-input">
+                            <label><h3>#2</h3></label>
+                            <input type="text" th:field="*{vocabWord2}" placeholder="Word" maxlength="14">
+                            <input type="text" th:field="*{vocabMeaning2}" placeholder="Meaning" maxlength="42">
+                        </div>
+
+                        <div class="vocab-input">
+                            <label><h3>#3</h3></label>
+                            <input type="text" th:field="*{vocabWord3}" placeholder="Word" maxlength="14">
+                            <input type="text" th:field="*{vocabMeaning3}" placeholder="Meaning" maxlength="42">
+                        </div>
+
+                        <div class="vocab-input">
+                            <label><h3>#4</h3></label>
+                            <input type="text" th:field="*{vocabWord4}" placeholder="Word" maxlength="14">
+                            <input type="text" th:field="*{vocabMeaning4}" placeholder="Meaning" maxlength="42">
+                        </div>
+                    </div>
+
+                    <div class="notes-container">
+                        <label for="notes"><h3>Notes</h3></label>
+                        <textarea id="notes" th:field="*{notes}" maxlength="256" rows=4
+                                  placeholder="Add your notes here..."></textarea>
+                    </div>
+
+                    <div class="form-buttons">
+                        <button class="flashcard-button" type="submit">Create</button>
+                        <button class="flashcard-button" type="button" onclick="hideFlashcardForm()">Cancel</button>
+                    </div>
+                </form>
+
             </div>
 
             <div class="related-words">

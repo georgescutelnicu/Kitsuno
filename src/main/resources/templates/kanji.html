@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/spring-security">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -29,13 +30,23 @@
         </ul>
         <div class="user-section">
             <a href="#" class="user-link">
-                <h6>Hi Guest!</h6>
+                <h6 sec:authorize="isAuthenticated()">Hi <span sec:authentication="name">!</span></h6>
+                <h6 sec:authorize="!isAuthenticated()">Hi Guest!</h6>
                 <img src="images/navbar/user_icon.png" alt="User Icon" class="user-icon">
             </a>
             <ul class="user-dropdown">
-                <li><a href="#"><img src="images/navbar/login.png" alt="Login Icon"> Login</a></li>
-                <li><a href="#"><img src="images/navbar/signup.png" alt="SignUP Icon"> Sign Up</a></li>
-                <li><a href="#"><img src="images/navbar/settings.png" alt="Settings Icon"> Settings</a></li>
+                <li sec:authorize="!isAuthenticated()">
+                    <a href="/login"><img src="images/navbar/login.png" alt="Login Icon"> LogIn</a>
+                </li>
+                <li sec:authorize="!isAuthenticated()">
+                    <a href="/register"><img src="images/navbar/signup.png" alt="SignUp Icon"> SignUp</a>
+                </li>
+                <li sec:authorize="isAuthenticated()">
+                    <a href="/profile"><img src="images/navbar/settings.png" alt="Settings Icon"> Profile</a>
+                </li>
+                <li sec:authorize="isAuthenticated()">
+                    <a href="/logout"><img src="images/navbar/signout.png" alt="SignOut Icon"> LogOut</a>
+                </li>
             </ul>
         </div>
     </nav>
