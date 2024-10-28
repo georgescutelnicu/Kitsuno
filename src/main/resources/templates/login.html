@@ -47,7 +47,7 @@
                         <a href="/login"><img src="images/navbar/login.png" alt="Login Icon"> LogIn</a>
                     </li>
                     <li sec:authorize="!isAuthenticated()">
-                        <a href="/signup"><img src="images/navbar/signup.png" alt="SignUp Icon"> SignUp</a>
+                        <a href="/register"><img src="images/navbar/signup.png" alt="SignUp Icon"> SignUp</a>
                     </li>
                     <li sec:authorize="isAuthenticated()">
                         <a href="/profile"><img src="images/navbar/settings.png" alt="Settings Icon"> Profile</a>
@@ -58,6 +58,23 @@
                 </ul>
             </div>
         </nav>
+
+        <nav class="bottom-navbar">
+            <ul class="nav-links">
+                <li><a href="#"><img src="images/navbar/home_icon.png" alt="Home Icon"> <span>Home</span></a>
+                </li>
+                <li><a href="#"><img src="images/navbar/hiragana_icon.png" alt="Hiragana Icon">
+                    <span>Hiragana</span></a></li>
+                <li><a href="#"><img src="images/navbar/katakana_icon.png" alt="Katakana Icon">
+                    <span>Katakana</span></a></li>
+                <li><a href="#"><img src="images/navbar/kanji_icon.png" alt="Kanji Icon"> <span>Kanji</span></a></li>
+                <li><a href="#"><img src="images/navbar/flashcard_icon.png" alt="Flashcards Icon">
+                    <span>Flashcards</span></a></li>
+                <li><a href="#"><img src="images/navbar/vocabulary_icon.png" alt="Vocabulary Icon">
+                    <span>Vocabulary</span></a></li>
+            </ul>
+        </nav>
+
         <div id="form-section">
             <div id="login-form" class="form-container">
                 <h2>Login</h2>
