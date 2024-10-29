@@ -9,13 +9,18 @@ import com.kitsuno.service.KanjiService;
 import com.kitsuno.service.UserService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import java.util.List;
 import java.util.Optional;
 
 @Controller
@@ -67,5 +72,24 @@ public class FlashcardController {
         flashcardService.saveFlashcard(flashcard);
 
         return "redirect:/flashcards";
+    }
+
+    @GetMapping("/flashcards")
+    public String showFlashcards(Model model) {
+
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+
+        if (auth != null && auth.isAuthenticated() && auth.getPrincipal() instanceof UserDetails userDetails) {
+            String username = userDetails.getUsername();
+            Optional<User> userOptional = userService.findByUsername(username);
+
+            if (userOptional.isPresent()) {
+                User user = userOptional.get();
+                List<Flashcard> flashcardsList = flashcardService.getAllFlashcardsByUserId(user.getId());
+                model.addAttribute("flashcardsList", flashcardsList);
+            }
+        }
+
+        return "flashcard";
     }
 }
