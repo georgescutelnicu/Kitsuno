@@ -228,6 +228,7 @@ body {
 #main-section {
     background-color: #fff;
     width: 60%;
+    min-height: calc(80vh + 55px);
     margin: auto;
     padding-bottom: 50px;
     display: flex;
@@ -243,6 +244,7 @@ body {
     #main-section {
     	width: 100%;
     	padding-bottom: 100px;
+    	min-height: 80vh;
     }
 }
 
@@ -471,6 +473,7 @@ body {
 .flip-container {
     margin: 20px auto;
     height: 320px;
+    perspective: 1000px;
 }
 
 .flipper {
@@ -719,7 +722,6 @@ hr {
     box-shadow: 0 4px 0 0 #e0e0e0;
     border-radius: 15px;
     padding: 12px 30px;
-    margin-bottom: 24px;
     font-size: 16px;
     cursor: pointer;
 }
@@ -737,11 +739,127 @@ hr {
     border-color: #c0c0c0;
 }
 
+#flashcard-form {
+    width: 80%;
+}
+
+#flashcard-form h3 {
+    margin: 0;
+}
+
+.vocabulary-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+    margin-bottom: 30px;
+    margin-right: 3%;
+}
+
+.vocab-input {
+    margin: 5% 15%;
+    display: flex;
+    flex-direction: column;
+}
+
+.vocab-input label {
+    font-weight: 600;
+    margin-bottom: 5px;
+    text-align: center;
+    font-size: 1.1em;
+}
+
+.vocab-input input {
+    box-shadow: none;
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    transition: border-color 0.3s, box-shadow 0.3s;
+    margin-bottom: 15px;
+    font-size: 1em;
+}
+
+.vocab-input input:focus {
+    border-color: #007BFF;
+    outline: none;
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+}
+
+.notes-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.notes-container label {
+    font-weight: 600;
+    margin-bottom: 5px;
+    font-size: 1.1em;
+}
+
+.notes-container textarea {
+    width: 100%;
+    max-width: 400px;
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    resize: none;
+    transition: border-color 0.3s, box-shadow 0.3s;
+    font-size: 1em;
+}
+
+.notes-container textarea:focus {
+    border-color: #007BFF;
+    outline: none;
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+}
+
+#flashcard-error {
+    color: red;
+}
+
+.create-flashcard-error {
+    color: red;
+    text-align: center;
+}
+
+.hidden {
+    display: none;
+}
+
+.form-buttons {
+    text-align: center;
+    margin-top: 18px;
+}
+
+.form-buttons button {
+    margin: 1%;
+}
+
 @media (max-width: 1068px) {
     .readings {
         flex-direction: column;
         align-items: center;
     }
+    .vocabulary-grid {
+        margin-right: 5%;
+    }
+}
+
+
+/* Flashcards */
+.info-div {
+    margin: 7.5%;
+}
+
+.info {
+    background-color: #f9f9f9;
+    color: #333;
+    padding: 20px;
+    border-left: 4px solid #ff6600;
+    border-radius: 8px;
+    font-size: 1.1em;
+    max-width: 600px;
+    text-align: center;
 }
 
 
