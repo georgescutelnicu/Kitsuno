@@ -78,3 +78,19 @@ function playAudio(audioSource) {
     const audio = new Audio(audioSource);
     audio.play();
 }
+
+
+// Show/hide flashcard form
+function showFlashcardForm() {
+    document.getElementById("flashcard-form").classList.remove("hidden");
+    document.querySelector(".flashcard-button-form").style.display = "none";
+}
+
+function hideFlashcardForm() {
+    document.getElementById("flashcard-form").classList.add("hidden");
+    document.querySelector(".flashcard-button-form").style.display = "block";
+}
+
+function flashcardError() {
+    document.getElementById("flashcard-error").classList.remove("hidden");
+}
