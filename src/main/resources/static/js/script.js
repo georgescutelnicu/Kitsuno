@@ -94,3 +94,67 @@ function hideFlashcardForm() {
 function flashcardError() {
     document.getElementById("flashcard-error").classList.remove("hidden");
 }
+
+
+// Handle hiragana typing in vocabulary forms
+const romajiToHiragana = {
+    'a': 'あ', 'i': 'い', 'u': 'う', 'e': 'え', 'o': 'お',
+    'ka': 'か', 'ki': 'き', 'ku': 'く', 'ke': 'け', 'ko': 'こ',
+    'ga': 'が', 'gi': 'ぎ', 'gu': 'ぐ', 'ge': 'げ', 'go': 'ご',
+    'sa': 'さ', 'shi': 'し', 'su': 'す', 'se': 'せ', 'so': 'そ',
+    'za': 'ざ', 'ji': 'じ', 'zu': 'ず', 'ze': 'ぜ', 'zo': 'ぞ',
+    'ta': 'た', 'chi': 'ち', 'tsu': 'つ', 'te': 'て', 'to': 'と',
+    'da': 'だ', 'ji': 'ぢ', 'zu': 'づ', 'de': 'で', 'do': 'ど',
+    'na': 'な', 'ni': 'に', 'nu': 'ぬ', 'ne': 'ね', 'no': 'の',
+    'ha': 'は', 'hi': 'ひ', 'fu': 'ふ', 'he': 'へ', 'ho': 'ほ',
+    'ba': 'ば', 'bi': 'び', 'bu': 'ぶ', 'be': 'べ', 'bo': 'ぼ',
+    'pa': 'ぱ', 'pi': 'ぴ', 'pu': 'ぷ', 'pe': 'ぺ', 'po': 'ぽ',
+    'ma': 'ま', 'mi': 'み', 'mu': 'む', 'me': 'め', 'mo': 'も',
+    'ya': 'や', 'yu': 'ゆ', 'yo': 'よ',
+    'ra': 'ら', 'ri': 'り', 'ru': 'る', 're': 'れ', 'ro': 'ろ',
+    'wa': 'わ', 'wo': 'を', 'n': 'ん',
+
+    'kya': 'きゃ', 'kyu': 'きゅ', 'kyo': 'きょ',
+    'gya': 'ぎゃ', 'gyu': 'ぎゅ', 'gyo': 'ぎょ',
+    'sha': 'しゃ', 'shu': 'しゅ', 'sho': 'しょ',
+    'cha': 'ちゃ', 'chu': 'ちゅ', 'cho': 'ちょ',
+    'nya': 'にゃ', 'nyu': 'にゅ', 'nyo': 'にょ',
+    'hya': 'ひゃ', 'hyu': 'ひゅ', 'hyo': 'ひょ',
+    'bya': 'びゃ', 'byu': 'びゅ', 'byo': 'びょ',
+    'pya': 'ぴゃ', 'pyu': 'ぴゅ', 'pyo': 'ぴょ',
+    'mya': 'みゃ', 'myu': 'みゅ', 'myo': 'みょ',
+    'rya': 'りゃ', 'ryu': 'りゅ', 'ryo': 'りょ',
+};
+
+function convertToHiragana(inputElement) {
+    let value = inputElement.value;
+    let convertedText = '';
+    let tempRomaji = '';
+
+    for (let i = 0; i < value.length; i++) {
+        tempRomaji += value[i].toLowerCase();
+
+        if (romajiToHiragana[tempRomaji]) {
+            convertedText += romajiToHiragana[tempRomaji];
+            tempRomaji = '';
+        }
+
+        else if ('aiueo'.includes(tempRomaji) && tempRomaji.length === 1) {
+            convertedText += romajiToHiragana[tempRomaji];
+            tempRomaji = '';
+        }
+
+        else if (tempRomaji.length > 1 && tempRomaji[0] === tempRomaji[1]) {
+            convertedText += 'っ';
+            tempRomaji = tempRomaji.slice(1);
+        }
+
+        else if (tempRomaji.length > 3 || !Object.keys(romajiToHiragana).some(key => key.startsWith(tempRomaji))) {
+            convertedText += tempRomaji[0];
+            tempRomaji = tempRomaji.slice(1);
+        }
+    }
+
+    convertedText += tempRomaji;
+    inputElement.value = convertedText;
+}

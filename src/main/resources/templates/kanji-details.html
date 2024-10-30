@@ -154,33 +154,33 @@
                     <div class="vocabulary-grid">
                         <div class="vocab-input">
                             <label><h3>#1</h3></label>
-                            <input type="text" th:field="*{vocabWord1}" placeholder="Word" maxlength="14">
-                            <input type="text" th:field="*{vocabMeaning1}" placeholder="Meaning" maxlength="42">
+                            <input type="text" th:field="*{vocabWord1}" placeholder="Word" oninput="convertToHiragana(this)">
+                            <input type="text" th:field="*{vocabMeaning1}" placeholder="Meaning">
 
                         </div>
 
                         <div class="vocab-input">
                             <label><h3>#2</h3></label>
-                            <input type="text" th:field="*{vocabWord2}" placeholder="Word" maxlength="14">
-                            <input type="text" th:field="*{vocabMeaning2}" placeholder="Meaning" maxlength="42">
+                            <input type="text" th:field="*{vocabWord2}" placeholder="Word" oninput="convertToHiragana(this)">
+                            <input type="text" th:field="*{vocabMeaning2}" placeholder="Meaning">
                         </div>
 
                         <div class="vocab-input">
                             <label><h3>#3</h3></label>
-                            <input type="text" th:field="*{vocabWord3}" placeholder="Word" maxlength="14">
-                            <input type="text" th:field="*{vocabMeaning3}" placeholder="Meaning" maxlength="42">
+                            <input type="text" th:field="*{vocabWord3}" placeholder="Word" oninput="convertToHiragana(this)">
+                            <input type="text" th:field="*{vocabMeaning3}" placeholder="Meaning">
                         </div>
 
                         <div class="vocab-input">
                             <label><h3>#4</h3></label>
-                            <input type="text" th:field="*{vocabWord4}" placeholder="Word" maxlength="14">
-                            <input type="text" th:field="*{vocabMeaning4}" placeholder="Meaning" maxlength="42">
+                            <input type="text" th:field="*{vocabWord4}" placeholder="Word" oninput="convertToHiragana(this)">
+                            <input type="text" th:field="*{vocabMeaning4}" placeholder="Meaning">
                         </div>
                     </div>
 
                     <div class="notes-container">
                         <label for="notes"><h3>Notes</h3></label>
-                        <textarea id="notes" th:field="*{notes}" maxlength="256" rows=4
+                        <textarea id="notes" th:field="*{notes}" rows=4
                                   placeholder="Add your notes here..."></textarea>
                     </div>
 
