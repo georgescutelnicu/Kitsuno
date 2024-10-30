@@ -132,26 +132,38 @@ function convertToHiragana(inputElement) {
     let tempRomaji = '';
 
     for (let i = 0; i < value.length; i++) {
-        tempRomaji += value[i].toLowerCase();
+        const char = value[i].toLowerCase();
 
-        if (romajiToHiragana[tempRomaji]) {
-            convertedText += romajiToHiragana[tempRomaji];
-            tempRomaji = '';
-        }
+        if (char === 'n') {
+            tempRomaji += 'n';
+        } else {
+            if (tempRomaji === 'n') {
+                if ('aiueo'.includes(char)) {
+                    convertedText += romajiToHiragana[tempRomaji + char];
+                    tempRomaji = '';
+                    continue;
+                } else {
+                    convertedText += 'ん';
+                    tempRomaji = '';
+                }
+            }
 
-        else if ('aiueo'.includes(tempRomaji) && tempRomaji.length === 1) {
-            convertedText += romajiToHiragana[tempRomaji];
-            tempRomaji = '';
-        }
+            tempRomaji += char;
 
-        else if (tempRomaji.length > 1 && tempRomaji[0] === tempRomaji[1]) {
-            convertedText += 'っ';
-            tempRomaji = tempRomaji.slice(1);
-        }
+            if (romajiToHiragana[tempRomaji]) {
+                convertedText += romajiToHiragana[tempRomaji];
+                tempRomaji = '';
+            } else if (tempRomaji.length === 1 && 'aiueo'.includes(tempRomaji)) {
+                convertedText += romajiToHiragana[tempRomaji];
+                tempRomaji = '';
+            } else if (tempRomaji.length > 1 && tempRomaji[0] === tempRomaji[1]) {
+                convertedText += 'っ';
+                tempRomaji = tempRomaji.slice(1);
+            } else if (tempRomaji.length > 3 || !Object.keys(romajiToHiragana).some(key => key.startsWith(tempRomaji))) {
 
-        else if (tempRomaji.length > 3 || !Object.keys(romajiToHiragana).some(key => key.startsWith(tempRomaji))) {
-            convertedText += tempRomaji[0];
-            tempRomaji = tempRomaji.slice(1);
+                convertedText += tempRomaji[0];
+                tempRomaji = tempRomaji.slice(1);
+            }
         }
     }
 
