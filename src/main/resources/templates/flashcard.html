@@ -4,7 +4,7 @@
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title>Login to Your Account | Kitsuno</title>
+        <title>Check your own flashcards | Kitsuno</title>
 
         <link rel="icon" href="/images/favicon/favicon-32x32.png" sizes="32x32" type="image/png">
         <link rel="icon" href="/images/favicon/favicon-64x64.png" sizes="64x64" type="image/png">
@@ -78,18 +78,71 @@
         <div id="main-section">
             <div sec:authorize="isAuthenticated()">
                 <div th:if="${flashcardsList.size() > 0}">
-                    <div class="grid-container" style="grid-template-columns: repeat(3, 1fr); margin-top: 15%;">
+                    <div class="flashcard-container">
                         <div th:each="flashcard : ${flashcardsList}">
-                            <button class="kana-button"
-                                    style="width: 115px; height: 125px; font-size: 40px;"
-                                    th:title="${flashcard.kanji.character}">
-                                <span th:text="${flashcard.kanji.character}"></span>
-                            </button>
+
+                            <div class="flashcard-kana-section">
+                                <div class="flip-container" style="height: 360px;">
+                                    <div class="flipper">
+                                        <div class="flashcard-front">
+                                            <div class="flashcard-kanji-character">
+                                                <h1 th:text="${flashcard.kanji.character}"></h1>
+                                                <p th:text="${flashcard.notes}"></p>
+                                            </div>
+                                        </div>
+
+                                        <div class="flashcard-back">
+                                            <div class="flashcard-kanji-details">
+                                                <div class="flashcard-left-column">
+                                                    <p><strong>Kunyomi:</strong></p>
+                                                    <p>
+                                                        <span th:if="${flashcard.kanji.kunyomiReadings == null}">-</span>
+                                                        <span th:if="${flashcard.kanji.kunyomiReadings != null}"
+                                                              th:each="kunyomi, stat : ${flashcard.kanji.kunyomiReadings}">
+                                                        <span th:text="${kunyomi}"></span>
+                                                        <span th:if="${!stat.last}"> &nbsp; </span>
+                                                    </span>
+                                                    </p>
+                                                </div>
+
+                                                <div class="flashcard-right-column">
+                                                    <p><strong>Onyomi:</strong></p>
+                                                    <p>
+                                                        <span th:if="${flashcard.kanji.onyomiReadings == null}">-</span>
+                                                        <span th:if="${flashcard.kanji.onyomiReadings != null}"
+                                                              th:each="kunyomi, stat : ${flashcard.kanji.onyomiReadings}">
+                                                        <span th:text="${kunyomi}"></span>
+                                                        <span th:if="${!stat.last}"> &nbsp; </span>
+                                                    </span>
+                                                    </p>
+                                                </div>
+                                            </div>
+
+                                            <p class="flashcard-kanji-meaning"
+                                               th:text="${flashcard.kanji.meanings}"></p>
+
+                                            <hr>
+
+                                            <div class="flashcard-vocabulary">
+                                                <ul>
+                                                    <li th:each="vocab : ${flashcard.vocabulary}">
+                                                        <span th:text="${vocab.substring(0, vocab.indexOf(' '))}"></span>
+                                                        <span class="flashcard-vocabulary-meaning"
+                                                              th:text="${vocab.substring(vocab.indexOf(' ') + 1)}"></span>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
                         </div>
                     </div>
                 </div>
                 <div class="info-div" th:if="${flashcardsList.size() == 0}">
-                    <p class="info">You can create custom flashcards by navigating to the Kanji page, selecting a Kanji, and creating a flashcard from there.</p>
+                    <p class="info">You can create custom flashcards by navigating to the Kanji page, selecting a Kanji,
+                        and creating a flashcard from there.</p>
                 </div>
             </div>
 

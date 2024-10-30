@@ -862,6 +862,152 @@ hr {
     text-align: center;
 }
 
+.flashcard-container {
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+    justify-content: center;
+}
+
+.flashcard-kana-section {
+    background-color: #f9f9f9;
+    border-radius: 12px;
+    padding: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    width: 333px;
+    text-align: center;
+    margin: 33px;
+}
+
+.flip-container {
+    margin: 20px auto;
+    height: 320px;
+    perspective: 1000px;
+}
+
+.flipper {
+    height: 100%;
+    transition: transform 0.6s;
+    transform-style: preserve-3d;
+}
+
+.flip-container:hover .flipper {
+    transform: rotateY(180deg);
+}
+
+.flashcard-kanji-character h1 {
+    font-size: 150px;
+    color: #333;
+    border: 1px solid #333;
+    height: 225px;
+    width: 225px;
+    margin: 0 auto;
+}
+
+.flashcard-front, .flashcard-back {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    backface-visibility: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.flashcard-front {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.flashcard-back {
+    background-color: #fff;
+    transform: rotateY(180deg);
+    text-align: left;
+    border-radius: 8%;
+}
+
+.flashcard-kanji-details {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    padding: 0 10%;
+}
+
+.flashcard-left-column,
+.flashcard-right-column {
+    width: 45%;
+    text-align: left;
+    margin: 1%;
+}
+
+.flashcard-left-column p,
+.flashcard-right-column p {
+    margin: 0;
+    padding: 2px 0;
+}
+
+.flashcard-left-column p:first-child,
+.flashcard-right-column p:first-child {
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+.flashcard-left-column,
+.flashcard-right-column {
+    text-align: center;
+    font-size: 12px;
+}
+
+.flashcard-kanji-meaning {
+    text-align: center;
+    margin: 25px 6px 0;
+    font-weight: bold;
+    font-size: 14px;
+}
+
+.flashcard-vocabulary {
+    font-size: 13px;
+    text-align: left;
+    width: 100%;
+    margin-top: 12px;
+    margin-left: 15%;
+}
+
+.flashcard-vocabulary ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.flashcard-vocabulary li {
+    display: flex;
+    justify-content: space-between;
+    padding: 2px 0;
+}
+
+.flashcard-vocabulary-meaning {
+    text-align: right;
+    display: inline-block;
+    margin-right: 15%;
+}
+
+.flashcard-container hr {
+    width: 100%;
+    border: 0.5px solid #ddd;
+    margin: 15px 0;
+}
+
+@media (max-width: 1068px) {
+    .flashcard-container {
+        display: block;
+    }
+    .flashcard-kana-section {
+        margin: 25px auto;
+    }
+}
+
 
 /* Forms */
 #form-section {
