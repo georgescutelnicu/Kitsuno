@@ -7,31 +7,31 @@ import java.util.List;
 
 public class FlashcardDTO {
 
-    @Size(max = 14, message = "Vocabulary word must not exceed 14 characters.")
+    @Size(max = 8, message = "Vocabulary word must not exceed 8 characters")
     private String vocabWord1;
 
-    @Size(max = 42, message = "Vocabulary meaning must not exceed 42 characters.")
+    @Size(max = 24, message = "Vocabulary meaning must not exceed 24 characters")
     private String vocabMeaning1;
 
-    @Size(max = 14, message = "Vocabulary word must not exceed 14 characters.")
+    @Size(max = 8, message = "Vocabulary word must not exceed 8 characters")
     private String vocabWord2;
 
-    @Size(max = 42, message = "Vocabulary meaning must not exceed 42 characters.")
+    @Size(max = 24, message = "Vocabulary meaning must not exceed 24 characters")
     private String vocabMeaning2;
 
-    @Size(max = 14, message = "Vocabulary word must not exceed 14 characters.")
+    @Size(max = 8, message = "Vocabulary word must not exceed 8 characters")
     private String vocabWord3;
 
-    @Size(max = 42, message = "Vocabulary meaning must not exceed 42 characters.")
+    @Size(max = 24, message = "Vocabulary meaning must not exceed 24 characters")
     private String vocabMeaning3;
 
-    @Size(max = 14, message = "Vocabulary word must not exceed 14 characters.")
+    @Size(max = 8, message = "Vocabulary word must not exceed 8 characters")
     private String vocabWord4;
 
-    @Size(max = 42, message = "Vocabulary meaning must not exceed 42 characters.")
+    @Size(max = 24, message = "Vocabulary meaning must not exceed 24 characters")
     private String vocabMeaning4;
 
-    @Size(max = 256, message = "Notes must not exceed 256 characters.")
+    @Size(max = 128, message = "Notes must not exceed 128 characters")
     private String notes;
 
     @NotNull(message = "Kanji ID cannot be null.")

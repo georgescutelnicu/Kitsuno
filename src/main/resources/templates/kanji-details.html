@@ -4,7 +4,7 @@
     <head>
         <meta charset="utf-8">
         <meta content="width=device-width, initial-scale=1" name="viewport">
-        <title>Kitsuno</title>
+        <title th:text="${'Kanji character ' + kanji.character} + ' | Kitsuno'"></title>
 
         <link href="https://fonts.googleapis.com" rel="preconnect">
         <link crossorigin href="https://fonts.gstatic.com" rel="preconnect">
@@ -147,7 +147,7 @@
                     <input type="hidden" name="kanjiId" th:value="${kanji.id}"/>
                     <input type="hidden" name="userId" th:value="6"/>
 
-                    <div th:if="${#fields.hasErrors()}" class="alert alert-danger">
+                    <div th:if="${#fields.hasErrors()}">
                         <p th:each="err : ${#fields.errors()}" th:text="${err}" class="create-flashcard-error"></p>
                     </div>
 

@@ -39,12 +39,12 @@ public class FlashcardController {
 
     @PostMapping("/kanji/{character}")
     public String saveFlashcard(@Valid @ModelAttribute("flashcardDTO") FlashcardDTO flashcardDTO,
-                                @RequestParam("kanjiCharacter") String kanjiCharacter,
                                 BindingResult bindingResult,
+                                @RequestParam("kanjiCharacter") String kanjiCharacter,
                                 Model model) {
 
         if (!flashcardDTO.hasAtLeastOneVocabPair()) {
-            bindingResult.reject("error.flashcardDTO", "At least one vocabulary pair is required!");
+            bindingResult.reject("error.flashcardDTO", "At least one vocabulary pair is required");
         }
 
         if (bindingResult.hasErrors()) {
