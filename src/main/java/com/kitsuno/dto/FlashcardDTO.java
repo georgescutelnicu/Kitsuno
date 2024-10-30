@@ -31,7 +31,7 @@ public class FlashcardDTO {
     @Size(max = 24, message = "Vocabulary meaning must not exceed 24 characters")
     private String vocabMeaning4;
 
-    @Size(max = 128, message = "Notes must not exceed 128 characters")
+    @Size(max = 200, message = "Notes must not exceed 200 characters")
     private String notes;
 
     @NotNull(message = "Kanji ID cannot be null.")

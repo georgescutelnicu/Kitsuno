@@ -158,3 +158,21 @@ function convertToHiragana(inputElement) {
     convertedText += tempRomaji;
     inputElement.value = convertedText;
 }
+
+
+// Highlights text in red when flashcard inputs character count exceeds the specified limit.
+document.addEventListener("DOMContentLoaded", function () {
+    const limitElements = document.querySelectorAll(".character-limit");
+
+    limitElements.forEach(element => {
+        const limit = parseInt(element.getAttribute("data-limit"));
+
+        element.addEventListener("input", function () {
+            if (element.value.length > limit) {
+                element.style.color = "red";
+            } else {
+                element.style.color = "black";
+            }
+        });
+    });
+});
