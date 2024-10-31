@@ -3,28 +3,37 @@ package com.kitsuno.controller;
 import com.kitsuno.entity.Hiragana;
 import com.kitsuno.entity.Kanji;
 import com.kitsuno.entity.Katakana;
+import com.kitsuno.entity.User;
 import com.kitsuno.service.HiraganaService;
 import com.kitsuno.service.KanjiService;
 import com.kitsuno.service.KatakanaService;
+import com.kitsuno.service.UserService;
 import com.kitsuno.utils.Utils;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import com.kitsuno.dto.FlashcardDTO;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
 @Controller
 public class WebController {
     private HiraganaService hiraganaService;
     private KatakanaService katakanaService;
     private KanjiService kanjiService;
+    private UserService userService;
 
-    public WebController(HiraganaService hiraganaService, KatakanaService katakanaService, KanjiService kanjiService) {
+    public WebController(HiraganaService hiraganaService, KatakanaService katakanaService, KanjiService kanjiService,
+                         UserService userService) {
         this.hiraganaService = hiraganaService;
         this.katakanaService = katakanaService;
         this.kanjiService = kanjiService;
+        this.userService = userService;
     }
 
     @GetMapping("/")
@@ -33,7 +42,7 @@ public class WebController {
     }
 
     @GetMapping("/home")
-    public String showHome() {
+    public String showHome(Model model) {
         return "home";
     }
 
@@ -55,15 +64,27 @@ public class WebController {
 
     @GetMapping("/kanji")
     public String showKanji(Model model) {
-        Map<String, List<Kanji>> kanjiMap = kanjiService.findAllGroupedByCategory();
+        Map<String, List<Kanji>> kanjiMap = this.kanjiService.findAllGroupedByCategory();
         model.addAttribute("kanjiMap", kanjiMap);
         return "kanji";
     }
 
     @GetMapping("/kanji/{character}")
     public String showKanjiDetails(@PathVariable("character") String character, Model model) {
-        Kanji kanji = kanjiService.findKanjiByCharacter(character);
+        Kanji kanji = this.kanjiService.findKanjiByCharacter(character);
+        FlashcardDTO flashcardDTO = new FlashcardDTO();
         model.addAttribute("kanji", kanji);
+        model.addAttribute("flashcardDTO", flashcardDTO);
+
+        Optional<User> authenticatedUser = Utils.getAuthenticatedUser(userService);
+
+        if (authenticatedUser.isPresent()) {
+            User user = authenticatedUser.get();
+            model.addAttribute("userId", user.getId());
+        } else {
+            model.addAttribute("userId", null);
+        }
+
         return "kanji-details";
     }
 }

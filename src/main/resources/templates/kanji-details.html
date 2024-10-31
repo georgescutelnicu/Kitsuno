@@ -145,7 +145,7 @@
                     <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
                     <input type="hidden" name="kanjiCharacter" th:value="${kanji.character}"/>
                     <input type="hidden" name="kanjiId" th:value="${kanji.id}"/>
-                    <input type="hidden" name="userId" th:value="6"/>
+                    <input type="hidden" name="userId" th:value="${userId}"/>
 
                     <div th:if="${#fields.hasErrors()}">
                         <p th:each="err : ${#fields.errors()}" th:text="${err}" class="create-flashcard-error"></p>
