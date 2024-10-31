@@ -32,6 +32,11 @@ public class FlashcardServiceImpl implements FlashcardService {
     }
 
     @Override
+    public Flashcard getFlashcardByUserAndKanji(int userId, String character) {
+        return flashcardDAO.getFlashcardByUserIdAndKanjiCharacter(userId, character);
+    }
+
+    @Override
     public void deleteFlashcard(int id) {
         flashcardDAO.deleteFlashcard(id);
     }

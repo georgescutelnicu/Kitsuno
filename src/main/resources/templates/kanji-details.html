@@ -125,8 +125,8 @@
             <div class="button-container">
                 <div sec:authorize="isAuthenticated()">
                     <button class="flashcard-button flashcard-button-form" th:style="${hasError} ? 'color: red;' : ''"
-                            onclick="showFlashcardForm()">Create
-                        Flashcard
+                            th:text="${hasFlashcard} ? 'Update Flashcard' : 'Create Flashcard'"
+                            onclick="showFlashcardForm()" >
                     </button>
                 </div>
                 <div sec:authorize="!isAuthenticated()">
@@ -194,7 +194,8 @@
                     </div>
 
                     <div class="form-buttons">
-                        <button class="flashcard-button" type="submit">Create</button>
+                        <button class="flashcard-button" type="submit"
+                                th:text="${hasFlashcard} ? 'Update' : 'Create'"></button>
                         <button class="flashcard-button" type="button" onclick="hideFlashcardForm()">Cancel</button>
                     </div>
                 </form>

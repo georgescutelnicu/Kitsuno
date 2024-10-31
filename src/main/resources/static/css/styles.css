@@ -1003,6 +1003,10 @@ hr {
     display: inline;
 }
 
+.flashcard-container a {
+    text-decoration: none;
+}
+
 .update-button, .delete-button {
     padding: 2.5%;
     border: none;

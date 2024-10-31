@@ -41,6 +41,23 @@ public class FlashcardDAOImpl implements FlashcardDAO {
     }
 
     @Override
+    public Flashcard getFlashcardByUserIdAndKanjiCharacter(int userId, String character) {
+        TypedQuery<Flashcard> query = entityManager.createQuery(
+                "FROM Flashcard f WHERE f.user.id = :userId AND f.kanji.character = :character", Flashcard.class);
+        query.setParameter("userId", userId);
+        query.setParameter("character", character);
+
+        List<Flashcard> results = query.getResultList();
+
+        if (results.isEmpty()) {
+            return null;
+        }
+
+        return results.get(0);
+    }
+
+
+    @Override
     @Transactional
     public void deleteFlashcard(int id) {
         Flashcard flashcard = getFlashcardById(id);

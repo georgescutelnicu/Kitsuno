@@ -12,5 +12,7 @@ public interface FlashcardDAO {
 
     List<Flashcard> getAllFlashcardsByUserId(int userId);
 
+    Flashcard getFlashcardByUserIdAndKanjiCharacter(int userId, String character);
+
     void deleteFlashcard(int id);
 }

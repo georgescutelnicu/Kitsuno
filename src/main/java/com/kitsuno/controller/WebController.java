@@ -1,13 +1,7 @@
 package com.kitsuno.controller;
 
-import com.kitsuno.entity.Hiragana;
-import com.kitsuno.entity.Kanji;
-import com.kitsuno.entity.Katakana;
-import com.kitsuno.entity.User;
-import com.kitsuno.service.HiraganaService;
-import com.kitsuno.service.KanjiService;
-import com.kitsuno.service.KatakanaService;
-import com.kitsuno.service.UserService;
+import com.kitsuno.entity.*;
+import com.kitsuno.service.*;
 import com.kitsuno.utils.Utils;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -27,13 +21,15 @@ public class WebController {
     private KatakanaService katakanaService;
     private KanjiService kanjiService;
     private UserService userService;
+    private FlashcardService flashcardService;
 
     public WebController(HiraganaService hiraganaService, KatakanaService katakanaService, KanjiService kanjiService,
-                         UserService userService) {
+                         UserService userService, FlashcardService flashcardService) {
         this.hiraganaService = hiraganaService;
         this.katakanaService = katakanaService;
         this.kanjiService = kanjiService;
         this.userService = userService;
+        this.flashcardService = flashcardService;
     }
 
     @GetMapping("/")
@@ -81,8 +77,13 @@ public class WebController {
         if (authenticatedUser.isPresent()) {
             User user = authenticatedUser.get();
             model.addAttribute("userId", user.getId());
+
+            Flashcard flashcardByUserAndKanji = flashcardService.getFlashcardByUserAndKanji(user.getId(), character);
+            model.addAttribute("hasFlashcard", flashcardByUserAndKanji != null);
+
         } else {
             model.addAttribute("userId", null);
+            model.addAttribute("hasFlashcard", false);
         }
 
         return "kanji-details";

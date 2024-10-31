@@ -38,7 +38,11 @@ public class FlashcardController {
     public String saveFlashcard(@Valid @ModelAttribute("flashcardDTO") FlashcardDTO flashcardDTO,
                                 BindingResult bindingResult,
                                 @RequestParam("kanjiCharacter") String kanjiCharacter,
+                                @RequestParam("userId") int userId,
                                 Model model) {
+
+        Flashcard flashcardByUserAndKanji = flashcardService.getFlashcardByUserAndKanji(userId, kanjiCharacter);
+        model.addAttribute("hasFlashcard", flashcardByUserAndKanji != null);
 
         if (!flashcardDTO.hasAtLeastOneVocabPair()) {
             bindingResult.reject("error.flashcardDTO", "At least one vocabulary pair is required");
