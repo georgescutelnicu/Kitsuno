@@ -15,10 +15,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Optional;
@@ -91,5 +88,11 @@ public class FlashcardController {
         }
 
         return "flashcard";
+    }
+
+    @PostMapping("/flashcards/delete/{id}")
+    public String deleteFlashcard(@PathVariable("id") int id) {
+        flashcardService.deleteFlashcard(id);
+        return "redirect:/flashcards";
     }
 }

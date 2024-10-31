@@ -999,6 +999,43 @@ hr {
     margin: 15px 0;
 }
 
+.flashcard-container form {
+    display: inline;
+}
+
+.update-button, .delete-button {
+    padding: 2.5%;
+    border: none;
+    border-radius: 5px;
+    font-size: 26px;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.2s;
+}
+
+.update-button i, .delete-button i{
+   display: flex;
+}
+
+.update-button {
+    background-color: #4CAF50;
+    color: white;
+}
+
+.delete-button {
+    background-color: #f44336;
+    color: white;
+}
+
+.update-button:hover {
+    background-color: #45a049;
+    transform: scale(1.05);
+}
+
+.delete-button:hover {
+    background-color: #e53935;
+    transform: scale(1.05);
+}
+
 @media (max-width: 1068px) {
     .flashcard-container {
         display: block;
