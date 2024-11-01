@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/spring-security">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Kitsuno</title>
+
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Kalam:wght@300;400;700&family=Poppins:ital,wght@0,100;0,400;0,500;0,600;1,400;1,500;1,600&family=Quicksand:wght@300..700&display=swap"
+              rel="stylesheet">
+
+        <link rel="stylesheet" href="https://cdn.lineicons.com/5.0/lineicons.css"/>
+
+        <link rel="stylesheet" href="css/styles.css">
+
+    </head>
+    <body>
+        <nav class="navbar">
+            <div class="logo">
+                <a href="#">
+                    <img src="images/navbar/logo.png" alt="Logo">
+                </a>
+            </div>
+            <ul class="nav-links">
+                <li><a href="#"><img src="images/navbar/home_icon.png" alt="Home Icon"> <span>Home</span></a>
+                </li>
+                <li><a href="#"><img src="images/navbar/hiragana_icon.png" alt="Hiragana Icon">
+                    <span>Hiragana</span></a></li>
+                <li><a href="#"><img src="images/navbar/katakana_icon.png" alt="Katakana Icon">
+                    <span>Katakana</span></a></li>
+                <li><a href="#"><img src="images/navbar/kanji_icon.png" alt="Kanji Icon"> <span>Kanji</span></a></li>
+                <li><a href="#"><img src="images/navbar/flashcard_icon.png" alt="Flashcards Icon">
+                    <span>Flashcards</span></a></li>
+                <li class="active"><a href="#"><img src="images/navbar/vocabulary_icon.png" alt="Vocabulary Icon">
+                    <span>Resources</span></a></li>
+            </ul>
+            <div class="user-section">
+                <a href="#" class="user-link">
+                    <h6 sec:authorize="isAuthenticated()">Hi <span sec:authentication="name">!</span></h6>
+                    <h6 sec:authorize="!isAuthenticated()">Hi Guest!</h6>
+                    <img src="images/navbar/user_icon.png" alt="User Icon" class="user-icon">
+                </a>
+                <ul class="user-dropdown">
+                    <li sec:authorize="!isAuthenticated()">
+                        <a href="/login"><img src="images/navbar/login.png" alt="Login Icon"> LogIn</a>
+                    </li>
+                    <li sec:authorize="!isAuthenticated()">
+                        <a href="/signup"><img src="images/navbar/signup.png" alt="SignUp Icon"> Register</a>
+                    </li>
+                    <li sec:authorize="isAuthenticated()">
+                        <a href="/profile"><img src="images/navbar/settings.png" alt="Settings Icon"> Profile</a>
+                    </li>
+                    <li sec:authorize="isAuthenticated()">
+                        <a href="/logout"><img src="images/navbar/signout.png" alt="SignOut Icon"> LogOut</a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+
+        <nav class="bottom-navbar">
+            <ul class="nav-links">
+                <li><a href="#"><img src="images/navbar/home_icon.png" alt="Home Icon"> <span>Home</span></a>
+                </li>
+                <li><a href="#"><img src="images/navbar/hiragana_icon.png" alt="Hiragana Icon">
+                    <span>Hiragana</span></a></li>
+                <li><a href="#"><img src="images/navbar/katakana_icon.png" alt="Katakana Icon">
+                    <span>Katakana</span></a></li>
+                <li><a href="#"><img src="images/navbar/kanji_icon.png" alt="Kanji Icon"> <span>Kanji</span></a></li>
+                <li><a href="#"><img src="images/navbar/flashcard_icon.png" alt="Flashcards Icon">
+                    <span>Flashcards</span></a></li>
+                <li class="active"><a href="#"><img src="images/navbar/vocabulary_icon.png" alt="Vocabulary Icon">
+                    <span>Resources</span></a></li>
+            </ul>
+        </nav>
+
+        <div id="main-section">
+            <h1 class="resources-h1">Resources</h1>
+
+            <div class="resource-item" onclick="toggleDropdown('books')">
+                <div class="resource-header">
+                    <i class="lni lni-books-2"></i>
+                    <h3>Books</h3>
+                    <span class="dropdown-arrow">&#9660;</span>
+                </div>
+                <div class="dropdown-content" id="books">
+                    <ul>
+                        <li><a href="https://www.amazon.com/GENKI-Integrated-Elementary-Japanese-English/dp/4789014401"
+                               target="_blank">GENKI I (JLPT N5)</a></li>
+                        <li><a href="https://www.amazon.com/Genki-Integrated-Elementary-Japanese-English/dp/4789014436"
+                               target="_blank">GENKI II (JLPT N4)</a></li>
+                        <li><a href="https://www.amazon.com/Japanese-From-Zero%2521-5-book-series/dp/B086JPZ6T5"
+                               target="_blank">Japanese From Zero! (5 book series)</a></li>
+                        <li>
+                            <a href="https://www.amazon.com/Remembering-Kanji-Complete-Japanese-Characters-ebook/dp/B086763LWC/ref=sr_1_2?crid=1BR1398U7IL7L&dib=eyJ2IjoiMSJ9.JT_tYpmpClcks5DmN2_BenfvnH00UVJCncakPMLTpzqUaDdmosM-9cD_NFwKPGCV3YmWrh8l5VCb5zNIMMGCERCaHQLTxrE1Husp0MnRhG1DVK6A6stOnUkpNkWZXkHNeB0YBpjbZ63e5uChLdrJG-qQ8IrbUayRgCr1DQ7fTzpisrA6rOGfzvPkkzVZETOykDROpgsiYqhGIizUmz6PlnGxheDwjmKyHpaYMQ8Sf-U.gCKZRW83iSbN7uQVHpTIAtzzSzQqHdp8Xg1b4FBMvl4&dib_tag=se&keywords=kanji&qid=1730446443&s=digital-text&sprefix=kanji%2Cdigital-text%2C286&sr=1-2"
+                               target="_blank">Remembering the Kanji</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="resource-item" onclick="toggleDropdown('charts')">
+                <div class="resource-header">
+                    <i class="lni lni-bookmark-1"></i>
+                    <h3>Charts</h3>
+                    <span class="dropdown-arrow">&#9660;</span>
+                </div>
+                <div class="dropdown-content" id="charts">
+                    <ul>
+                        <li><a href="https://upload.wikimedia.org/wikipedia/commons/2/28/Table_hiragana.svg"
+                               target="_blank">Hiragana Chart</a></li>
+                        <li><a href="https://upload.wikimedia.org/wikipedia/commons/0/0d/Table_katakana.svg"
+                               target="_blank">Katakana Chart</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="resource-item" onclick="toggleDropdown('videos')">
+                <div class="resource-header">
+                    <i class="lni lni-play"></i>
+                    <h3>Videos</h3>
+                    <span class="dropdown-arrow">&#9660;</span>
+                </div>
+                <div class="dropdown-content" id="videos">
+                    <ul>
+                        <li><a href="https://www.youtube.com/playlist?list=PLOcym2c7xnBwU12Flkm5RcLIEhvURQ8TB"
+                               target="_blank">Japanese From Zero! Books 1-5 VIDEOS</a></li>
+                        <li><a href="https://www.youtube.com/playlist?list=PLPSfPyOOcp3Qbu6DT536Y1IkcRLSLbHty"
+                               target="_blank">Learn Basic Japanese Vocabulary</a></li>
+                        <li><a href="https://www.youtube.com/@JapanesePod101" target="_blank">Learn Japanese with
+                            JapanesePod101.com</a></li>
+                        <li><a href="https://www.youtube.com/@JapanesePod101" target="_blank">Japanese Suki</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="resource-item" onclick="toggleDropdown('flashcards')">
+                <div class="resource-header">
+                    <i class="lni lni-www"></i>
+                    <h3>Websites</h3>
+                    <span class="dropdown-arrow">&#9660;</span>
+                </div>
+                <div class="dropdown-content" id="flashcards">
+                    <ul>
+                        <li><a href="https://www.jlpt.jp/e/" target="_blank">JLPT Official Website</a></li>
+                        <li><a href="https://www.japanesepod101.com/" target="_blank">JapanesePod101: Learn Japanese
+                            Online</a></li>
+                        <li><a href="https://www.tofugu.com/learn-japanese/" target="_blank">Learn Japanese: A
+                            Ridiculously Detailed Guide</a></li>
+                        <li><a href="https://jlptsensei.com/" target="_blank">JLPT Sensei | Learn Japanese & Study for
+                            the JLPT</a></li>
+                        <li><a href="https://www.kanshudo.com/" target="_blank">Kanshudo: Learn Japanese fast and
+                            effectively</a></li>
+                        <li><a href="https://nihongo-e-na.com/eng" target="_blank">NIHONGO eな - Portal for Learning
+                            Japanese</a></li>
+                        <li><a href="https://learnjapanesepod.com/" target="_blank">Learn Japanese Podcasts</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="resource-item" onclick="toggleDropdown('asd')">
+                <div class="resource-header">
+                    <i class="lni lni-chat-bubble-2"></i>
+                    <h3>Conversations</h3>
+                    <span class="dropdown-arrow">&#9660;</span>
+                </div>
+                <div class="dropdown-content" id="asd">
+                    <ul>
+                        <li><a href="https://www.youtube.com/@kensanokaeri" target="_blank">Kensanokaeri</a></li>
+                        <li><a href="https://www.youtube.com/@JapanesewithShun" target="_blank">Japanese with Shun</a>
+                        </li>
+                        <li><a href="https://www.youtube.com/@mikurealjapanese" target="_blank">MikuRealJapanese</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <script src="js/script.js"></script>
+    </body>
+</html>

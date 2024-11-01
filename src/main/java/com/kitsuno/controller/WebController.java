@@ -88,4 +88,9 @@ public class WebController {
 
         return "kanji-details";
     }
+
+    @GetMapping("/resources")
+    public String showResources() {
+        return "resources";
+    }
 }

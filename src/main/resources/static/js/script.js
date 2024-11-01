@@ -188,3 +188,25 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     });
 });
+
+
+// Toggle down resources
+function toggleDropdown(id) {
+    const content = document.getElementById(id);
+    const header = content.previousElementSibling;
+
+    if (content.style.maxHeight) {
+        content.style.maxHeight = null;
+        header.classList.remove("active-rss");
+    } else {
+        content.style.maxHeight = content.scrollHeight + "px";
+        header.classList.add("active-rss");
+    }
+}
+
+const dropdowns = document.querySelectorAll('.dropdown-content ul li a');
+dropdowns.forEach(link => {
+    link.addEventListener('click', (event) => {
+        event.stopPropagation();
+    });
+});
