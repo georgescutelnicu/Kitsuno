@@ -35,14 +35,11 @@ public class FlashcardController {
     }
 
     @PostMapping("/kanji/{character}")
-    public String saveFlashcard(@Valid @ModelAttribute("flashcardDTO") FlashcardDTO flashcardDTO,
-                                BindingResult bindingResult,
-                                @RequestParam("kanjiCharacter") String kanjiCharacter,
-                                @RequestParam("userId") int userId,
-                                Model model) {
-
-        Flashcard flashcardByUserAndKanji = flashcardService.getFlashcardByUserAndKanji(userId, kanjiCharacter);
-        model.addAttribute("hasFlashcard", flashcardByUserAndKanji != null);
+    public String saveOrUpdateFlashcard(@Valid @ModelAttribute("flashcardDTO") FlashcardDTO flashcardDTO,
+                                        BindingResult bindingResult,
+                                        @RequestParam("kanjiCharacter") String kanjiCharacter,
+                                        @RequestParam("userId") int userId,
+                                        Model model) {
 
         if (!flashcardDTO.hasAtLeastOneVocabPair()) {
             bindingResult.reject("error.flashcardDTO", "At least one vocabulary pair is required");
@@ -50,27 +47,16 @@ public class FlashcardController {
 
         if (bindingResult.hasErrors()) {
             Kanji kanji = kanjiService.findKanjiByCharacter(kanjiCharacter);
-
             model.addAttribute("hasError", true);
+            model.addAttribute("userId", userId);
             model.addAttribute("kanji", kanji);
             model.addAttribute("flashcardDTO", flashcardDTO);
-
+            model.addAttribute("hasFlashcard",
+                    flashcardService.getFlashcardByUserAndKanji(userId, kanjiCharacter) != null);
             return "kanji-details";
         }
 
-        Flashcard flashcard = new Flashcard();
-
-        Kanji kanji = kanjiService.findKanjiById(flashcardDTO.getKanjiId());
-        Optional<User> user = userService.findById(flashcardDTO.getUserId());
-        flashcard.setKanji(kanji);
-        flashcard.setUser(user.get());
-
-        String[] vocabArray = flashcardDTO.getVocabularyAsArray();
-        flashcard.setVocabulary(vocabArray);
-
-        flashcard.setNotes(flashcardDTO.getNotes());
-
-        flashcardService.saveFlashcard(flashcard);
+        flashcardService.saveOrUpdateFlashcard(flashcardDTO, userId, kanjiCharacter);
 
         return "redirect:/flashcards";
     }
