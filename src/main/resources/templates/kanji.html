@@ -1,82 +1,97 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
       xmlns:sec="http://www.thymeleaf.org/spring-security">
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Kitsuno</title>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Kitsuno</title>
 
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Kalam:wght@300;400;700&family=Poppins:ital,wght@0,100;0,400;0,500;0,600;1,400;1,500;1,600&family=Quicksand:wght@300..700&display=swap" rel="stylesheet">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Kalam:wght@300;400;700&family=Poppins:ital,wght@0,100;0,400;0,500;0,600;1,400;1,500;1,600&family=Quicksand:wght@300..700&display=swap"
+              rel="stylesheet">
 
-    <link rel="stylesheet" href="css/styles.css">
+        <link rel="stylesheet" href="css/styles.css">
 
-</head>
-<body>
-    <nav class="navbar">
-        <div class="logo">
-            <a href="#">
-                <img src="images/navbar/logo.png" alt="Logo">
-            </a>
-        </div>
-        <ul class="nav-links">
-            <li><a href="#"><img src="images/navbar/home_icon.png" alt="Home Icon"> <span>Home</span></a></li>
-            <li><a href="#"><img src="images/navbar/hiragana_icon.png" alt="Hiragana Icon"> <span>Hiragana</span></a></li>
-            <li><a href="#"><img src="images/navbar/katakana_icon.png" alt="Katakana Icon"> <span>Katakana</span></a></li>
-            <li class="active"><a href="#"><img src="images/navbar/kanji_icon.png" alt="Kanji Icon"> <span>Kanji</span></a></li>
-            <li><a href="#"><img src="images/navbar/flashcard_icon.png" alt="Flashcards Icon"> <span>Flashcards</span></a></li>
-            <li><a href="#"><img src="images/navbar/vocabulary_icon.png" alt="Vocabulary Icon"> <span>Vocabulary</span></a></li>
-        </ul>
-        <div class="user-section">
-            <a href="#" class="user-link">
-                <h6 sec:authorize="isAuthenticated()">Hi <span sec:authentication="name">!</span></h6>
-                <h6 sec:authorize="!isAuthenticated()">Hi Guest!</h6>
-                <img src="images/navbar/user_icon.png" alt="User Icon" class="user-icon">
-            </a>
-            <ul class="user-dropdown">
-                <li sec:authorize="!isAuthenticated()">
-                    <a href="/login"><img src="images/navbar/login.png" alt="Login Icon"> LogIn</a>
-                </li>
-                <li sec:authorize="!isAuthenticated()">
-                    <a href="/register"><img src="images/navbar/signup.png" alt="SignUp Icon"> SignUp</a>
-                </li>
-                <li sec:authorize="isAuthenticated()">
-                    <a href="/profile"><img src="images/navbar/settings.png" alt="Settings Icon"> Profile</a>
-                </li>
-                <li sec:authorize="isAuthenticated()">
-                    <a href="/logout"><img src="images/navbar/signout.png" alt="SignOut Icon"> LogOut</a>
-                </li>
-            </ul>
-        </div>
-    </nav>
-
-    <nav class="bottom-navbar">
-        <ul class="nav-links">
-            <li><a href="#"><img src="images/navbar/home_icon.png" alt="Home Icon"> <span>Home</span></a></li>
-            <li><a href="#"><img src="images/navbar/hiragana_icon.png" alt="Hiragana Icon"> <span>Hiragana</span></a></li>
-            <li><a href="#"><img src="images/navbar/katakana_icon.png" alt="Katakana Icon"> <span>Katakana</span></a></li>
-            <li class="active"><a href="#"><img src="images/navbar/kanji_icon.png" alt="Kanji Icon"> <span>Kanji</span></a></li>
-            <li><a href="#"><img src="images/navbar/flashcard_icon.png" alt="Flashcards Icon"> <span>Flashcards</span></a></li>
-            <li><a href="#"><img src="images/navbar/vocabulary_icon.png" alt="Vocabulary Icon"> <span>Vocabulary</span></a></li>
-        </ul>
-    </nav>
-
-    <div id="main-section">
-        <h1 class="kana-h1">JLPT N5 Kanji</h1>
-        <div class="kanji-lesson" th:each="entry, idx : ${kanjiMap}">
-            <h3>Lesson <span th:text="${idx.count}"></span></h3>
-            <p th:text="${entry.key}"></p>
-            <div class="kanji-grid">
-                <a th:each="kanji : ${entry.value}"
-                   th:href="@{'/kanji/' + ${kanji.character}}"
-                   class="kanji-button"
-                   th:text="${kanji.character}"></a>
+    </head>
+    <body>
+        <nav class="navbar">
+            <div class="logo">
+                <a href="/">
+                    <img src="images/navbar/logo.png" alt="Logo">
+                </a>
             </div>
-            <hr class="lesson-divider">
-        </div>
-    </div>
+            <ul class="nav-links">
+                <li><a href="/home"><img src="images/navbar/home_icon.png" alt="Home Icon">
+                    <span>Home</span></a>
+                </li>
+                <li><a href="/hiragana"><img src="images/navbar/hiragana_icon.png" alt="Hiragana Icon">
+                    <span>Hiragana</span></a></li>
+                <li><a href="/katakana"><img src="images/navbar/katakana_icon.png" alt="Katakana Icon">
+                    <span>Katakana</span></a></li>
+                <li class="active"><a href="/kanji"><img src="images/navbar/kanji_icon.png" alt="Kanji Icon">
+                    <span>Kanji</span></a></li>
+                <li><a href="/flashcards"><img src="images/navbar/flashcard_icon.png" alt="Flashcards Icon">
+                    <span>Flashcards</span></a></li>
+                <li><a href="/resources"><img src="images/navbar/resources_icon.png" alt="Resources Icon">
+                    <span>Resources</span></a></li>
+            </ul>
+            <div class="user-section">
+                <a href="#" class="user-link">
+                    <h6 sec:authorize="isAuthenticated()">Hi <span sec:authentication="name">!</span></h6>
+                    <h6 sec:authorize="!isAuthenticated()">Hi Guest!</h6>
+                    <img src="images/navbar/user_icon.png" alt="User Icon" class="user-icon">
+                </a>
+                <ul class="user-dropdown">
+                    <li sec:authorize="!isAuthenticated()">
+                        <a href="/login"><img src="images/navbar/login.png" alt="Login Icon"> LogIn</a>
+                    </li>
+                    <li sec:authorize="!isAuthenticated()">
+                        <a href="/signup"><img src="images/navbar/signup.png" alt="SignUp Icon"> Register</a>
+                    </li>
+                    <li sec:authorize="isAuthenticated()">
+                        <a href="/profile"><img src="images/navbar/settings.png" alt="Settings Icon"> Profile</a>
+                    </li>
+                    <li sec:authorize="isAuthenticated()">
+                        <a href="/logout"><img src="images/navbar/signout.png" alt="SignOut Icon"> LogOut</a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
 
-    <script src="js/script.js"></script>
-</body>
+        <nav class="bottom-navbar">
+            <ul class="nav-links">
+                <li><a href="/home"><img src="images/navbar/home_icon.png" alt="Home Icon">
+                    <span>Home</span></a>
+                </li>
+                <li><a href="/hiragana"><img src="images/navbar/hiragana_icon.png" alt="Hiragana Icon">
+                    <span>Hiragana</span></a></li>
+                <li><a href="/katakana"><img src="images/navbar/katakana_icon.png" alt="Katakana Icon">
+                    <span>Katakana</span></a></li>
+                <li class="active"><a href="/kanji"><img src="images/navbar/kanji_icon.png" alt="Kanji Icon">
+                    <span>Kanji</span></a></li>
+                <li><a href="/flashcards"><img src="images/navbar/flashcard_icon.png" alt="Flashcards Icon">
+                    <span>Flashcards</span></a></li>
+                <li><a href="/resources"><img src="images/navbar/resources_icon.png" alt="Resources Icon">
+                    <span>Resources</span></a></li>
+            </ul>
+        </nav>
+
+        <div id="main-section">
+            <h1 class="kana-h1">JLPT N5 Kanji</h1>
+            <div class="kanji-lesson" th:each="entry, idx : ${kanjiMap}">
+                <h3>Lesson <span th:text="${idx.count}"></span></h3>
+                <p th:text="${entry.key}"></p>
+                <div class="kanji-grid">
+                    <a th:each="kanji : ${entry.value}"
+                       th:href="@{'/kanji/' + ${kanji.character}}"
+                       class="kanji-button"
+                       th:text="${kanji.character}"></a>
+                </div>
+                <hr class="lesson-divider">
+            </div>
+        </div>
+
+        <script src="js/script.js"></script>
+    </body>
 </html>

@@ -11,29 +11,30 @@
         <link href="https://fonts.googleapis.com/css2?family=Kalam:wght@300;400;700&family=Poppins:ital,wght@0,100;0,400;0,500;0,600;1,400;1,500;1,600&family=Quicksand:wght@300..700&display=swap"
               rel="stylesheet">
 
-        <link rel="stylesheet" href="https://cdn.lineicons.com/5.0/lineicons.css"/>
-
         <link rel="stylesheet" href="css/styles.css">
 
     </head>
     <body>
         <nav class="navbar">
             <div class="logo">
-                <a href="#">
+                <a href="/">
                     <img src="images/navbar/logo.png" alt="Logo">
                 </a>
             </div>
             <ul class="nav-links">
-                <li><a href="#"><img src="images/navbar/home_icon.png" alt="Home Icon"> <span>Home</span></a>
+                <li><a href="/home"><img src="images/navbar/home_icon.png" alt="Home Icon">
+                    <span>Home</span></a>
                 </li>
-                <li><a href="#"><img src="images/navbar/hiragana_icon.png" alt="Hiragana Icon">
+                <li><a href="/hiragana"><img src="images/navbar/hiragana_icon.png" alt="Hiragana Icon">
                     <span>Hiragana</span></a></li>
-                <li><a href="#"><img src="images/navbar/katakana_icon.png" alt="Katakana Icon">
+                <li><a href="/katakana"><img src="images/navbar/katakana_icon.png" alt="Katakana Icon">
                     <span>Katakana</span></a></li>
-                <li><a href="#"><img src="images/navbar/kanji_icon.png" alt="Kanji Icon"> <span>Kanji</span></a></li>
-                <li><a href="#"><img src="images/navbar/flashcard_icon.png" alt="Flashcards Icon">
+                <li><a href="/kanji"><img src="images/navbar/kanji_icon.png" alt="Kanji Icon"> <span>Kanji</span></a>
+                </li>
+                <li><a href="/flashcards"><img src="images/navbar/flashcard_icon.png" alt="Flashcards Icon">
                     <span>Flashcards</span></a></li>
-                <li class="active"><a href="#"><img src="images/navbar/vocabulary_icon.png" alt="Vocabulary Icon">
+                <li class="active"><a href="/resources"><img src="images/navbar/resources_icon.png"
+                                                             alt="Resources Icon">
                     <span>Resources</span></a></li>
             </ul>
             <div class="user-section">
@@ -61,16 +62,19 @@
 
         <nav class="bottom-navbar">
             <ul class="nav-links">
-                <li><a href="#"><img src="images/navbar/home_icon.png" alt="Home Icon"> <span>Home</span></a>
+                <li><a href="/home"><img src="images/navbar/home_icon.png" alt="Home Icon">
+                    <span>Home</span></a>
                 </li>
-                <li><a href="#"><img src="images/navbar/hiragana_icon.png" alt="Hiragana Icon">
+                <li><a href="/hiragana"><img src="images/navbar/hiragana_icon.png" alt="Hiragana Icon">
                     <span>Hiragana</span></a></li>
-                <li><a href="#"><img src="images/navbar/katakana_icon.png" alt="Katakana Icon">
+                <li><a href="/katakana"><img src="images/navbar/katakana_icon.png" alt="Katakana Icon">
                     <span>Katakana</span></a></li>
-                <li><a href="#"><img src="images/navbar/kanji_icon.png" alt="Kanji Icon"> <span>Kanji</span></a></li>
-                <li><a href="#"><img src="images/navbar/flashcard_icon.png" alt="Flashcards Icon">
+                <li><a href="/kanji"><img src="images/navbar/kanji_icon.png" alt="Kanji Icon"> <span>Kanji</span></a>
+                </li>
+                <li><a href="/flashcards"><img src="images/navbar/flashcard_icon.png" alt="Flashcards Icon">
                     <span>Flashcards</span></a></li>
-                <li class="active"><a href="#"><img src="images/navbar/vocabulary_icon.png" alt="Vocabulary Icon">
+                <li class="active"><a href="/resources"><img src="images/navbar/resources_icon.png"
+                                                             alt="Resources Icon">
                     <span>Resources</span></a></li>
             </ul>
         </nav>
@@ -80,7 +84,7 @@
 
             <div class="resource-item" onclick="toggleDropdown('books')">
                 <div class="resource-header">
-                    <i class="lni lni-books-2"></i>
+                    <img src="images/resources/books-rss.png" alt="Books Image">
                     <h3>Books</h3>
                     <span class="dropdown-arrow">&#9660;</span>
                 </div>
@@ -101,7 +105,7 @@
 
             <div class="resource-item" onclick="toggleDropdown('charts')">
                 <div class="resource-header">
-                    <i class="lni lni-bookmark-1"></i>
+                    <img src="images/resources/charts-rss.png" alt="Charts Image">
                     <h3>Charts</h3>
                     <span class="dropdown-arrow">&#9660;</span>
                 </div>
@@ -117,7 +121,7 @@
 
             <div class="resource-item" onclick="toggleDropdown('videos')">
                 <div class="resource-header">
-                    <i class="lni lni-play"></i>
+                    <img src="images/resources/videos-rss.png" alt="Videos Image">
                     <h3>Videos</h3>
                     <span class="dropdown-arrow">&#9660;</span>
                 </div>
@@ -136,7 +140,7 @@
 
             <div class="resource-item" onclick="toggleDropdown('flashcards')">
                 <div class="resource-header">
-                    <i class="lni lni-www"></i>
+                    <img src="images/resources/websites-rss.png" alt="Websites Image">
                     <h3>Websites</h3>
                     <span class="dropdown-arrow">&#9660;</span>
                 </div>
@@ -160,7 +164,7 @@
 
             <div class="resource-item" onclick="toggleDropdown('asd')">
                 <div class="resource-header">
-                    <i class="lni lni-chat-bubble-2"></i>
+                    <img src="images/resources/conversations-rss.png" alt="Conversations Image">
                     <h3>Conversations</h3>
                     <span class="dropdown-arrow">&#9660;</span>
                 </div>

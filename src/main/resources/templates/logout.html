@@ -20,21 +20,24 @@
     <body>
         <nav class="navbar">
             <div class="logo">
-                <a href="#">
+                <a href="/">
                     <img src="images/navbar/logo.png" alt="Logo">
                 </a>
             </div>
             <ul class="nav-links">
-                <li><a href="#"><img src="images/navbar/home_icon.png" alt="Home Icon"> <span>Home</span></a></li>
-                <li><a href="#"><img src="images/navbar/hiragana_icon.png" alt="Hiragana Icon">
+                <li><a href="/home"><img src="images/navbar/home_icon.png" alt="Home Icon">
+                    <span>Home</span></a>
+                </li>
+                <li><a href="/hiragana"><img src="images/navbar/hiragana_icon.png" alt="Hiragana Icon">
                     <span>Hiragana</span></a></li>
-                <li><a href="#"><img src="images/navbar/katakana_icon.png" alt="Katakana Icon">
+                <li><a href="/katakana"><img src="images/navbar/katakana_icon.png" alt="Katakana Icon">
                     <span>Katakana</span></a></li>
-                <li><a href="#"><img src="images/navbar/kanji_icon.png" alt="Kanji Icon"> <span>Kanji</span></a></li>
-                <li><a href="#"><img src="images/navbar/flashcard_icon.png" alt="Flashcards Icon">
+                <li><a href="/kanji"><img src="images/navbar/kanji_icon.png" alt="Kanji Icon"> <span>Kanji</span></a>
+                </li>
+                <li><a href="/flashcards"><img src="images/navbar/flashcard_icon.png" alt="Flashcards Icon">
                     <span>Flashcards</span></a></li>
-                <li><a href="#"><img src="images/navbar/vocabulary_icon.png" alt="Vocabulary Icon">
-                    <span>Vocabulary</span></a></li>
+                <li><a href="/resources"><img src="images/navbar/resources_icon.png" alt="Resources Icon">
+                    <span>Resources</span></a></li>
             </ul>
             <div class="user-section">
                 <a href="#" class="user-link">
@@ -47,7 +50,7 @@
                         <a href="/login"><img src="images/navbar/login.png" alt="Login Icon"> LogIn</a>
                     </li>
                     <li sec:authorize="!isAuthenticated()">
-                        <a href="/register"><img src="images/navbar/signup.png" alt="SignUp Icon"> SignUp</a>
+                        <a href="/signup"><img src="images/navbar/signup.png" alt="SignUp Icon"> Register</a>
                     </li>
                     <li sec:authorize="isAuthenticated()">
                         <a href="/profile"><img src="images/navbar/settings.png" alt="Settings Icon"> Profile</a>
@@ -61,16 +64,19 @@
 
         <nav class="bottom-navbar">
             <ul class="nav-links">
-                <li><a href="#"><img src="images/navbar/home_icon.png" alt="Home Icon"> <span>Home</span></a></li>
-                <li><a href="#"><img src="images/navbar/hiragana_icon.png" alt="Hiragana Icon">
+                <li><a href="/home"><img src="images/navbar/home_icon.png" alt="Home Icon">
+                    <span>Home</span></a>
+                </li>
+                <li><a href="/hiragana"><img src="images/navbar/hiragana_icon.png" alt="Hiragana Icon">
                     <span>Hiragana</span></a></li>
-                <li><a href="#"><img src="images/navbar/katakana_icon.png" alt="Katakana Icon">
+                <li><a href="/katakana"><img src="images/navbar/katakana_icon.png" alt="Katakana Icon">
                     <span>Katakana</span></a></li>
-                <li><a href="#"><img src="images/navbar/kanji_icon.png" alt="Kanji Icon"> <span>Kanji</span></a></li>
-                <li><a href="#"><img src="images/navbar/flashcard_icon.png" alt="Flashcards Icon">
+                <li><a href="/kanji"><img src="images/navbar/kanji_icon.png" alt="Kanji Icon"> <span>Kanji</span></a>
+                </li>
+                <li><a href="/flashcards"><img src="images/navbar/flashcard_icon.png" alt="Flashcards Icon">
                     <span>Flashcards</span></a></li>
-                <li><a href="#"><img src="images/navbar/vocabulary_icon.png" alt="Vocabulary Icon">
-                    <span>Vocabulary</span></a></li>
+                <li><a href="/resources"><img src="images/navbar/resources_icon.png" alt="Resources Icon">
+                    <span>Resources</span></a></li>
             </ul>
         </nav>
 

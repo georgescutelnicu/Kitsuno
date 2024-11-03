@@ -17,25 +17,25 @@
     <body>
         <nav class="navbar">
             <div class="logo">
-                <a href="#">
+                <a href="/">
                     <img alt="Logo" th:src="@{/images/navbar/logo.png}">
                 </a>
             </div>
             <ul class="nav-links">
-                <li><a href="#"><img alt="Home Icon" th:src="@{/images/navbar/home_icon.png}"> <span>Home</span></a>
+                <li><a href="/home"><img alt="Home Icon" th:src="@{/images/navbar/home_icon.png}"> <span>Home</span></a>
                 </li>
-                <li><a href="#"><img alt="Hiragana Icon" th:src="@{/images/navbar/hiragana_icon.png}">
+                <li><a href="/hiragana"><img alt="Hiragana Icon" th:src="@{/images/navbar/hiragana_icon.png}">
                     <span>Hiragana</span></a>
                 </li>
-                <li><a href="#"><img alt="Katakana Icon" th:src="@{/images/navbar/katakana_icon.png}">
+                <li><a href="/katakana"><img alt="Katakana Icon" th:src="@{/images/navbar/katakana_icon.png}">
                     <span>Katakana</span></a>
                 </li>
-                <li class="active"><a href="#"><img alt="Kanji Icon" th:src="@{/images/navbar/kanji_icon.png}">
+                <li class="active"><a href="/kanji"><img alt="Kanji Icon" th:src="@{/images/navbar/kanji_icon.png}">
                     <span>Kanji</span></a></li>
-                <li><a href="#"><img alt="Flashcards Icon" th:src="@{/images/navbar/flashcard_icon.png}">
+                <li><a href="/flashcards"><img alt="Flashcards Icon" th:src="@{/images/navbar/flashcard_icon.png}">
                     <span>Flashcards</span></a></li>
-                <li><a href="#"><img alt="Vocabulary Icon" th:src="@{/images/navbar/vocabulary_icon.png}">
-                    <span>Vocabulary</span></a></li>
+                <li><a href="/resources"><img alt="Vocabulary Icon" th:src="@{/images/navbar/resources_icon.png}">
+                    <span>Resources</span></a></li>
             </ul>
             <div class="user-section">
                 <a href="#" class="user-link">
@@ -70,25 +70,25 @@
 
         <nav class="bottom-navbar">
             <ul class="nav-links">
-                <li><a href="#"><img alt="Home Icon" th:src="@{/images/navbar/home_icon.png}"> <span>Home</span></a>
+                <li><a href="/home"><img alt="Home Icon" th:src="@{/images/navbar/home_icon.png}"> <span>Home</span></a>
                 </li>
-                <li><a href="#"><img alt="Hiragana Icon" th:src="@{/images/navbar/hiragana_icon.png}">
+                <li><a href="/hiragana"><img alt="Hiragana Icon" th:src="@{/images/navbar/hiragana_icon.png}">
                     <span>Hiragana</span></a>
                 </li>
-                <li><a href="#"><img alt="Katakana Icon" th:src="@{/images/navbar/katakana_icon.png}">
+                <li><a href="/katakana"><img alt="Katakana Icon" th:src="@{/images/navbar/katakana_icon.png}">
                     <span>Katakana</span></a>
                 </li>
-                <li class="active"><a href="#"><img alt="Kanji Icon" th:src="@{/images/navbar/kanji_icon.png}">
+                <li class="active"><a href="/kanji"><img alt="Kanji Icon" th:src="@{/images/navbar/kanji_icon.png}">
                     <span>Kanji</span></a></li>
-                <li><a href="#"><img alt="Flashcards Icon" th:src="@{/images/navbar/flashcard_icon.png}">
+                <li><a href="/flashcards"><img alt="Flashcards Icon" th:src="@{/images/navbar/flashcard_icon.png}">
                     <span>Flashcards</span></a></li>
-                <li><a href="#"><img alt="Vocabulary Icon" th:src="@{/images/navbar/vocabulary_icon.png}">
-                    <span>Vocabulary</span></a></li>
+                <li><a href="/resources"><img alt="Resources Icon" th:src="@{/images/navbar/resources_icon.png}">
+                    <span>Resources</span></a></li>
             </ul>
         </nav>
 
         <div id="main-section">
-            <a href="#" class="back-button"><img th:src=@{/images/kanji/arrow.png}></a>
+            <a href="/kanji" class="back-button"><img th:src=@{/images/kanji/arrow.png}></a>
 
             <div class="kanji-character">
 
@@ -126,7 +126,7 @@
                 <div sec:authorize="isAuthenticated()">
                     <button class="flashcard-button flashcard-button-form" th:style="${hasError} ? 'color: red;' : ''"
                             th:text="${hasFlashcard} ? 'Update Flashcard' : 'Create Flashcard'"
-                            onclick="showFlashcardForm()" >
+                            onclick="showFlashcardForm()">
                     </button>
                 </div>
                 <div sec:authorize="!isAuthenticated()">
