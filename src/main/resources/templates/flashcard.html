@@ -52,13 +52,13 @@
                         <a href="/login"><img src="images/navbar/login.png" alt="Login Icon"> LogIn</a>
                     </li>
                     <li sec:authorize="!isAuthenticated()">
-                        <a href="/signup"><img src="images/navbar/signup.png" alt="SignUp Icon"> Register</a>
+                        <a href="/register"><img src="images/navbar/register.png" alt="Register Icon"> Register</a>
                     </li>
                     <li sec:authorize="isAuthenticated()">
-                        <a href="/profile"><img src="images/navbar/settings.png" alt="Settings Icon"> Profile</a>
+                        <a href="/profile"><img src="images/navbar/profile.png" alt="Profile Icon"> Profile</a>
                     </li>
                     <li sec:authorize="isAuthenticated()">
-                        <a href="/logout"><img src="images/navbar/signout.png" alt="SignOut Icon"> LogOut</a>
+                        <a href="/logout"><img src="images/navbar/logout.png" alt="Logout Icon"> Logout</a>
                     </li>
                 </ul>
             </div>

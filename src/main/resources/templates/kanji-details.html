@@ -51,17 +51,17 @@
                     </li>
                     <li sec:authorize="!isAuthenticated()">
                         <a href="/register">
-                            <img th:src="@{/images/navbar/signup.png}" alt="SignUp Icon"> SignUp
+                            <img th:src="@{/images/navbar/register.png}" alt="Register Icon"> SignUp
                         </a>
                     </li>
                     <li sec:authorize="isAuthenticated()">
                         <a href="/profile">
-                            <img th:src="@{/images/navbar/settings.png}" alt="Settings Icon"> Profile
+                            <img th:src="@{/images/navbar/profile.png}" alt="Profile Icon"> Profile
                         </a>
                     </li>
                     <li sec:authorize="isAuthenticated()">
                         <a href="/logout">
-                            <img th:src="@{/images/navbar/signout.png}" alt="SignOut Icon"> LogOut
+                            <img th:src="@{/images/navbar/logout.png}" alt="Logout Icon"> LogOut
                         </a>
                     </li>
                 </ul>

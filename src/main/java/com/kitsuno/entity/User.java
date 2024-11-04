@@ -5,6 +5,7 @@ import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @Entity
@@ -30,6 +31,14 @@ public class User {
     @Size(min = 60, max = 60, message = "Encrypted password must have 60 characters")
     @Column(name = "password", nullable = false)
     private String password;
+
+    @Column(name = "join_date", nullable = false, updatable = false)
+    private LocalDate joinDate;
+
+    @PrePersist
+    protected void onCreate() {
+        this.joinDate = LocalDate.now();
+    }
 
     @Column(name = "enabled")
     private boolean enabled = true;
@@ -79,6 +88,9 @@ public class User {
         return flashcards;
     }
 
+
+    public LocalDate getJoinDate() { return joinDate; }
+
     public boolean isEnabled() {
         return enabled;
     }
@@ -102,6 +114,8 @@ public class User {
     public void setEnabled(boolean enabled) {
         this.enabled = enabled;
     }
+
+    public void setJoinDate(LocalDate joinDate) { this.joinDate = joinDate; }
 
     public void setFlashcards(List<Flashcard> flashcards) {
         this.flashcards = flashcards;
