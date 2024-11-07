@@ -54,6 +54,11 @@ public class FlashcardServiceImpl implements FlashcardService {
     }
 
     @Override
+    public int countFlashcardsByUserId(int userId) {
+        return flashcardDAO.countFlashcardsByUserId(userId);
+    }
+
+    @Override
     public Flashcard getFlashcardByUserAndKanji(int userId, String character) {
         return flashcardDAO.getFlashcardByUserIdAndKanjiCharacter(userId, character);
     }

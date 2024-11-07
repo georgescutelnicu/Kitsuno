@@ -41,6 +41,17 @@ public class FlashcardDAOImpl implements FlashcardDAO {
     }
 
     @Override
+    public int countFlashcardsByUserId(int userId) {
+        TypedQuery<Long> query = entityManager.createQuery(
+                "SELECT COUNT(f) FROM Flashcard f WHERE f.user.id = :userId", Long.class);
+        query.setParameter("userId", userId);
+
+        Long count = query.getSingleResult();
+
+        return count.intValue();
+    }
+
+    @Override
     public Flashcard getFlashcardByUserIdAndKanjiCharacter(int userId, String character) {
         TypedQuery<Flashcard> query = entityManager.createQuery(
                 "FROM Flashcard f WHERE f.user.id = :userId AND f.kanji.character = :character", Flashcard.class);
