@@ -5,6 +5,11 @@ import com.kitsuno.dto.UserDTO;
 import com.kitsuno.entity.Kanji;
 import com.kitsuno.entity.User;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.validation.BindingResult;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -16,11 +21,13 @@ public class UserServiceImpl implements UserService {
 
     private UserDAO userDAO;
     private PasswordEncoder passwordEncoder;
+    private UserDetailsService userDetailsService;
 
     @Autowired
-    public UserServiceImpl(UserDAO userDAO, PasswordEncoder passwordEncoder) {
+    public UserServiceImpl(UserDAO userDAO, PasswordEncoder passwordEncoder, UserDetailsService userDetailsService) {
         this.userDAO = userDAO;
         this.passwordEncoder = passwordEncoder;
+        this.userDetailsService = userDetailsService;
     }
 
     @Override
@@ -53,9 +60,24 @@ public class UserServiceImpl implements UserService {
         user.setEnabled(true);
         save(user);
 
-        System.out.println("User registered successfully.");
-
         return true;
     }
 
+    @Override
+    public void updateUsernameAndRefreshAuthentication(User user, String newUsername) {
+
+        user.setUsername(newUsername);
+        userDAO.save(user);
+
+        UserDetails updatedUserDetails = userDetailsService.loadUserByUsername(newUsername);
+        Authentication authentication = new UsernamePasswordAuthenticationToken(updatedUserDetails, updatedUserDetails.getPassword(), updatedUserDetails.getAuthorities());
+        SecurityContextHolder.getContext().setAuthentication(authentication);
+    }
+
+    @Override
+    public void updatePassword(User user, String newPassword) {
+
+        user.setPassword(passwordEncoder.encode(newPassword));
+        userDAO.save(user);
+    }
 }

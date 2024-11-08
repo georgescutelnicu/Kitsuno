@@ -14,4 +14,6 @@ public interface UserService {
     Optional<User> findByEmail(String email);
     User save(User user);
     boolean registerUser(UserDTO userDTO, BindingResult bindingResult);
+    void updateUsernameAndRefreshAuthentication(User user, String newUsername);
+    void updatePassword(User user, String newPassword);
 }
