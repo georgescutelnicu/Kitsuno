@@ -1221,3 +1221,141 @@ input {
         display: none;
   }
 }
+
+
+/* Profile */
+.profile-container {
+    padding: 75px;
+    background-color: #fff;
+}
+
+.profile-header {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 40px;
+    margin-bottom: 15px;
+}
+
+.profile-left {
+    text-align: center;
+}
+
+.profile-icon {
+    width: 160px;
+    height: 160px;
+    border-radius: 50%;
+    border: 5px solid #ff3b3b;
+}
+
+.profile-left h2 {
+    position: relative;
+    bottom: 50px;
+    background-color: #ff3b3b;
+    font-size: 19px;
+    color: #fff;
+    width: 220px;
+    padding: 4px 0;
+    border-radius: 16px;
+}
+
+.profile-details {
+    font-size: 16px;
+    color: #666;
+    margin-bottom: 50px;
+    line-height: 24px;
+}
+
+.profile-details p {
+    margin: 4px 0;
+}
+
+.profile-details i {
+    font-size: 20px;
+    position: relative;
+    top: 5px;
+}
+
+.profile-details strong{
+    margin-right: 10px;
+}
+
+.form-columns {
+    display: flex;
+    gap: 20px;
+    width: 750px;
+    margin: auto;
+}
+
+.form-container-profile {
+    flex: 1;
+    background-color: #f9f9f9;
+    padding: 15px;
+    margin: 60px auto;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.form-container-profile-profile h3 {
+    font-size: 16px;
+    margin-bottom: 10px;
+}
+
+.form-container-profile form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.form-container-profile label {
+    font-size: 14px;
+    color: #333;
+}
+
+.form-container-profile input {
+    width: 66.66%;
+    margin: auto;
+    padding: 8px;
+    font-size: 14px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+}
+
+.submit-button {
+    width: 66.66%;
+    margin: auto;
+    padding: 8px;
+    font-size: 14px;
+    background-color: #e74c3c;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.submit-button:hover {
+    background-color: #c0392b;
+}
+
+.profile-footer-container {
+    text-align: center;
+}
+
+.profile-footer {
+    margin: 0 1%;
+    font-size: 18px;
+    text-decoration: underline;
+    color: #666;
+    font-weight: bold;
+}
+
+@media (max-width: 868px) {
+    .form-columns {
+        display: block;
+        width: 100%;
+    }
+    .profile-footer {
+        margin:0 2%;
+    }
+}

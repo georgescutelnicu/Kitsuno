@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/spring-security">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title th:text="${user.username} + ' | Kitsuno'"></title>
+
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Kalam:wght@300;400;700&family=Poppins:ital,wght@0,100;0,400;0,500;0,600;1,400;1,500;1,600&family=Quicksand:wght@300..700&display=swap"
+              rel="stylesheet">
+
+        <link rel="stylesheet" href="https://cdn.lineicons.com/5.0/lineicons.css"/>
+
+        <link rel="stylesheet" href="css/styles.css">
+
+    </head>
+    <body>
+        <div class="profile-container">
+            <div class="profile-header">
+                <div class="profile-left">
+                    <img src="images/profile/profile_icon.png" alt="User Icon" class="profile-icon">
+                    <h2 th:text="${user.username}"></h2>
+                </div>
+                <div class="profile-details">
+                    <p><i class="lni lni-envelope-1"></i> <strong>Email:</strong>
+                        <span th:text="${user.email}"></span></p>
+                    <p><i class="lni lni-calendar-days"></i> <strong>Joined Date:</strong>
+                        <span th:text="${user.joinDate}"></span></p>
+                    <p><i class="lni lni-bookmark-circle"></i> <strong>Flashcards:</strong>
+                        <span th:text="${countFlashcards}"></span></p>
+                </div>
+            </div>
+
+            <hr>
+
+            <div class="form-columns">
+                <div class="form-container form-container-profile">
+                    <h3>Change Username</h3>
+                    <form th:action="@{/updateUsername}" th:object="${usernameUpdateDTO}" method="post">
+                        <label for="new-username">New Username:</label>
+                        <input type="text" id="new-username" name="newUsername" th:field="*{newUsername}" required>
+
+                        <div th:if="${#fields.hasErrors('newUsername')}" class="error">
+                            <span th:errors="*{newUsername}"></span>
+                        </div>
+
+                        <button type="submit" class="submit-button">Update Username</button>
+
+                        <div th:if="${usernameSuccess}" class="green">
+                            <p th:text="${usernameSuccess}"></p>
+                        </div>
+                    </form>
+                </div>
+
+                <div class="form-container form-container-profile">
+                    <h3>Change Password</h3>
+                    <form th:action="@{/updatePassword}" th:object="${passwordUpdateDTO}" method="post">
+                        <label for="old-password">Old Password:</label>
+                        <input type="password" id="old-password" name="oldPassword" th:field="*{oldPassword}" required>
+                        <div th:if="${#fields.hasErrors('oldPassword')}" class="error">
+                            <span th:errors="*{oldPassword}"></span>
+                        </div>
+
+                        <label for="new-password">New Password:</label>
+                        <input type="password" id="new-password" name="newPassword" th:field="*{newPassword}" required>
+                        <div th:if="${#fields.hasErrors('newPassword')}" class="error">
+                            <span th:errors="*{newPassword}"></span>
+                        </div>
+
+                        <label for="confirm-password">Confirm New Password:</label>
+                        <input type="password" id="confirm-password" name="confirmPassword"
+                               th:field="*{confirmPassword}" required>
+                        <div th:if="${#fields.hasErrors('confirmPassword')}" class="error">
+                            <span th:errors="*{confirmPassword}"></span>
+                        </div>
+
+                        <button type="submit" class="submit-button">Update Password</button>
+
+                        <div th:if="${passwordSuccess}" class="green">
+                            <p th:text="${passwordSuccess}"></p>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <hr>
+            <div class="profile-footer-container">
+                <a href="/home" class="profile-footer">Home</a>
+                <a href="/logout" class="profile-footer">Log Out</a>
+            </div>
+        </div>
+    </body>
+</html>

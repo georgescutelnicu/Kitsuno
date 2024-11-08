@@ -30,11 +30,11 @@ public class SecurityConfig {
                         .csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse())
                 )
                 .authorizeHttpRequests(authorize -> authorize
-                        .requestMatchers("/logout").authenticated()
+                        .requestMatchers("/logout", "/updateUsername", "/updatePassword", "/profile").authenticated()
                         .anyRequest().permitAll()
                 )
                 .formLogin(form -> form
-                        .loginPage("/login")  // Custom login page
+                        .loginPage("/login")
                         .defaultSuccessUrl("/home", true)
                         .loginProcessingUrl("/login")
                         .failureUrl("/login?error")
