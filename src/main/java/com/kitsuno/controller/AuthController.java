@@ -44,6 +44,11 @@ public class AuthController {
                     "Email already exists");
         }
 
+        if (!userDTO.getPassword().equals(userDTO.isPasswordConfirmed())) {
+            bindingResult.rejectValue("confirmPassword", "error.userDTO",
+                    "Password and Confirm Password must match");
+        }
+
         if (bindingResult.hasErrors()) {
             modelAndView.setViewName("register");
             modelAndView.addObject("user", userDTO);
@@ -52,7 +57,7 @@ public class AuthController {
 
         userService.registerUser(userDTO, bindingResult);
 
-        modelAndView.setViewName("redirect:/home");
+        modelAndView.setViewName("redirect:/login");
         return modelAndView;
     }
 

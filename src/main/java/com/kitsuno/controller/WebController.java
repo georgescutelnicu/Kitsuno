@@ -2,9 +2,8 @@ package com.kitsuno.controller;
 
 import com.kitsuno.entity.*;
 import com.kitsuno.service.*;
-import com.kitsuno.utils.Utils;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
+import com.kitsuno.utils.KanaUtils;
+import com.kitsuno.utils.SecurityUtils;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import com.kitsuno.dto.FlashcardDTO;
@@ -45,7 +44,7 @@ public class WebController {
     @GetMapping("/hiragana")
     public String showHiragana(Model model) {
         List<Hiragana> hiraganaList = this.hiraganaService.findAll();
-        List<Hiragana> formattedHiraganaList = Utils.formatKana(hiraganaList);
+        List<Hiragana> formattedHiraganaList = KanaUtils.formatKana(hiraganaList);
         model.addAttribute("hiraganaList", formattedHiraganaList);
         return "hiragana";
     }
@@ -53,7 +52,7 @@ public class WebController {
     @GetMapping("/katakana")
     public String showKatakana(Model model) {
         List<Katakana> katakanaList = this.katakanaService.findAll();
-        List<Katakana> formattedKatakanaList = Utils.formatKana(katakanaList);
+        List<Katakana> formattedKatakanaList = KanaUtils.formatKana(katakanaList);
         model.addAttribute("katakanaList", formattedKatakanaList);
         return "katakana";
     }
@@ -72,7 +71,7 @@ public class WebController {
         model.addAttribute("kanji", kanji);
         model.addAttribute("flashcardDTO", flashcardDTO);
 
-        Optional<User> authenticatedUser = Utils.getAuthenticatedUser(userService);
+        Optional<User> authenticatedUser = SecurityUtils.getAuthenticatedUser(userService);
 
         if (authenticatedUser.isPresent()) {
             User user = authenticatedUser.get();

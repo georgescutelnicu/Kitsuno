@@ -7,11 +7,9 @@ import com.kitsuno.entity.User;
 import com.kitsuno.service.FlashcardService;
 import com.kitsuno.service.KanjiService;
 import com.kitsuno.service.UserService;
+import com.kitsuno.utils.SecurityUtils;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -64,18 +62,13 @@ public class FlashcardController {
     @GetMapping("/flashcards")
     public String showFlashcards(Model model) {
 
-        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        Optional<User> authenticatedUser = SecurityUtils.getAuthenticatedUser(userService);
 
-        if (auth != null && auth.isAuthenticated() && auth.getPrincipal() instanceof UserDetails userDetails) {
-            String username = userDetails.getUsername();
-            Optional<User> userOptional = userService.findByUsername(username);
-
-            if (userOptional.isPresent()) {
-                User user = userOptional.get();
+            if (authenticatedUser.isPresent()) {
+                User user = authenticatedUser.get();
                 List<Flashcard> flashcardsList = flashcardService.getAllFlashcardsByUserId(user.getId());
                 model.addAttribute("flashcardsList", flashcardsList);
             }
-        }
 
         return "flashcard";
     }
