@@ -9,6 +9,26 @@ navItems.forEach(item => {
 });
 
 
+// Adjust font size of the username displayed on the top navbar
+function adjustFontSize() {
+    const usernameDisplay = document.querySelector('.user-section h6');
+    const fullText = usernameDisplay.textContent;
+    const username = fullText.split(' ')[1];
+
+    let fontSize = 24;
+
+    if (username.length > 7 && username.length <= 10) {
+        fontSize = 20;
+    } else if (username.length > 10) {
+        fontSize = 16;
+    }
+
+    usernameDisplay.style.fontSize = `${fontSize}px`;
+}
+
+window.addEventListener('DOMContentLoaded', adjustFontSize);
+
+
 // Navbar user tab dropdown
 document.addEventListener('DOMContentLoaded', function () {
     const userLink = document.querySelector('.user-link');
