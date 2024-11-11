@@ -255,6 +255,79 @@ body {
 }
 
 
+/* Vocabulary page */
+#vocabForm {
+    text-align: center;
+    margin: 100px auto 50px;
+    width: 500px;
+}
+
+#vocabForm .vocab-input-container {
+    position: relative;
+    display: inline-block;
+    width: 100%;
+}
+
+#vocabForm input[type="text"] {
+    width: 100%;
+    padding: 10px 20px;
+    font-size: 1rem;
+    border-radius: 20px;
+    border: 1px solid #ccc;
+    outline: none;
+    box-sizing: border-box;
+}
+
+/* Search button styling */
+#vocabForm button[type="submit"] {
+    position: absolute;
+    right: 6px;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: #ff5a5a;
+    color: white;
+    border: none;
+    border-radius: 14px;
+    padding: 6px 15px;
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 14px;
+}
+
+#vocabForm button[type="submit"]:hover {
+    background-color: #ff3b3b;
+}
+
+/* Instruction section styling */
+#vocabForm .vocab-container {
+    margin-top: 15px;
+    display: flex;
+    align-items: center;
+    background-color: #f8f8f8;
+    padding: 10px 15px;
+    border-radius: 15px;
+}
+
+#vocabForm .vocab-container img {
+    width: 75px;
+    height: auto;
+    margin-right: 10px;
+}
+
+#vocabForm .vocab-container p {
+    margin: 0;
+    text-align: left;
+    font-weight: 500;
+    color: #555;
+}
+
+@media (max-width: 768px) {
+    #vocabForm  {
+       width: 400px;
+    }
+}
+
+
 /* Kana pages */
 .kana-h1 {
 	margin-top: 56px;

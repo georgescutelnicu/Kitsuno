@@ -4,7 +4,7 @@
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title>Kitsuno</title>
+        <title>Explore vocabulary | Kitsuno</title>
 
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -22,8 +22,8 @@
                 </a>
             </div>
             <ul class="nav-links">
-                <li class="active"><a href="/home"><img src="images/navbar/home_icon.png" alt="Home Icon">
-                    <span>Home</span></a>
+                <li class="active"><a href="/vocabulary"><img src="images/navbar/home_icon.png" alt="Home Icon">
+                    <span>Vocabulary</span></a>
                 </li>
                 <li><a href="/hiragana"><img src="images/navbar/hiragana_icon.png" alt="Hiragana Icon">
                     <span>Hiragana</span></a></li>
@@ -61,8 +61,8 @@
 
         <nav class="bottom-navbar">
             <ul class="nav-links">
-                <li class="active"><a href="/home"><img src="images/navbar/home_icon.png" alt="Home Icon">
-                    <span>Home</span></a>
+                <li class="active"><a href="/vocabulary"><img src="images/navbar/home_icon.png" alt="Home Icon">
+                    <span>Vocabulary</span></a>
                 </li>
                 <li><a href="/hiragana"><img src="images/navbar/hiragana_icon.png" alt="Hiragana Icon">
                     <span>Hiragana</span></a></li>
@@ -78,67 +78,38 @@
         </nav>
 
         <div id="main-section">
-            <div class="api-image">
-                <a href="#">
-                    <img src="images/home/api.png" alt="API Image">
-                </a>
-            </div>
+            <form id="vocabForm" th:action="@{/vocabulary}" method="post">
+                <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>
+                <div class="vocab-input-container">
+                    <input type="text" id="query" name="query" required pattern="^(?!\s*$).+"
+                           title="Please enter a word, not just spaces."
+                           placeholder="Enter kanji, kana or english word"/>
+                    <button type="submit">Search</button>
+                </div>
+                <div class="vocab-container">
+                    <img src="images/vocabulary/vocab_icon.png" alt="Vocabulary Icon"/>
+                    <p>Discover real sentences that show how words are used in different contexts</p>
+                </div>
+            </form>
 
-            <div class="resources-image">
-                <a href="#">
-                    <img src="images/home/resources.png" alt="Resources Image">
-                </a>
-            </div>
+            <div class="related-words" th:if="${apiResponse != null}">
+                <hr class="hr-header">
+                <h3>Sentences</h3>
+                <p class="related-words-p">Common sentences and meanings related to the word '<span
+                        th:text="${query}"></span>'</p>
 
-            <div class="whats-new">
-                <h2 class="whats-new-title">What’s New?</h2>
-                <ul class="whats-new-list">
-                    <li class="whats-new-item">
-                        <div class="whats-new-head">
-                            <p class="category" style="background: red;">Kanji</p>
+                <div class="vocabulary-list">
+                    <div th:each="sentence : ${apiResponse.sentences}">
+                        <div class="vocab-item">
+                            <p class="kanji-word" th:text="${sentence.furigana}"></p>
+                            <p class="meaning" th:text="${sentence.translation}"></p>
                         </div>
-                        <div class="whats-new-body">
-                            <time datetime="2024-09-27">2024.09.27</time>
-                            <p class="title">
-                                An app to help people who want to read kuzushiji cursive script.
-                            </p>
-                        </div>
-                    </li>
-                    <li class="whats-new-item">
-                        <div class="whats-new-head">
-                            <p class="category" style="background: blue;">Resources</p>
-                        </div>
-                        <div class="whats-new-body">
-                            <time datetime="2024-09-27">2024.09.27</time>
-                            <p class="title">
-                                An app to help people who want to read kuzushiji cursive script.
-                            </p>
-                        </div>
-                    </li>
-                    <li class="whats-new-item">
-                        <div class="whats-new-head">
-                            <p class="category" style="background: purple;">UI Stuff</p>
-                        </div>
-                        <div class="whats-new-body">
-                            <time datetime="2024-08-28">2024.08.28</time>
-                            <p class="title">
-                                An app to help people who want to read kuzushiji cursive script.
-                            </p>
-                        </div>
-                    </li>
-                    <li class="whats-new-item">
-                        <div class="whats-new-head">
-                            <p class="category" style="background: orange;">Kanji</p>
-                        </div>
-                        <div class="whats-new-body">
-                            <time datetime="2024-08-28">2024.08.28</time>
-                            <p class="title">
-                                An app to help people who want to read kuzushiji cursive script.
-                            </p>
-                        </div>
-                    </li>
-                </ul>
+                        <hr>
+                    </div>
+                </div>
+
             </div>
+        </div>
         </div>
 
         <script src="js/script.js"></script>
