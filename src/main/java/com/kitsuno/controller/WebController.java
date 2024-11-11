@@ -9,6 +9,8 @@ import org.springframework.ui.Model;
 import com.kitsuno.dto.FlashcardDTO;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
 import java.util.Map;
@@ -16,6 +18,8 @@ import java.util.Optional;
 
 @Controller
 public class WebController {
+
+    private ApiService apiService;
     private HiraganaService hiraganaService;
     private KatakanaService katakanaService;
     private KanjiService kanjiService;
@@ -23,12 +27,13 @@ public class WebController {
     private FlashcardService flashcardService;
 
     public WebController(HiraganaService hiraganaService, KatakanaService katakanaService, KanjiService kanjiService,
-                         UserService userService, FlashcardService flashcardService) {
+                         UserService userService, FlashcardService flashcardService, ApiService apiService) {
         this.hiraganaService = hiraganaService;
         this.katakanaService = katakanaService;
         this.kanjiService = kanjiService;
         this.userService = userService;
         this.flashcardService = flashcardService;
+        this.apiService = apiService;
     }
 
     @GetMapping("/")
@@ -36,9 +41,19 @@ public class WebController {
         return "welcome";
     }
 
-    @GetMapping("/home")
+    @GetMapping("/vocabulary")
     public String showHome(Model model) {
-        return "home";
+        return "vocabulary";
+    }
+
+    @PostMapping("/vocabulary")
+    public String getSentenceExamples(@RequestParam("query") String query, Model model) {
+        Map<String, Object> response = apiService.getSentenceExamples(query);
+
+        model.addAttribute("query", query);
+        model.addAttribute("apiResponse", response);
+
+        return "vocabulary";
     }
 
     @GetMapping("/hiragana")
