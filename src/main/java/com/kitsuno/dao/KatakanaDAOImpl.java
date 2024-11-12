@@ -1,5 +1,6 @@
 package com.kitsuno.dao;
 
+import com.kitsuno.entity.Hiragana;
 import com.kitsuno.entity.Katakana;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.TypedQuery;
@@ -25,5 +26,16 @@ public class KatakanaDAOImpl implements KatakanaDAO {
         List<Katakana> katakanaList = query.getResultList();
 
         return katakanaList;
+    }
+
+    @Override
+    public Katakana findByCharacter(String character) {
+        TypedQuery<Katakana> query = entityManager.createQuery(
+                "SELECT k FROM Katakana k WHERE k.character = :character", Katakana.class);
+        query.setParameter("character", character);
+
+        Katakana katakana = query.getSingleResult();
+
+        return katakana;
     }
 }

@@ -22,4 +22,9 @@ public class HiraganaServiceImpl implements HiraganaService {
     public List<Hiragana> findAll() {
         return hiraganaDAO.findAll();
     }
+
+    @Override
+    public Hiragana findByCharacter(String character) {
+        return hiraganaDAO.findByCharacter(character);
+    }
 }

@@ -32,6 +32,11 @@ public class KanjiServiceImpl implements KanjiService {
     }
 
     @Override
+    public List<Kanji> findAll() {
+        return kanjiDAO.findAll();
+    }
+
+    @Override
     public Map<String, List<Kanji>> findAllGroupedByCategory() {
         List<Kanji> kanjiList = this.kanjiDAO.findAll();
         Map<String, List<Kanji>> kanjiMap = new LinkedHashMap<>();

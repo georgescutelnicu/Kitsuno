@@ -1,5 +1,6 @@
 package com.kitsuno.dao;
 
+import com.kitsuno.entity.Hiragana;
 import com.kitsuno.entity.Katakana;
 
 import java.util.List;
@@ -7,4 +8,5 @@ import java.util.List;
 public interface KatakanaDAO {
 
     List<Katakana> findAll();
+    Katakana findByCharacter(String character);
 }

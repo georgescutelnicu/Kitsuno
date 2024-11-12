@@ -7,4 +7,5 @@ import java.util.List;
 public interface HiraganaDAO {
 
     List<Hiragana> findAll();
+    Hiragana findByCharacter(String character);
 }

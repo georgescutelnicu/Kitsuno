@@ -26,4 +26,15 @@ public class HiraganaDAOImpl implements HiraganaDAO {
 
         return hiraganaList;
     }
+
+    @Override
+    public Hiragana findByCharacter(String character) {
+        TypedQuery<Hiragana> query = entityManager.createQuery(
+                "SELECT h FROM Hiragana h WHERE h.character = :character", Hiragana.class);
+        query.setParameter("character", character);
+
+        Hiragana hiragana = query.getSingleResult();
+
+        return hiragana;
+    }
 }

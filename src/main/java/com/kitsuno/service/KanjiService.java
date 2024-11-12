@@ -10,5 +10,6 @@ public interface KanjiService {
 
     Kanji findKanjiById(int id);
     Kanji findKanjiByCharacter(String character);
+    List<Kanji> findAll();
     Map<String, List<Kanji>> findAllGroupedByCategory();
 }
