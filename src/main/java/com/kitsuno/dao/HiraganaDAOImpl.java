@@ -33,8 +33,8 @@ public class HiraganaDAOImpl implements HiraganaDAO {
                 "SELECT h FROM Hiragana h WHERE h.character = :character", Hiragana.class);
         query.setParameter("character", character);
 
-        Hiragana hiragana = query.getSingleResult();
+        List<Hiragana> hiraganaList = query.getResultList();
 
-        return hiragana;
+        return hiraganaList.isEmpty() ? null : hiraganaList.get(0);
     }
 }

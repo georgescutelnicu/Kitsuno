@@ -31,9 +31,9 @@ public class KanjiDAOImpl implements KanjiDAO {
                 Kanji.class);
         query.setParameter("character", character);
 
-        Kanji kanji = query.getSingleResult();
+        List<Kanji> kanjiList = query.getResultList();
 
-        return kanji;
+        return kanjiList.isEmpty() ? null : kanjiList.get(0);
     }
 
     @Override

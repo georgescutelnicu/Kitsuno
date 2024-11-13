@@ -3,6 +3,7 @@ package com.kitsuno.service;
 import com.kitsuno.dao.KatakanaDAO;
 import com.kitsuno.entity.Hiragana;
 import com.kitsuno.entity.Katakana;
+import com.kitsuno.exception.rest.CharacterNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -25,6 +26,10 @@ public class KatakanaServiceImpl implements KatakanaService {
 
     @Override
     public Katakana findByCharacter(String character) {
-        return katakanaDAO.findByCharacter(character);
+        Katakana katakana =  katakanaDAO.findByCharacter(character);
+        if (katakana == null) {
+            throw new CharacterNotFoundException("Katakana character not found: " + character);
+        }
+        return katakana;
     }
 }

@@ -34,8 +34,8 @@ public class KatakanaDAOImpl implements KatakanaDAO {
                 "SELECT k FROM Katakana k WHERE k.character = :character", Katakana.class);
         query.setParameter("character", character);
 
-        Katakana katakana = query.getSingleResult();
+        List<Katakana> katakanaList = query.getResultList();
 
-        return katakana;
+        return katakanaList.isEmpty() ? null : katakanaList.get(0);
     }
 }

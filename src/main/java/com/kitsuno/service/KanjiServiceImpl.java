@@ -3,6 +3,7 @@ package com.kitsuno.service;
 import com.kitsuno.dao.KanjiDAO;
 import com.kitsuno.entity.Flashcard;
 import com.kitsuno.entity.Kanji;
+import com.kitsuno.exception.rest.CharacterNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -28,7 +29,11 @@ public class KanjiServiceImpl implements KanjiService {
 
     @Override
     public Kanji findKanjiByCharacter(String character) {
-        return this.kanjiDAO.findKanjiByCharacter(character);
+        Kanji kanji = kanjiDAO.findKanjiByCharacter(character);
+        if (kanji == null) {
+            throw new CharacterNotFoundException("Kanji character not found: " + character);
+        }
+        return kanji;
     }
 
     @Override
