@@ -230,3 +230,13 @@ dropdowns.forEach(link => {
         event.stopPropagation();
     });
 });
+
+
+// Go back to the last page
+function goBack() {
+    if (window.history.length > 1) {
+        window.history.back();
+    } else {
+        window.location.href = "/";
+    }
+}
