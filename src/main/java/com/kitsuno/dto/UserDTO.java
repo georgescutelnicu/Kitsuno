@@ -8,7 +8,7 @@ public class UserDTO {
 
     @NotNull(message = "Username cannot be null")
     @NotEmpty(message = "Username is required")
-    @Size(min = 6, max = 18, message = "Username must be between 6 and 18 characters")
+    @Size(min = 5, max = 14, message = "Username must be between 5 and 14 characters")
     @Pattern(regexp = "^[a-zA-Z0-9]+$", message = "Username can only contain alphanumeric characters")
     private String username;
 

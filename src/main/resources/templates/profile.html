@@ -30,6 +30,11 @@
                         <span th:text="${user.joinDate}"></span></p>
                     <p><i class="lni lni-bookmark-circle"></i> <strong>Flashcards:</strong>
                         <span th:text="${countFlashcards}"></span></p>
+                    <p><i class="lni lni-key-1"></i> <strong>Api Key:</strong>
+                        <span th:text="${user.apiKey}"></span>
+                        <a th:href="@{/updateApiKey}" class="updateApiKey">
+                            <i class="lni lni-refresh-circle-1-clockwise"></i>
+                        </a></p>
                 </div>
             </div>
 

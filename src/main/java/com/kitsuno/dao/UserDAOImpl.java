@@ -56,6 +56,20 @@ public class UserDAOImpl implements UserDAO {
     }
 
     @Override
+    public Optional<User> findByApiKey(String apiKey) {
+        TypedQuery<User> query = entityManager.createQuery("SELECT u FROM User u WHERE u.apiKey = :apiKey", User.class);
+
+        query.setParameter("apiKey", apiKey);
+
+        try {
+            User user = query.getSingleResult();
+            return Optional.of(user);
+        } catch (NoResultException e) {
+            return Optional.empty();
+        }
+    }
+
+    @Override
     @Transactional
     public User save(User user) {
         entityManager.persist(user);

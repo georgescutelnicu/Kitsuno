@@ -10,5 +10,6 @@ public interface UserDAO {
     Optional<User> findById(int id);
     Optional<User> findByUsername(String username);
     Optional<User> findByEmail(String email);
+    Optional<User> findByApiKey(String apiKey);
     User save(User user);
 }

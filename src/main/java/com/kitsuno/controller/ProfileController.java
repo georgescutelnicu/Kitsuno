@@ -100,4 +100,13 @@ public class ProfileController {
 
         return "redirect:/profile";
     }
+
+    @GetMapping("/updateApiKey")
+    public String updateApiKey() {
+        User authenticatedUser = SecurityUtils.getAuthenticatedUser(userService).get();
+        userService.updateApiKey(authenticatedUser);
+        userService.save(authenticatedUser);
+        return "redirect:/profile";
+    }
+
 }

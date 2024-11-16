@@ -15,6 +15,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
+import java.util.UUID;
 
 @Service
 public class UserServiceImpl implements UserService {
@@ -46,6 +47,11 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public Optional<User> findByApiKey(String apiKey) {
+        return userDAO.findByApiKey(apiKey);
+    }
+
+    @Override
     public User save(User user) {
         return userDAO.save(user);
     }
@@ -57,6 +63,7 @@ public class UserServiceImpl implements UserService {
         user.setUsername(userDTO.getUsername());
         user.setEmail(userDTO.getEmail());
         user.setPassword(passwordEncoder.encode(userDTO.getPassword()));
+        user.setApiKey(generateApiKey());
         user.setEnabled(true);
         save(user);
 
@@ -79,5 +86,14 @@ public class UserServiceImpl implements UserService {
 
         user.setPassword(passwordEncoder.encode(newPassword));
         userDAO.save(user);
+    }
+
+    public String generateApiKey() {
+        return UUID.randomUUID().toString().replace("-", "");
+    }
+
+    public void updateApiKey(User user) {
+        String newApiKey = generateApiKey();
+        user.setApiKey(newApiKey);
     }
 }

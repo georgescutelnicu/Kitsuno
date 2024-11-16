@@ -1256,6 +1256,12 @@ input {
     top: 5px;
 }
 
+.updateApiKey i {
+    font-size: 16px;
+    margin-left: 2.5px;
+    top: 2.5px;
+}
+
 .profile-details strong{
     margin-right: 10px;
 }

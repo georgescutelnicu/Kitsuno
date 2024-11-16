@@ -18,7 +18,7 @@ public class User {
     private int id;
 
     @NotBlank(message = "Username is mandatory")
-    @Size(min = 6, max = 18, message = "Username must be between 6 and 18 characters")
+    @Size(min = 5, max = 14, message = "Username must be between 5 and 14 characters")
     @Column(name = "username", unique = true, nullable = false)
     private String username;
 
@@ -39,6 +39,9 @@ public class User {
     protected void onCreate() {
         this.joinDate = LocalDate.now();
     }
+
+    @Column(name = "api_key", unique = true)
+    private String apiKey;
 
     @Column(name = "enabled")
     private boolean enabled = true;
@@ -91,6 +94,8 @@ public class User {
 
     public LocalDate getJoinDate() { return joinDate; }
 
+    public String getApiKey() { return apiKey; }
+
     public boolean isEnabled() {
         return enabled;
     }
@@ -111,6 +116,8 @@ public class User {
         this.password = password;
     }
 
+    public void setApiKey(String apiKey) { this.apiKey = apiKey; }
+    
     public void setEnabled(boolean enabled) {
         this.enabled = enabled;
     }
