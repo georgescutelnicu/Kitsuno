@@ -2,7 +2,9 @@ package com.kitsuno.exception.handler;
 
 import com.kitsuno.exception.ErrorResponse;
 import com.kitsuno.utils.DateUtils;
+import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.servlet.ModelAndView;
@@ -32,7 +34,7 @@ public class GlobalExceptionHandler {
     }
 
     @ExceptionHandler(Exception.class)
-    public ModelAndView handleNoHandlerFoundException(Exception exc) {
+    public Object handleNoHandlerFound(Exception ex, HttpServletRequest request) {
 
         String timeStamp = DateUtils.formatTimestamp(System.currentTimeMillis());
 
@@ -42,11 +44,17 @@ public class GlobalExceptionHandler {
         error.setTimeStamp(timeStamp);
         error.setDetails("Check the URL for typos or missing paths.");
 
+        String requestURI = request.getRequestURI();
+
+        if (requestURI.startsWith("/api")) {
+            return new ResponseEntity<>(error, HttpStatus.NOT_FOUND);
+        }
+
         ModelAndView modelAndView = new ModelAndView("error");
         modelAndView.addObject("statusCode", error.getStatus());
         modelAndView.addObject("errorMessage", error.getMessage());
         modelAndView.addObject("errorDetails", error.getDetails());
-        modelAndView.addObject("timestamp",timeStamp);
+        modelAndView.addObject("timestamp", timeStamp);
 
         return modelAndView;
     }
