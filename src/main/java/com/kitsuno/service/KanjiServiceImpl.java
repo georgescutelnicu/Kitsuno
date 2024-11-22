@@ -1,7 +1,6 @@
 package com.kitsuno.service;
 
 import com.kitsuno.dao.KanjiDAO;
-import com.kitsuno.entity.Flashcard;
 import com.kitsuno.entity.Kanji;
 import com.kitsuno.exception.rest.CharacterNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,7 +23,11 @@ public class KanjiServiceImpl implements KanjiService {
 
     @Override
     public Kanji findKanjiById(int id) {
-        return kanjiDAO.findKanjiById(id);
+        Kanji kanji = kanjiDAO.findKanjiById(id);
+        if (kanji == null) {
+            throw new CharacterNotFoundException("Kanji character not found for id: " + id);
+        }
+        return kanji;
     }
 
     @Override
@@ -43,7 +46,11 @@ public class KanjiServiceImpl implements KanjiService {
 
     @Override
     public List<Kanji> findAllByCategory(String category) {
-        return kanjiDAO.findAllByCategory(category);
+        List<Kanji> kanjiList =  kanjiDAO.findAllByCategory(category);
+        if (kanjiList.isEmpty()) {
+            throw new CharacterNotFoundException("Kanji characters not found for category: " + category);
+        }
+        return kanjiList;
     }
 
     @Override

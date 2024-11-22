@@ -55,9 +55,9 @@ public class CharacterRestController {
         return kanjiService.findAll();
     }
 
-    @GetMapping("/kanji/{character}")
-    public Kanji getKanjiByCharacter(@PathVariable String character) {
-        return kanjiService.findKanjiByCharacter(character);
+    @GetMapping("/kanji/{id}")
+    public Kanji getKanjiById(@PathVariable int id) {
+        return kanjiService.findKanjiById(id);
     }
 
     @GetMapping("/kanji/category")
