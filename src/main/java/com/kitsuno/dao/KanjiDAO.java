@@ -10,4 +10,7 @@ public interface KanjiDAO {
     Kanji findKanjiById(int id);
     Kanji findKanjiByCharacter(String character);
     List<Kanji> findAll();
+    List<String> findAllCategories();
+    List<Kanji> findAllByCategory(String category);
+
 }

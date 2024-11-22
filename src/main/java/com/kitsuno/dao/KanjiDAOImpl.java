@@ -1,6 +1,5 @@
 package com.kitsuno.dao;
 
-import com.kitsuno.entity.Flashcard;
 import com.kitsuno.entity.Kanji;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.TypedQuery;
@@ -8,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Repository
 public class KanjiDAOImpl implements KanjiDAO {
@@ -39,6 +39,34 @@ public class KanjiDAOImpl implements KanjiDAO {
     @Override
     public List<Kanji> findAll() {
         TypedQuery<Kanji> query = entityManager.createQuery("Select k from Kanji k ORDER BY k.id", Kanji.class);
+
+        List<Kanji> kanjiList = query.getResultList();
+
+        return kanjiList;
+    }
+
+    @Override
+    public List<String> findAllCategories() {
+        TypedQuery<String> query = entityManager.createQuery(
+                "SELECT DISTINCT k.category FROM Kanji k WHERE k.category IS NOT NULL ORDER BY k.category",
+                String.class
+        );
+
+        List<String> categories = query.getResultList();
+        categories = categories.stream()
+                .map(category -> category.replace(" ", "-"))
+                .collect(Collectors.toList());
+
+        return categories;
+    }
+
+    @Override
+    public List<Kanji> findAllByCategory(String category) {
+        TypedQuery<Kanji> query = entityManager.createQuery(
+                "SELECT k FROM Kanji k WHERE k.category = :category ORDER BY k.id",
+                Kanji.class
+        );
+        query.setParameter("category", category);
 
         List<Kanji> kanjiList = query.getResultList();
 

@@ -17,7 +17,6 @@ public class ApiServiceImpl implements ApiService {
 
     @Override
     public Map<String, Object> getSentenceExamples(String query) {
-        // Prepare the request payload
         Map<String, Object> requestBody = Map.of(
                 "query", query,
                 "language", "English",

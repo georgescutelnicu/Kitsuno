@@ -59,4 +59,14 @@ public class CharacterRestController {
     public Kanji getKanjiByCharacter(@PathVariable String character) {
         return kanjiService.findKanjiByCharacter(character);
     }
+
+    @GetMapping("/kanji/category")
+    public List<String> getAllCategories() {
+        return kanjiService.findAllCategories();
+    }
+
+    @GetMapping("/kanji/category/{category}")
+    public List<Kanji> getAllKanjiCategories(@PathVariable String category) {
+        return kanjiService.findAllByCategory(category.replace("-", " "));
+    }
 }
