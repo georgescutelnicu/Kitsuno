@@ -8,5 +8,5 @@ import java.util.List;
 public interface KatakanaService {
 
     List<Katakana> findAll();
-    Katakana findByCharacter(String character);
+    Katakana findByCharacter(String romaji);
 }

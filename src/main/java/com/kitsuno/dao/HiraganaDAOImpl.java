@@ -28,10 +28,10 @@ public class HiraganaDAOImpl implements HiraganaDAO {
     }
 
     @Override
-    public Hiragana findByCharacter(String character) {
+    public Hiragana findByCharacter(String romaji) {
         TypedQuery<Hiragana> query = entityManager.createQuery(
-                "SELECT h FROM Hiragana h WHERE h.character = :character", Hiragana.class);
-        query.setParameter("character", character);
+                "SELECT h FROM Hiragana h WHERE h.romaji = :romaji", Hiragana.class);
+        query.setParameter("romaji", romaji);
 
         List<Hiragana> hiraganaList = query.getResultList();
 

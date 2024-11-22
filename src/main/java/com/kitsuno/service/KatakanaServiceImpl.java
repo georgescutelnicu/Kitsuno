@@ -25,10 +25,10 @@ public class KatakanaServiceImpl implements KatakanaService {
     }
 
     @Override
-    public Katakana findByCharacter(String character) {
-        Katakana katakana =  katakanaDAO.findByCharacter(character);
+    public Katakana findByCharacter(String romaji) {
+        Katakana katakana =  katakanaDAO.findByCharacter(romaji);
         if (katakana == null) {
-            throw new CharacterNotFoundException("Katakana character not found: " + character);
+            throw new CharacterNotFoundException("Katakana romaji not found: " + romaji);
         }
         return katakana;
     }

@@ -25,10 +25,10 @@ public class HiraganaServiceImpl implements HiraganaService {
     }
 
     @Override
-    public Hiragana findByCharacter(String character) {
-        Hiragana hiragana = hiraganaDAO.findByCharacter(character);
+    public Hiragana findByCharacter(String romaji) {
+        Hiragana hiragana = hiraganaDAO.findByCharacter(romaji);
         if (hiragana == null) {
-            throw new CharacterNotFoundException("Hiragana character not found: " + character);
+            throw new CharacterNotFoundException("Hiragana romaji not found: " + romaji);
         }
         return hiragana;
     }

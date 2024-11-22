@@ -29,10 +29,10 @@ public class KatakanaDAOImpl implements KatakanaDAO {
     }
 
     @Override
-    public Katakana findByCharacter(String character) {
+    public Katakana findByCharacter(String romaji) {
         TypedQuery<Katakana> query = entityManager.createQuery(
-                "SELECT k FROM Katakana k WHERE k.character = :character", Katakana.class);
-        query.setParameter("character", character);
+                "SELECT k FROM Katakana k WHERE k.romaji = :romaji", Katakana.class);
+        query.setParameter("romaji", romaji);
 
         List<Katakana> katakanaList = query.getResultList();
 

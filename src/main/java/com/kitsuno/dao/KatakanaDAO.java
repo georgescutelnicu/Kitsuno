@@ -8,5 +8,5 @@ import java.util.List;
 public interface KatakanaDAO {
 
     List<Katakana> findAll();
-    Katakana findByCharacter(String character);
+    Katakana findByCharacter(String romaji);
 }

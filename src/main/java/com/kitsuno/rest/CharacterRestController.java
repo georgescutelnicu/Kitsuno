@@ -35,9 +35,9 @@ public class CharacterRestController {
         return hiraganaService.findAll();
     }
 
-    @GetMapping("/hiragana/{character}")
-    public Hiragana getHiraganaByCharacter(@PathVariable String character) {
-        return hiraganaService.findByCharacter(character);
+    @GetMapping("/hiragana/{romaji}")
+    public Hiragana getHiraganaByCharacter(@PathVariable String romaji) {
+        return hiraganaService.findByCharacter(romaji);
     }
 
     @GetMapping("/katakana")
@@ -45,9 +45,9 @@ public class CharacterRestController {
         return katakanaService.findAll();
     }
 
-    @GetMapping("/katakana/{character}")
-    public Katakana getKatakanaByCharacter(@PathVariable String character) {
-        return katakanaService.findByCharacter(character);
+    @GetMapping("/katakana/{romaji}")
+    public Katakana getKatakanaByCharacter(@PathVariable String romaji) {
+        return katakanaService.findByCharacter(romaji);
     }
 
     @GetMapping("/kanji")
