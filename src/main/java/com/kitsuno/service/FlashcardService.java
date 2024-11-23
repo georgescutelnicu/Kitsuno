@@ -14,6 +14,8 @@ public interface FlashcardService {
 
     int countFlashcardsByUserId(int userId);
 
+    Flashcard getFlashcardByUserAndId(int userId, int flashcardId);
+
     Flashcard getFlashcardByUserAndKanji(int userId, String character);
 
     void deleteFlashcard(int id);

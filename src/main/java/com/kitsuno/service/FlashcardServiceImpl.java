@@ -5,6 +5,8 @@ import com.kitsuno.dto.FlashcardDTO;
 import com.kitsuno.entity.Flashcard;
 import com.kitsuno.entity.Kanji;
 import com.kitsuno.entity.User;
+import com.kitsuno.exception.rest.CharacterNotFoundException;
+import com.kitsuno.exception.rest.FlashcardNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import java.util.List;
@@ -59,8 +61,17 @@ public class FlashcardServiceImpl implements FlashcardService {
     }
 
     @Override
+    public Flashcard getFlashcardByUserAndId(int userId, int flashcardId) {
+        Flashcard flashcard = flashcardDAO.getFlashcardByUserIdAndId(userId, flashcardId);
+        if (flashcard == null) {
+            throw new FlashcardNotFoundException("Flashcard not found for id: " + flashcardId);
+        }
+        return flashcard;
+    }
+
+    @Override
     public Flashcard getFlashcardByUserAndKanji(int userId, String character) {
-        return flashcardDAO.getFlashcardByUserIdAndKanjiCharacter(userId, character);
+        return flashcardDAO.getFlashcardByUserIdAndKanji(userId, character);
     }
 
     @Override

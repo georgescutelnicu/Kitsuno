@@ -14,7 +14,9 @@ public interface FlashcardDAO {
 
     int countFlashcardsByUserId(int userId);
 
-    Flashcard getFlashcardByUserIdAndKanjiCharacter(int userId, String character);
+    Flashcard getFlashcardByUserIdAndId(int userId, int flashcardId);
+
+    Flashcard getFlashcardByUserIdAndKanji(int userId, String character);
 
     void deleteFlashcard(int id);
 }
