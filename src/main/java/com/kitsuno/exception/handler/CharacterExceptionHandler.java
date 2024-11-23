@@ -20,7 +20,7 @@ public class CharacterExceptionHandler {
         error.setStatus(HttpStatus.NOT_FOUND.value());
         error.setMessage(exc.getMessage());
         error.setTimeStamp(timeStamp);
-        error.setDetails("The specified character could not be found in the database.");
+        error.setDetails("The specified element could not be found in the database.");
 
         return new ResponseEntity<>(error, HttpStatus.NOT_FOUND);
     }

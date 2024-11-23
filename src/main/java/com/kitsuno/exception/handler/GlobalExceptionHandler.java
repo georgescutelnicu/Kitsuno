@@ -1,12 +1,14 @@
 package com.kitsuno.exception.handler;
 
 import com.kitsuno.exception.ErrorResponse;
+import com.kitsuno.exception.rest.CharacterNotFoundException;
 import com.kitsuno.utils.DateUtils;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.method.annotation.MethodArgumentTypeMismatchException;
 import org.springframework.web.servlet.ModelAndView;
 
 @ControllerAdvice
@@ -31,6 +33,23 @@ public class GlobalExceptionHandler {
         modelAndView.addObject("timestamp", error.getTimeStamp());
 
         return modelAndView;
+    }
+
+    @ExceptionHandler(MethodArgumentTypeMismatchException.class)
+    public ResponseEntity<ErrorResponse> handleTypeMismatchException(MethodArgumentTypeMismatchException ex) {
+
+        String timeStamp = DateUtils.formatTimestamp(System.currentTimeMillis());
+
+        String paramName = ex.getName();
+        String expectedType = ex.getRequiredType() != null ? ex.getRequiredType().getSimpleName() : "unknown type";
+
+        ErrorResponse error = new ErrorResponse();
+        error.setStatus(HttpStatus.BAD_REQUEST.value());
+        error.setMessage("Invalid input for parameter: " + paramName);
+        error.setTimeStamp(timeStamp);
+        error.setDetails("The provided value is not of the expected type: " + expectedType);
+
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(error);
     }
 
     @ExceptionHandler(Exception.class)
