@@ -48,4 +48,15 @@ public class FlashcardRestController {
 
         return flashcardRestDTO;
     }
+
+    @DeleteMapping("/flashcards/{flashcardId}")
+    public void deleteFlashcardByUserAndId(@RequestHeader("API-KEY") String apiKey,
+                                           @PathVariable("flashcardId") int flashcardId) {
+        Optional<User> apiKeyUser = userService.findByApiKey(apiKey);
+        int userId = apiKeyUser.get().getId();
+
+        Flashcard flashcard = flashcardService.getFlashcardByUserAndId(userId, flashcardId);
+
+        flashcardService.deleteFlashcard(flashcard.getId());
+    }
 }

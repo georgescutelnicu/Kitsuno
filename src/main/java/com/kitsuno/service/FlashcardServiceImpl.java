@@ -64,7 +64,8 @@ public class FlashcardServiceImpl implements FlashcardService {
     public Flashcard getFlashcardByUserAndId(int userId, int flashcardId) {
         Flashcard flashcard = flashcardDAO.getFlashcardByUserIdAndId(userId, flashcardId);
         if (flashcard == null) {
-            throw new FlashcardNotFoundException("Flashcard not found for id: " + flashcardId);
+            throw new FlashcardNotFoundException("Flashcard with id " + flashcardId +
+                    " was not found for the current user");
         }
         return flashcard;
     }
@@ -76,6 +77,10 @@ public class FlashcardServiceImpl implements FlashcardService {
 
     @Override
     public void deleteFlashcard(int id) {
+        Flashcard flashcard = getFlashcardById(id);
+        if (flashcard == null) {
+            throw new FlashcardNotFoundException("Flashcard with id " + id + " was not found for the current user");
+        }
         flashcardDAO.deleteFlashcard(id);
     }
 }
