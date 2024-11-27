@@ -37,7 +37,6 @@ public class FlashcardDTO {
     @NotNull(message = "Kanji ID cannot be null.")
     private Integer kanjiId;
 
-    @NotNull(message = "User ID cannot be null.")
     private Integer userId;
 
     public FlashcardDTO() {
