@@ -4,6 +4,7 @@ import com.kitsuno.dto.FlashcardDTO;
 import com.kitsuno.dto.rest.FlashcardRestDTO;
 import com.kitsuno.entity.Flashcard;
 import com.kitsuno.entity.User;
+import com.kitsuno.exception.rest.FlashcardNotFoundException;
 import com.kitsuno.service.FlashcardService;
 import com.kitsuno.service.KanjiService;
 import com.kitsuno.service.UserService;
@@ -56,7 +57,7 @@ public class FlashcardRestController {
     }
 
     @PostMapping("/flashcards")
-    public void createOrUpdateFlashcard(@RequestHeader("API-KEY") String apiKey,
+    public void createFlashcard(@RequestHeader("API-KEY") String apiKey,
                                         @RequestBody @Valid FlashcardDTO flashcardDTO) {
 
         if (!flashcardDTO.hasAtLeastOneVocabPair()) {
@@ -72,8 +73,33 @@ public class FlashcardRestController {
         flashcardService.saveOrUpdateFlashcard(flashcardDTO, userId, kanjiCharacter);
     }
 
+    @PutMapping("/flashcards/{flashcardId}")
+    public void updateFlashcard(@RequestHeader("API-KEY") String apiKey,
+                                @PathVariable int flashcardId,
+                                @RequestBody @Valid FlashcardDTO flashcardDTO) {
+
+        Optional<User> apiKeyUser = userService.findByApiKey(apiKey);
+        int userId = apiKeyUser.get().getId();
+
+        Flashcard flashcard = flashcardService.getFlashcardByUserAndId(userId, flashcardId);
+        if (flashcard == null) {
+            throw new FlashcardNotFoundException("Flashcard with id " + flashcardId +
+                    " was not found for the current user");
+        }
+
+        if (!flashcardDTO.hasAtLeastOneVocabPair()) {
+            throw new IllegalArgumentException("Flashcard must have at least one vocabulary word and meaning pair.");
+        }
+
+        flashcardDTO.setUserId(userId);
+
+        String kanjiCharacter = kanjiService.findKanjiById(flashcardDTO.getKanjiId()).getCharacter();
+
+        flashcardService.saveOrUpdateFlashcard(flashcardDTO, userId, kanjiCharacter);
+    }
+
     @DeleteMapping("/flashcards/{flashcardId}")
-    public void deleteFlashcardByUserAndId(@RequestHeader("API-KEY") String apiKey,
+    public void deleteFlashcard(@RequestHeader("API-KEY") String apiKey,
                                            @PathVariable("flashcardId") int flashcardId) {
         Optional<User> apiKeyUser = userService.findByApiKey(apiKey);
         int userId = apiKeyUser.get().getId();
