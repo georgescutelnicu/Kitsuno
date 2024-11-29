@@ -1,6 +1,6 @@
 package com.kitsuno.dto;
 
-import jakarta.validation.constraints.NotNull;
+import com.kitsuno.validation.ValidKanjiId;
 import jakarta.validation.constraints.Size;
 import java.util.ArrayList;
 import java.util.List;
@@ -34,7 +34,7 @@ public class FlashcardDTO {
     @Size(max = 200, message = "Notes must not exceed 200 characters")
     private String notes;
 
-    @NotNull(message = "Kanji ID cannot be null.")
+    @ValidKanjiId(message = "Kanji ID cannot be null.")
     private Integer kanjiId;
 
     private Integer userId;
