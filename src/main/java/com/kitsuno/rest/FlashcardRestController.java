@@ -4,6 +4,7 @@ import com.kitsuno.dto.FlashcardDTO;
 import com.kitsuno.dto.rest.FlashcardRestDTO;
 import com.kitsuno.entity.Flashcard;
 import com.kitsuno.entity.User;
+import com.kitsuno.exception.rest.FlashcardAlreadyExistsException;
 import com.kitsuno.exception.rest.FlashcardNotFoundException;
 import com.kitsuno.service.FlashcardService;
 import com.kitsuno.service.KanjiService;
@@ -70,6 +71,12 @@ public class FlashcardRestController {
 
         String kanjiCharacter = kanjiService.findKanjiById(flashcardDTO.getKanjiId()).getCharacter();
 
+        Flashcard flashcard = flashcardService.getFlashcardByUserAndKanji(userId, kanjiCharacter);
+        if (flashcard != null) {
+            throw new FlashcardAlreadyExistsException("Flashcard with kanji character " + kanjiCharacter +
+                    " already exists for the current user. Try to update it instead");
+        }
+
         flashcardService.saveOrUpdateFlashcard(flashcardDTO, userId, kanjiCharacter);
     }
 
@@ -92,6 +99,7 @@ public class FlashcardRestController {
         }
 
         flashcardDTO.setUserId(userId);
+        flashcardDTO.setKanjiId(flashcard.getKanji().getId());
 
         String kanjiCharacter = kanjiService.findKanjiById(flashcardDTO.getKanjiId()).getCharacter();
 
