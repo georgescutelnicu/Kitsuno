@@ -4,8 +4,6 @@ import com.kitsuno.dto.FlashcardDTO;
 import com.kitsuno.dto.rest.FlashcardRestDTO;
 import com.kitsuno.entity.Flashcard;
 import com.kitsuno.entity.User;
-import com.kitsuno.exception.rest.FlashcardAlreadyExistsException;
-import com.kitsuno.exception.rest.FlashcardNotFoundException;
 import com.kitsuno.service.FlashcardService;
 import com.kitsuno.service.KanjiService;
 import com.kitsuno.service.UserService;
@@ -60,22 +58,14 @@ public class FlashcardRestController {
     @PostMapping("/flashcards")
     public void createFlashcard(@RequestHeader("API-KEY") String apiKey,
                                         @RequestBody @Valid FlashcardDTO flashcardDTO) {
-
-        if (!flashcardDTO.hasAtLeastOneVocabPair()) {
-            throw new IllegalArgumentException("Flashcard must have at least one vocabulary word and meaning pair.");
-        }
-
         Optional<User> apiKeyUser = userService.findByApiKey(apiKey);
         int userId = apiKeyUser.get().getId();
         flashcardDTO.setUserId(userId);
 
         String kanjiCharacter = kanjiService.findKanjiById(flashcardDTO.getKanjiId()).getCharacter();
 
-        Flashcard flashcard = flashcardService.getFlashcardByUserAndKanji(userId, kanjiCharacter);
-        if (flashcard != null) {
-            throw new FlashcardAlreadyExistsException("Flashcard with kanji character " + kanjiCharacter +
-                    " already exists for the current user. Try to update it instead");
-        }
+        FlashcardUtils.checkFlashcardExists(flashcardDTO, kanjiCharacter, userId, flashcardService);
+        FlashcardUtils.validateVocabPairs(flashcardDTO);
 
         flashcardService.saveOrUpdateFlashcard(flashcardDTO, userId, kanjiCharacter);
     }
@@ -88,18 +78,11 @@ public class FlashcardRestController {
         Optional<User> apiKeyUser = userService.findByApiKey(apiKey);
         int userId = apiKeyUser.get().getId();
 
-        Flashcard flashcard = flashcardService.getFlashcardByUserAndId(userId, flashcardId);
-        if (flashcard == null) {
-            throw new FlashcardNotFoundException("Flashcard with id " + flashcardId +
-                    " was not found for the current user");
-        }
-
-        if (!flashcardDTO.hasAtLeastOneVocabPair()) {
-            throw new IllegalArgumentException("Flashcard must have at least one vocabulary word and meaning pair.");
-        }
+        FlashcardUtils.checkFlashcardExistsForUpdate(flashcardDTO, flashcardId, userId, flashcardService);
+        FlashcardUtils.validateVocabPairs(flashcardDTO);
 
         flashcardDTO.setUserId(userId);
-        flashcardDTO.setKanjiId(flashcard.getKanji().getId());
+        flashcardDTO.setKanjiId(flashcardService.getFlashcardByUserAndId(userId, flashcardId).getKanji().getId());
 
         String kanjiCharacter = kanjiService.findKanjiById(flashcardDTO.getKanjiId()).getCharacter();
 
