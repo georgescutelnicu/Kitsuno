@@ -45,7 +45,7 @@
                 </a>
                 <ul class="user-dropdown">
                     <li sec:authorize="!isAuthenticated()">
-                        <a href="/login"><img src="images/navbar/login.png" alt="Login Icon"> LogIn</a>
+                        <a href="/login"><img src="images/navbar/login.png" alt="Login Icon"> Login</a>
                     </li>
                     <li sec:authorize="!isAuthenticated()">
                         <a href="/register"><img src="images/navbar/register.png" alt="Register Icon"> Register</a>
@@ -55,6 +55,9 @@
                     </li>
                     <li sec:authorize="isAuthenticated()">
                         <a href="/logout"><img src="images/navbar/logout.png" alt="Logout Icon"> Logout</a>
+                    </li>
+                    <li>
+                        <a href="/v1/api-docs"><img src="images/navbar/api.png" alt="Api-Docs Icon"> ApiDocs</a>
                     </li>
                 </ul>
             </div>
