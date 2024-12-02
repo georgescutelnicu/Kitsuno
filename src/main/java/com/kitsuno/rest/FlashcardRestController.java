@@ -1,7 +1,7 @@
 package com.kitsuno.rest;
 
 import com.kitsuno.dto.FlashcardDTO;
-import com.kitsuno.dto.rest.FlashcardRestDTO;
+import com.kitsuno.dto.FlashcardResponseDTO;
 import com.kitsuno.entity.Flashcard;
 import com.kitsuno.entity.User;
 import com.kitsuno.service.FlashcardService;
@@ -43,14 +43,14 @@ public class FlashcardRestController {
     @ApiResponses({
             @ApiResponse(responseCode = "200", description = "Successfully retrieved flashcards",
                     content = @Content(mediaType = "application/json",
-                            schema = @Schema(implementation = FlashcardRestDTO.class))),
+                            schema = @Schema(implementation = FlashcardResponseDTO.class))),
             @ApiResponse(responseCode = "401", description = "Unauthorized - API key is missing or invalid",
                     content = @Content),
             @ApiResponse(responseCode = "500", description = "Internal server error",
                     content = @Content)
     })
     @GetMapping("/flashcards")
-    public List<FlashcardRestDTO> getAllFlashcardsForUser(@RequestHeader("API-KEY") String apiKey) {
+    public List<FlashcardResponseDTO> getAllFlashcardsForUser(@RequestHeader("API-KEY") String apiKey) {
         Optional<User> apiKeyUser = userService.findByApiKey(apiKey);
         int userId = apiKeyUser.get().getId();
 
@@ -66,7 +66,7 @@ public class FlashcardRestController {
     @ApiResponses({
             @ApiResponse(responseCode = "200", description = "Successfully retrieved flashcard",
                     content = @Content(mediaType = "application/json",
-                            schema = @Schema(implementation = FlashcardRestDTO.class))),
+                            schema = @Schema(implementation = FlashcardResponseDTO.class))),
             @ApiResponse(responseCode = "401", description = "Unauthorized - API key is missing or invalid",
                     content = @Content),
             @ApiResponse(responseCode = "404", description = "Flashcard not found",
@@ -75,8 +75,8 @@ public class FlashcardRestController {
                     content = @Content)
     })
     @GetMapping("/flashcards/{flashcardId}")
-    public FlashcardRestDTO getFlashcardByUserAndId(@RequestHeader("API-KEY") String apiKey,
-                                                    @PathVariable("flashcardId") int flashcardId) {
+    public FlashcardResponseDTO getFlashcardByUserAndId(@RequestHeader("API-KEY") String apiKey,
+                                                        @PathVariable("flashcardId") int flashcardId) {
         Optional<User> apiKeyUser = userService.findByApiKey(apiKey);
         int userId = apiKeyUser.get().getId();
 

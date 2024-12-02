@@ -1,7 +1,7 @@
 package com.kitsuno.utils;
 
 import com.kitsuno.dto.FlashcardDTO;
-import com.kitsuno.dto.rest.FlashcardRestDTO;
+import com.kitsuno.dto.FlashcardResponseDTO;
 import com.kitsuno.entity.Flashcard;
 import com.kitsuno.exception.rest.FlashcardAlreadyExistsException;
 import com.kitsuno.exception.rest.FlashcardNotFoundException;
@@ -9,8 +9,8 @@ import com.kitsuno.service.FlashcardService;
 
 public class FlashcardUtils {
 
-    public static FlashcardRestDTO toDTO(Flashcard flashcard) {
-        return new FlashcardRestDTO(
+    public static FlashcardResponseDTO toDTO(Flashcard flashcard) {
+        return new FlashcardResponseDTO(
                 flashcard.getId(),
                 flashcard.getKanji().getCharacter(),
                 flashcard.getKanji().getJlpt(),

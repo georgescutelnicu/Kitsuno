@@ -1,8 +1,6 @@
-package com.kitsuno.dto.rest;
+package com.kitsuno.dto;
 
-import jakarta.persistence.Column;
-
-public class FlashcardRestDTO {
+public class FlashcardResponseDTO {
     private int id;
     private String kanjiCharacter;
     private String kanjiJlpt;
@@ -12,7 +10,7 @@ public class FlashcardRestDTO {
     private String[] vocabulary;
     private String notes;
 
-    public FlashcardRestDTO(int id, String kanjiCharacter, String kanjiJlpt, String kanjiMeanings, String[] onyomiReadings, String[] kunyomiReadings, String[] vocabulary, String notes) {
+    public FlashcardResponseDTO(int id, String kanjiCharacter, String kanjiJlpt, String kanjiMeanings, String[] onyomiReadings, String[] kunyomiReadings, String[] vocabulary, String notes) {
         this.id = id;
         this.kanjiCharacter = kanjiCharacter;
         this.kanjiJlpt = kanjiJlpt;
