@@ -1346,6 +1346,16 @@ input {
     }
 }
 
+@media (max-width: 668px) {
+    .profile-header {
+        flex-direction: column;
+        gap: 0;
+    }
+    .profile-details {
+        text-align: center;
+    }
+}
+
 
 /* Errors */
 .error-wrapper {
