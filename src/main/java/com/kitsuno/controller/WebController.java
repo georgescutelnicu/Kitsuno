@@ -77,6 +77,11 @@ public class WebController {
         return "katakana";
     }
 
+    @GetMapping("/practice-katakana")
+    public String showPracticeKatakana() {
+        return "katakana-practice";
+    }
+
     @GetMapping("/kanji")
     public String showKanji(Model model) {
         Map<String, List<Kanji>> kanjiMap = this.kanjiService.findAllGroupedByCategory();
