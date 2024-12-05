@@ -64,6 +64,11 @@ public class WebController {
         return "hiragana";
     }
 
+    @GetMapping("/practice-hiragana")
+    public String showPracticeHiragana() {
+        return "hiragana-practice";
+    }
+
     @GetMapping("/katakana")
     public String showKatakana(Model model) {
         List<Katakana> katakanaList = this.katakanaService.findAll();
