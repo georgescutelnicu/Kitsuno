@@ -82,6 +82,9 @@
 
         <div id="main-section">
             <h1 class="kana-h1">Chart</h1>
+            <p class="kana-p">To help you remember the characters, each one is paired with a mnemonic
+                to make learning easier. <strong>Click</strong> on any Hiragana character to learn more
+                about its pronunciation, story, and stroke order!</p>
             <div class="grid-container">
                 <div th:each="hiragana : ${hiraganaList}">
                     <div>
@@ -97,7 +100,6 @@
                 </div>
             </div>
 
-
             <h1 class="kana-h1">Dakuten and Handakuten</h1>
             <p class="kana-p"> Dakuten (濁点) and Handakuten (半濁点) are diacritical marks used in Japanese to modify
                 certain
@@ -108,7 +110,17 @@
                 sound. For example, "は" (ha) becomes "ぱ" (pa). These modifications expand the range of sounds in
                 Japanese,
                 allowing for clearer pronunciation and greater expressiveness.</p>
-            <img src="images/kana/hiragana_dakuten.png" alt="Hiragana Dakuten" class="chart">
+            <div class="grid-container">
+                <div th:each="variant : ${hiraganaVariants['dakuten']}">
+                    <div>
+                        <button id="kana-button-2" class="kana-button2"
+                                th:title="${variant['character']}" disabled>
+                            <span th:text="${variant['character']}"></span>
+                            <span class="romaji" th:text="${variant['romaji']}"></span>
+                        </button>
+                    </div>
+                </div>
+            </div>
 
             <h1 class="kana-h1">Yōon</h1>
             <p class="kana-p">Yōon (拗音) refers to the combination of a consonant followed by a smaller version of the
@@ -117,7 +129,17 @@
                 "や" (ゃ) creates "きゃ" (kya), and "し" (shi) with small "ゅ" (ゅ) forms "しゅ" (shu). Yōon combinations are
                 common in many words and allow for more complex and nuanced pronunciation in Japanese, making them
                 essential for mastering the language's phonetic structure.</p>
-            <img src="images/kana/hiragana_yoon.png" alt="Hiragana Yoon" class="chart">
+            <div class="grid-container-3col">
+                <div th:each="variant : ${hiraganaVariants['yoon']}">
+                    <div>
+                        <button id="kana-button-3col" class="kana-button2"
+                                th:title="${variant['character']}" disabled>
+                            <span th:text="${variant['character']}"></span>
+                            <span class="romaji" th:text="${variant['romaji']}"></span>
+                        </button>
+                    </div>
+                </div>
+            </div>
         </div>
 
         <script src="js/script.js"></script>

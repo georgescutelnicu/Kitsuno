@@ -60,7 +60,9 @@ public class WebController {
     public String showHiragana(Model model) {
         List<Hiragana> hiraganaList = this.hiraganaService.findAll();
         List<Hiragana> formattedHiraganaList = KanaUtils.formatKana(hiraganaList);
+        Map<String, List<Map<String, String>>> hiraganaVariants = KanaUtils.getHiraganaVariants();
         model.addAttribute("hiraganaList", formattedHiraganaList);
+        model.addAttribute("hiraganaVariants", hiraganaVariants);
         return "hiragana";
     }
 
@@ -73,7 +75,9 @@ public class WebController {
     public String showKatakana(Model model) {
         List<Katakana> katakanaList = this.katakanaService.findAll();
         List<Katakana> formattedKatakanaList = KanaUtils.formatKana(katakanaList);
+        Map<String, List<Map<String, String>>> katakanaVariants = KanaUtils.getKatakanaVariants();
         model.addAttribute("katakanaList", formattedKatakanaList);
+        model.addAttribute("katakanaVariants", katakanaVariants);
         return "katakana";
     }
 

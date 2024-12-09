@@ -82,6 +82,9 @@
 
         <div id="main-section">
             <h1 class="kana-h1">Chart</h1>
+            <p class="kana-p">To help you remember the characters, each one is paired with a mnemonic
+                to make learning easier. <strong>Click</strong> on any Katakana character to learn more
+                about its pronunciation, story, and stroke order!</p>
             <div class="grid-container">
                 <div th:each="katakana : ${katakanaList}">
                     <div>
@@ -104,7 +107,17 @@
                 becomes "パ" (pa) with a Handakuten. These modifications allow for voiced and semi-voiced sounds in words
                 borrowed from other languages, expanding the range of Katakana’s use. By understanding these
                 transformations, you'll be better equipped to read and write loanwords and names in Japanese.</p>
-            <img src="images/kana/katakana_dakuten.png" alt="Katakana Dakuten" class="chart">
+            <div class="grid-container">
+                <div th:each="variant : ${katakanaVariants['dakuten']}">
+                    <div>
+                        <button id="kana-button-2" class="kana-button2"
+                                th:title="${variant['character']}">
+                            <span th:text="${variant['character']}"></span>
+                            <span class="romaji" th:text="${variant['romaji']}"></span>
+                        </button>
+                    </div>
+                </div>
+            </div>
 
             <h1 class="kana-h1">Yōon</h1>
             <p class="kana-p">Yōon in Katakana follows the same principle as in Hiragana. A smaller "ャ" (ya), "ュ" (yu),
@@ -113,7 +126,17 @@
                 Yōon combinations are crucial for accurately representing these sounds, making it important to grasp
                 their
                 use when reading and writing in Katakana.</p>
-            <img src="images/kana/katakana_yoon.png" alt="Katakana Yoon" class="chart">
+            <div class="grid-container-3col">
+                <div th:each="variant : ${katakanaVariants['yoon']}">
+                    <div>
+                        <button id="kana-button-3col" class="kana-button2"
+                                th:title="${variant['character']}">
+                            <span th:text="${variant['character']}"></span>
+                            <span class="romaji" th:text="${variant['romaji']}"></span>
+                        </button>
+                    </div>
+                </div>
+            </div>
         </div>
 
         <script src="js/script.js"></script>
