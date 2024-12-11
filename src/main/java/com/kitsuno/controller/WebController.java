@@ -121,4 +121,14 @@ public class WebController {
     public String showResources() {
         return "resources";
     }
+
+    @GetMapping("/privacypolicy")
+    public String showPrivacyPolicy() {
+        return "privacypolicy";
+    }
+
+    @GetMapping("/tos")
+    public String showToS() {
+        return "tos";
+    }
 }
