@@ -542,6 +542,12 @@ body {
     border: 1px solid #ddd;
 }
 
+.practice-button {
+    margin-top: 72px;
+    text-decoration: none;
+    font-family: "Poppins", sans-serif;
+    font-weight: 500;
+}
 
 /* Kana practice page */
 .kana-game-container {
@@ -607,10 +613,6 @@ body {
     border-radius: 6px;
     cursor: pointer;
     transition: background-color 0.3s;
-}
-
-.check-button:hover {
-    background-color: #ff3b3b;
 }
 
 .scoreboard {
