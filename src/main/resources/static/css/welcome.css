@@ -34,22 +34,49 @@ body {
 	z-index: 1;
 }
 
-.logo {
-	margin-left: 6%;
-}
-
-.language-selector {
+.dropdown {
     position: relative;
-    width: 200px;
+    display: inline-block;
 }
 
-.language-selector select {
-    padding: 10px;
+.dropbtn {
+    width: 150px;
+    background-color: #ffffff;
+    color: #333;
+    padding: 10px 15px;;
     font-size: 16px;
-    border: 1px solid #ccc;
-    border-radius: 10px;
+    letter-spacing: 1px;
+    word-spacing: 3px;
+    border: none;
     cursor: pointer;
-    width: 100%;
+}
+
+.dropbtn:hover {
+    background-color: #e0e0e0;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #ffffff;
+    min-width: 150px;
+    text-align: center;
+    box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.1);
+}
+
+.dropdown-content a {
+    color: #333;
+    padding: 10px 15px;
+    text-decoration: none;
+    display: block;
+}
+
+.dropdown-content a:hover {
+    background-color: #f1f1f1;
+}
+
+.dropdown:hover .dropdown-content {
+    display: block;
 }
 
 @media (max-width: 768px) { 
@@ -101,7 +128,7 @@ body {
     width: 75%;
 }
 
-.welcome-buttons button {
+.welcome-buttons a {
 	margin: 3%;
 	padding: 5%;
 	font-size: 16px;
@@ -115,6 +142,9 @@ body {
     box-shadow: 0 4px 5px rgba(0, 0, 0, 0.2);
     cursor: pointer;
     transition: background-color 0.3s ease, transform 0.3s ease;
+    font-family: "Poppins", sans-serif;
+    font-weight: 500;
+    text-decoration: none;
 }
 
 .get-started:hover {
@@ -135,6 +165,9 @@ body {
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
     cursor: pointer;
     transition: background-color 0.3s ease, transform 0.3s ease;
+    font-family: "Poppins", sans-serif;
+    font-weight: 500;
+    text-decoration: none;
 }
 
 .already-have-account:hover {
@@ -176,12 +209,8 @@ body {
 	.welcome-content {
 		margin-left: 0;
 	}
-	.kitsune-image {
-        display: block;
-        position: relative;
-    }
 	.welcome-buttons {
-		width: 55%;
+		width: 75%;
 	}
 	.arrow-down {
 		width: 40px;
@@ -235,6 +264,9 @@ body {
     padding: 12px 30px;
     font-size: 16px;
     cursor: pointer;
+    font-family: "Poppins", sans-serif;
+    font-weight: 500;
+    text-decoration: none;
 }
 
 .learn-more:hover {
