@@ -122,6 +122,11 @@ public class WebController {
         return "resources";
     }
 
+    @GetMapping("/about")
+    public String showAbout() {
+        return "about";
+    }
+
     @GetMapping("/privacypolicy")
     public String showPrivacyPolicy() {
         return "privacypolicy";
