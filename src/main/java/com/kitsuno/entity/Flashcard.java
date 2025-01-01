@@ -30,8 +30,7 @@ public class Flashcard {
     public Flashcard() {
     }
 
-    public Flashcard(int id, String[] vocabulary, String notes, Kanji kanji, User user) {
-        this.id = id;
+    public Flashcard(String[] vocabulary, String notes, Kanji kanji, User user) {
         this.vocabulary = vocabulary;
         this.notes = notes;
         this.kanji = kanji;

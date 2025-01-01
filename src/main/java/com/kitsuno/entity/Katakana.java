@@ -32,9 +32,8 @@ public class Katakana implements Kana {
     public Katakana() {
     }
 
-    public Katakana(int id, String character, String romaji, String audio,
+    public Katakana(String character, String romaji, String audio,
                     String mnemonic, String story,String strokeOrder) {
-        this.id = id;
         this.character = character;
         this.romaji = romaji;
         this.audio = audio;

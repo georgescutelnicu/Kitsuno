@@ -32,9 +32,8 @@ public class Hiragana implements Kana {
     public Hiragana() {
     }
 
-    public Hiragana(int id, String character, String romaji, String audio,
+    public Hiragana(String character, String romaji, String audio,
                     String mnemonic, String story,String strokeOrder) {
-        this.id = id;
         this.character = character;
         this.romaji = romaji;
         this.audio = audio;
