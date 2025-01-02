@@ -43,8 +43,8 @@ public class Flashcard {
                 "id=" + id +
                 ", vocabulary=" + Arrays.toString(vocabulary) +
                 ", notes='" + notes + '\'' +
-                ", kanji=" + kanji +
-                ", user=" + user +
+                ", kanji=" + kanji.getCharacter() +
+                ", user=" + user.getUsername() +
                 '}';
     }
 
