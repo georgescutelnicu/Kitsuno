@@ -4,7 +4,6 @@ import com.kitsuno.entity.Kanji;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
-import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.test.context.jdbc.Sql;
 
@@ -20,11 +19,8 @@ class KanjiDAOImplTest {
     @Autowired
     private KanjiDAO kanjiDAO;
 
-    @Autowired
-    private TestEntityManager entityManager;
-
     @Test
-    void testFindKanjiById() {
+    void testFindKanjiByIdExisting() {
         Kanji result = kanjiDAO.findKanjiById(1);
 
         assertThat(result).isNotNull();
@@ -40,7 +36,7 @@ class KanjiDAOImplTest {
     }
 
     @Test
-    void testFindKanjiByCharacter() {
+    void testFindKanjiByCharacterExisting() {
         Kanji result = kanjiDAO.findKanjiByCharacter("日");
 
         assertThat(result).isNotNull();
