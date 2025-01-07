@@ -113,4 +113,13 @@ class FlashcardDAOImplTest {
 
         assertThat(flashcard).isNull();
     }
+
+    @Test
+    void testDeleteFlashcardNonExisting() {
+        flashcardDAO.deleteFlashcard(999);
+
+        Flashcard flashcard = flashcardDAO.getFlashcardById(999);
+
+        assertThat(flashcard).isNull();
+    }
 }
