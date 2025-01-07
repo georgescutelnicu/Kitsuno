@@ -21,7 +21,7 @@ class UserDAOImplTest {
     @Autowired
     private UserDAOImpl userDAO;
 
-    private PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+    private final PasswordEncoder PASSWORD_ENCODER = new BCryptPasswordEncoder();
 
     @Test
     void testFindByIdExisting() {
@@ -90,7 +90,7 @@ class UserDAOImplTest {
     void testSaveUser() {
         User newUser = new User();
         newUser.setUsername("user3");
-        newUser.setPassword(passwordEncoder.encode("hashedpassword3"));
+        newUser.setPassword(PASSWORD_ENCODER.encode("hashedpassword3"));
         newUser.setEmail("user3@example.com");
         newUser.setApiKey("apikey3");
 

@@ -16,12 +16,11 @@ public class ApiServiceImplTest {
     private ApiServiceImpl apiService;
 
     @Test
-    void testApiCall_ReturnsExpectedResponse() {
+    void testGetSentenceExamples() {
         Map<String, Object> response = apiService.getSentenceExamples("tree");
 
         assertThat(response).isNotNull();
         assertThat(response).containsKey("sentences");
-
 
         List<Map<String, Object>> sentences = (List<Map<String, Object>>) response.get("sentences");
 
