@@ -5,10 +5,12 @@ import com.kitsuno.dto.FlashcardDTO;
 import com.kitsuno.entity.Flashcard;
 import com.kitsuno.entity.Kanji;
 import com.kitsuno.entity.User;
+import com.kitsuno.exception.rest.FlashcardAlreadyExistsException;
 import com.kitsuno.exception.rest.FlashcardNotFoundException;
 import com.kitsuno.service.FlashcardService;
 import com.kitsuno.service.KanjiService;
 import com.kitsuno.service.UserService;
+import com.kitsuno.utils.FlashcardUtils;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -173,5 +175,37 @@ class FlashcardRestControllerTest {
                 .andExpect(status().isOk());
 
         verify(flashcardService, times(1)).deleteFlashcard(1);
+    }
+
+    @Test
+    void testValidateVocabPairs() {
+        FlashcardDTO flashcardDTO = new FlashcardDTO();
+
+        assertThatThrownBy(() -> FlashcardUtils.validateVocabPairs(flashcardDTO))
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessage("Flashcard must have at least one vocabulary word and meaning pair.");
+    }
+
+    @Test
+    void testCheckFlashcardExists() {
+        when(flashcardService.getFlashcardByUserAndKanji(1, "日")).thenReturn(flashcard1);
+
+        assertThatThrownBy(() -> FlashcardUtils.checkFlashcardExists(
+                flashcardDTO, "日", 1, flashcardService))
+                .isInstanceOf(FlashcardAlreadyExistsException.class)
+                .hasMessage("Flashcard with kanji character 日 already exists for the current user. " +
+                        "Try to update it instead.");
+    }
+
+    @Test
+    void testCheckFlashcardExistsForUpdateNotFound() {
+        when(flashcardService.getFlashcardByUserAndId(1, 999)).thenReturn(null);
+
+        assertThatThrownBy(() -> FlashcardUtils.checkFlashcardExistsForUpdate(
+                flashcardDTO, 999, 1, flashcardService))
+                .isInstanceOf(FlashcardNotFoundException.class)
+                .hasMessage("Flashcard with id 999 was not found for the current user.");
+
+        verify(flashcardService, times(1)).getFlashcardByUserAndId(1, 999);
     }
 }
