@@ -88,6 +88,16 @@ body {
 	}
 }
 
+@media (max-width: 468px) {
+    .navbar {
+        display: block;
+        text-align: center;
+    }
+    .dropdown {
+        display: none;
+    }
+}
+
 
 /* Welcome section */
 .welcome {
@@ -215,6 +225,15 @@ body {
 	.arrow-down {
 		width: 40px;
 	} 
+}
+
+@media (max-width: 368px) {
+    .welcome-content h1 {
+        font-size: 2rem;
+    }
+    .welcome-buttons a {
+        font-size: 12px;
+    }
 }
 
 
@@ -414,6 +433,16 @@ body {
 	}
 }
 
+@media (max-width: 368px) {
+	.card-text h3 {
+		font-size: 12px;
+	}
+	.card-text p {
+	    font-size: 10px;
+	    margin: 0px 5px 0px;
+	}
+}
+
 
 /* FAQ section */
 #faq-section {
@@ -569,4 +598,11 @@ body {
 
 .footer-column li a:hover {
     text-decoration: underline;
+}
+
+@media (max-width: 468px) {
+    .footer-container {
+        display: block;
+        text-align: center;
+    }
 }
