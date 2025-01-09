@@ -1,7 +1,5 @@
 package com.kitsuno.exception;
 
-import java.util.List;
-
 public class ErrorResponse {
 
     private int status;

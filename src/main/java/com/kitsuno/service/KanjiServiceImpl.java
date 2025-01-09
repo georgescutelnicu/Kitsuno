@@ -14,7 +14,7 @@ import java.util.LinkedHashMap;
 @Service
 public class KanjiServiceImpl implements KanjiService {
 
-    private KanjiDAO kanjiDAO;
+    private final KanjiDAO kanjiDAO;
 
     @Autowired
     public KanjiServiceImpl(KanjiDAO kanjiDAO) {

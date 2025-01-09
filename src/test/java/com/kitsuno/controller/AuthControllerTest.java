@@ -137,7 +137,7 @@ class AuthControllerTest {
     @Test
     void testShowLoginFormAuthenticated() throws Exception {
         MockMvc mockMvc = MockMvcBuilders
-                .standaloneSetup(new AuthController())
+                .standaloneSetup(new AuthController(userService))
                 .setCustomArgumentResolvers(new MockUserDetailsArgumentResolver(true))
                 .build();
 
@@ -152,7 +152,7 @@ class AuthControllerTest {
         viewResolver.setPrefix("classpath:/templates/");
         viewResolver.setSuffix(".html");
 
-        MockMvc mockMvc = MockMvcBuilders.standaloneSetup(new AuthController())
+        MockMvc mockMvc = MockMvcBuilders.standaloneSetup(new AuthController(userService))
                 .setCustomArgumentResolvers(new MockUserDetailsArgumentResolver(false))
                 .setViewResolvers(viewResolver)
                 .build();

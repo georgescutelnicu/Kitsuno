@@ -5,7 +5,6 @@ import com.kitsuno.dto.FlashcardDTO;
 import com.kitsuno.entity.Flashcard;
 import com.kitsuno.entity.Kanji;
 import com.kitsuno.entity.User;
-import com.kitsuno.exception.rest.CharacterNotFoundException;
 import com.kitsuno.exception.rest.FlashcardNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

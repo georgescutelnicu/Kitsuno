@@ -6,7 +6,6 @@ import jakarta.persistence.NoResultException;
 import jakarta.persistence.PersistenceContext;
 import jakarta.persistence.TypedQuery;
 import jakarta.transaction.Transactional;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import java.util.Optional;
@@ -16,11 +15,6 @@ public class UserDAOImpl implements UserDAO {
 
     @PersistenceContext
     private EntityManager entityManager;
-
-    @Autowired
-    public UserDAOImpl(EntityManager entityManager) {
-        this.entityManager = entityManager;
-    }
 
     @Override
     public Optional<User> findById(int id) {

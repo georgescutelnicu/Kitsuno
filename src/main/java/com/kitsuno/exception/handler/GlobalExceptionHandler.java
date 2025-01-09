@@ -1,7 +1,6 @@
 package com.kitsuno.exception.handler;
 
 import com.kitsuno.exception.ErrorResponse;
-import com.kitsuno.exception.rest.CharacterNotFoundException;
 import com.kitsuno.utils.DateUtils;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.http.HttpStatus;

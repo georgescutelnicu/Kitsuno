@@ -12,7 +12,7 @@ import java.util.List;
 @Service
 public class HiraganaServiceImpl implements HiraganaService {
 
-    private HiraganaDAO hiraganaDAO;
+    private final HiraganaDAO hiraganaDAO;
 
     @Autowired
     public HiraganaServiceImpl(HiraganaDAO hiraganaDAO) {

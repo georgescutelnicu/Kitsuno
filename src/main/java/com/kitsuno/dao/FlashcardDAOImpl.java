@@ -35,9 +35,7 @@ public class FlashcardDAOImpl implements FlashcardDAO {
                 "FROM Flashcard f WHERE f.user.id = :userId", Flashcard.class);
         query.setParameter("userId", userId);
 
-        List<Flashcard> flashcardList = query.getResultList();
-
-        return flashcardList;
+        return query.getResultList();
     }
 
     @Override
@@ -82,7 +80,6 @@ public class FlashcardDAOImpl implements FlashcardDAO {
 
         return results.get(0);
     }
-
 
     @Override
     @Transactional

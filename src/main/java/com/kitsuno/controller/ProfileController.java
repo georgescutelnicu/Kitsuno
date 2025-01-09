@@ -23,9 +23,9 @@ import java.util.Optional;
 @Controller
 public class ProfileController {
 
-    private UserService userService;
-    private FlashcardService flashcardService;
-    private BCryptPasswordEncoder passwordEncoder;
+    private final UserService userService;
+    private final FlashcardService flashcardService;
+    private final BCryptPasswordEncoder passwordEncoder;
 
     @Autowired
     public ProfileController(UserService userService, FlashcardService flashcardService,

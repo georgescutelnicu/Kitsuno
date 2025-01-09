@@ -1,6 +1,5 @@
 package com.kitsuno.dao;
 
-import com.kitsuno.entity.Hiragana;
 import com.kitsuno.entity.Katakana;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.TypedQuery;
@@ -12,7 +11,7 @@ import java.util.List;
 @Repository
 public class KatakanaDAOImpl implements KatakanaDAO {
 
-    private EntityManager entityManager;
+    private final EntityManager entityManager;
 
     @Autowired
     public KatakanaDAOImpl(EntityManager entityManager) {
@@ -23,9 +22,7 @@ public class KatakanaDAOImpl implements KatakanaDAO {
     public List<Katakana> findAll() {
         TypedQuery<Katakana> query = entityManager.createQuery("SELECT k FROM Katakana k", Katakana.class);
 
-        List<Katakana> katakanaList = query.getResultList();
-
-        return katakanaList;
+        return query.getResultList();
     }
 
     @Override

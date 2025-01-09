@@ -105,7 +105,7 @@ public class FlashcardRestController {
 
         String kanjiCharacter = kanjiService.findKanjiById(flashcardDTO.getKanjiId()).getCharacter();
 
-        FlashcardUtils.checkFlashcardExists(flashcardDTO, kanjiCharacter, userId, flashcardService);
+        FlashcardUtils.checkFlashcardExists(kanjiCharacter, userId, flashcardService);
         FlashcardUtils.validateVocabPairs(flashcardDTO);
 
         flashcardService.saveOrUpdateFlashcard(flashcardDTO, userId, kanjiCharacter);
@@ -134,7 +134,7 @@ public class FlashcardRestController {
         Optional<User> apiKeyUser = userService.findByApiKey(apiKey);
         int userId = apiKeyUser.get().getId();
 
-        FlashcardUtils.checkFlashcardExistsForUpdate(flashcardDTO, flashcardId, userId, flashcardService);
+        FlashcardUtils.checkFlashcardExistsForUpdate(flashcardId, userId, flashcardService);
         FlashcardUtils.validateVocabPairs(flashcardDTO);
 
         flashcardDTO.setUserId(userId);

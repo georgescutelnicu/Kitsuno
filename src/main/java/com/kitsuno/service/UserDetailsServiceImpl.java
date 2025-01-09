@@ -13,7 +13,7 @@ import java.util.Optional;
 @Service("userDetailsService")
 public class UserDetailsServiceImpl implements UserDetailsService {
 
-    private UserDAO userDAO;
+    private final UserDAO userDAO;
 
     @Autowired
     public UserDetailsServiceImpl(UserDAO userDAO) {

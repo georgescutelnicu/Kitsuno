@@ -111,4 +111,44 @@ public class Kanji {
     public int getStrokeCount() {
         return strokeCount;
     }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public void setCharacter(String character) {
+        this.character = character;
+    }
+
+    public void setJlpt(String jlpt) {
+        this.jlpt = jlpt;
+    }
+
+    public void setMeanings(String meanings) {
+        this.meanings = meanings;
+    }
+
+    public void setOnyomiReadings(String[] onyomiReadings) {
+        this.onyomiReadings = onyomiReadings;
+    }
+
+    public void setKunyomiReadings(String[] kunyomiReadings) {
+        this.kunyomiReadings = kunyomiReadings;
+    }
+
+    public void setOnyomiVocab(String[] onyomiVocab) {
+        this.onyomiVocab = onyomiVocab;
+    }
+
+    public void setKunyomiVocab(String[] kunyomiVocab) {
+        this.kunyomiVocab = kunyomiVocab;
+    }
+
+    public void setCategory(String category) {
+        this.category = category;
+    }
+
+    public void setStrokeCount(int strokeCount) {
+        this.strokeCount = strokeCount;
+    }
 }

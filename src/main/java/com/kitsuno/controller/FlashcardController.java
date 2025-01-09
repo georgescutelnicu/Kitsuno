@@ -22,8 +22,8 @@ import java.util.Optional;
 public class FlashcardController {
 
     private final FlashcardService flashcardService;
-    private KanjiService kanjiService;
-    private UserService userService;
+    private final KanjiService kanjiService;
+    private final UserService userService;
 
     @Autowired
     public FlashcardController(FlashcardService flashcardService, KanjiService kanjiService, UserService userService) {

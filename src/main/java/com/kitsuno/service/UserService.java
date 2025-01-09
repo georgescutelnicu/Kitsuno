@@ -1,7 +1,6 @@
 package com.kitsuno.service;
 
 import com.kitsuno.dto.UserDTO;
-import com.kitsuno.entity.Kanji;
 import com.kitsuno.entity.User;
 import org.springframework.validation.BindingResult;
 

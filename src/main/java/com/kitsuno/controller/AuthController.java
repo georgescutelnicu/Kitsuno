@@ -16,7 +16,7 @@ import org.springframework.web.servlet.ModelAndView;
 @Controller
 public class AuthController {
 
-    private UserService userService;
+    private final UserService userService;
 
     @Autowired
     public AuthController(UserService userService) {
@@ -70,7 +70,6 @@ public class AuthController {
 
     @GetMapping("/logout")
     public ModelAndView showLogoutForm() {
-        ModelAndView modelAndView = new ModelAndView("logout");
-        return modelAndView;
+        return new ModelAndView("logout");
     }
 }

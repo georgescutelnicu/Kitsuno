@@ -1,6 +1,5 @@
 package com.kitsuno.service;
 
-import com.kitsuno.entity.Flashcard;
 import com.kitsuno.entity.Kanji;
 
 import java.util.Map;

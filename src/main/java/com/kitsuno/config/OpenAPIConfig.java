@@ -30,7 +30,7 @@ public class OpenAPIConfig {
 
         ExternalDocumentation externalDocs = new ExternalDocumentation()
                 .description("Go Back")
-                .url("https://kitsuno.com");  // this has to be changed
+                .url("/vocabulary");
 
         return new OpenAPI()
                 .info(info)

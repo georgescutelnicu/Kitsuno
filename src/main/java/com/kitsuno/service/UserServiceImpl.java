@@ -2,7 +2,6 @@ package com.kitsuno.service;
 
 import com.kitsuno.dao.UserDAO;
 import com.kitsuno.dto.UserDTO;
-import com.kitsuno.entity.Kanji;
 import com.kitsuno.entity.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -20,9 +19,9 @@ import java.util.UUID;
 @Service
 public class UserServiceImpl implements UserService {
 
-    private UserDAO userDAO;
-    private PasswordEncoder passwordEncoder;
-    private UserDetailsService userDetailsService;
+    private final UserDAO userDAO;
+    private final PasswordEncoder passwordEncoder;
+    private final UserDetailsService userDetailsService;
 
     @Autowired
     public UserServiceImpl(UserDAO userDAO, PasswordEncoder passwordEncoder, UserDetailsService userDetailsService) {

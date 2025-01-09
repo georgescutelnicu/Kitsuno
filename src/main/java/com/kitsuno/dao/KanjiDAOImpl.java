@@ -12,13 +12,12 @@ import java.util.stream.Collectors;
 @Repository
 public class KanjiDAOImpl implements KanjiDAO {
 
-    private EntityManager entityManager;
+    private final EntityManager entityManager;
 
     @Autowired
     public KanjiDAOImpl(EntityManager entityManager) {
         this.entityManager = entityManager;
     }
-
 
     @Override
     public Kanji findKanjiById(int id) {
@@ -40,9 +39,7 @@ public class KanjiDAOImpl implements KanjiDAO {
     public List<Kanji> findAll() {
         TypedQuery<Kanji> query = entityManager.createQuery("Select k from Kanji k ORDER BY k.id", Kanji.class);
 
-        List<Kanji> kanjiList = query.getResultList();
-
-        return kanjiList;
+        return query.getResultList();
     }
 
     @Override
@@ -68,8 +65,6 @@ public class KanjiDAOImpl implements KanjiDAO {
         );
         query.setParameter("category", category);
 
-        List<Kanji> kanjiList = query.getResultList();
-
-        return kanjiList;
+        return query.getResultList();
     }
 }

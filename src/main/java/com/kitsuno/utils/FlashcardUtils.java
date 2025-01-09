@@ -22,7 +22,7 @@ public class FlashcardUtils {
         );
     }
 
-    public static void checkFlashcardExists(FlashcardDTO flashcardDTO, String kanjiCharacter, int userId,
+    public static void checkFlashcardExists(String kanjiCharacter, int userId,
                                             FlashcardService flashcardService) {
         Flashcard flashcard = flashcardService.getFlashcardByUserAndKanji(userId, kanjiCharacter);
         if (flashcard != null) {
@@ -37,7 +37,7 @@ public class FlashcardUtils {
         }
     }
 
-    public static void checkFlashcardExistsForUpdate(FlashcardDTO flashcardDTO, int flashcardId, int userId,
+    public static void checkFlashcardExistsForUpdate(int flashcardId, int userId,
                                                      FlashcardService flashcardService) {
         Flashcard flashcard = flashcardService.getFlashcardByUserAndId(userId, flashcardId);
         if (flashcard == null) {

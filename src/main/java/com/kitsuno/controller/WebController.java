@@ -19,12 +19,12 @@ import java.util.Optional;
 @Controller
 public class WebController {
 
-    private ApiService apiService;
-    private HiraganaService hiraganaService;
-    private KatakanaService katakanaService;
-    private KanjiService kanjiService;
-    private UserService userService;
-    private FlashcardService flashcardService;
+    private final ApiService apiService;
+    private final HiraganaService hiraganaService;
+    private final KatakanaService katakanaService;
+    private final KanjiService kanjiService;
+    private final UserService userService;
+    private final FlashcardService flashcardService;
 
     public WebController(HiraganaService hiraganaService, KatakanaService katakanaService, KanjiService kanjiService,
                          UserService userService, FlashcardService flashcardService, ApiService apiService) {
@@ -42,7 +42,7 @@ public class WebController {
     }
 
     @GetMapping("/vocabulary")
-    public String showHome(Model model) {
+    public String showHome() {
         return "vocabulary";
     }
 

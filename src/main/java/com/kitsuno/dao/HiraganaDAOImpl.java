@@ -11,7 +11,7 @@ import java.util.List;
 @Repository
 public class HiraganaDAOImpl implements HiraganaDAO {
 
-    private EntityManager entityManager;
+    private final EntityManager entityManager;
 
     @Autowired
     public HiraganaDAOImpl(EntityManager entityManager) {
@@ -22,9 +22,7 @@ public class HiraganaDAOImpl implements HiraganaDAO {
     public List<Hiragana> findAll() {
         TypedQuery<Hiragana> query = entityManager.createQuery("SELECT h FROM Hiragana h", Hiragana.class);
 
-        List<Hiragana> hiraganaList = query.getResultList();
-
-        return hiraganaList;
+        return query.getResultList();
     }
 
     @Override

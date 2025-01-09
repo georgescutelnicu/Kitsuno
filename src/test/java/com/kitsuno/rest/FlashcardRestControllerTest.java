@@ -191,7 +191,7 @@ class FlashcardRestControllerTest {
         when(flashcardService.getFlashcardByUserAndKanji(1, "日")).thenReturn(flashcard1);
 
         assertThatThrownBy(() -> FlashcardUtils.checkFlashcardExists(
-                flashcardDTO, "日", 1, flashcardService))
+                "日", 1, flashcardService))
                 .isInstanceOf(FlashcardAlreadyExistsException.class)
                 .hasMessage("Flashcard with kanji character 日 already exists for the current user. " +
                         "Try to update it instead.");
@@ -202,7 +202,7 @@ class FlashcardRestControllerTest {
         when(flashcardService.getFlashcardByUserAndId(1, 999)).thenReturn(null);
 
         assertThatThrownBy(() -> FlashcardUtils.checkFlashcardExistsForUpdate(
-                flashcardDTO, 999, 1, flashcardService))
+                999, 1, flashcardService))
                 .isInstanceOf(FlashcardNotFoundException.class)
                 .hasMessage("Flashcard with id 999 was not found for the current user.");
 

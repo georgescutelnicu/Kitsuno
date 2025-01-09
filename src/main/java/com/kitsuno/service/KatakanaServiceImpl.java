@@ -1,7 +1,6 @@
 package com.kitsuno.service;
 
 import com.kitsuno.dao.KatakanaDAO;
-import com.kitsuno.entity.Hiragana;
 import com.kitsuno.entity.Katakana;
 import com.kitsuno.exception.rest.CharacterNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,7 +11,7 @@ import java.util.List;
 @Service
 public class KatakanaServiceImpl implements KatakanaService {
 
-    private KatakanaDAO katakanaDAO;
+    private final KatakanaDAO katakanaDAO;
 
     @Autowired
     public KatakanaServiceImpl(KatakanaDAO katakanaDAO) {
