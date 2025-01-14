@@ -15,6 +15,8 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.validation.Valid;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -98,8 +100,8 @@ public class FlashcardRestController {
                     content = @Content)
     })
     @PostMapping("/flashcards")
-    public void createFlashcard(@RequestHeader("API-KEY") String apiKey,
-                                @RequestBody @Valid FlashcardDTO flashcardDTO) {
+    public ResponseEntity<Void> createFlashcard(@RequestHeader("API-KEY") String apiKey,
+                                                @RequestBody @Valid FlashcardDTO flashcardDTO) {
         Optional<User> apiKeyUser = userService.findByApiKey(apiKey);
         int userId = apiKeyUser.get().getId();
         flashcardDTO.setUserId(userId);
@@ -110,6 +112,8 @@ public class FlashcardRestController {
         FlashcardUtils.validateVocabPairs(flashcardDTO);
 
         flashcardService.saveOrUpdateFlashcard(flashcardDTO, userId, kanjiCharacter);
+
+        return ResponseEntity.status(HttpStatus.CREATED).build();
     }
 
     @Operation(summary = "Update a flashcard",

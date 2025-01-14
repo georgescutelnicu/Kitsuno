@@ -133,7 +133,7 @@ class FlashcardRestControllerTest {
                         .header("API-KEY", "mock-api-key")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(new ObjectMapper().writeValueAsString(flashcardDTO)))
-                .andExpect(status().isOk());
+                .andExpect(status().isCreated());
     }
 
     @Test
