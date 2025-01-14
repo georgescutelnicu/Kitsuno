@@ -1,6 +1,7 @@
 package com.kitsuno.dto;
 
 import com.kitsuno.validation.ValidKanjiId;
+import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.validation.constraints.Size;
 import java.util.ArrayList;
 import java.util.List;
@@ -37,7 +38,11 @@ public class FlashcardDTO {
     @ValidKanjiId(message = "Kanji ID cannot be null.")
     private Integer kanjiId;
 
+    @Schema(hidden = true)
     private Integer userId;
+
+    @Schema(hidden = true)
+    private String[] vocabularyAsArray;
 
     public FlashcardDTO() {
     }
@@ -149,7 +154,6 @@ public class FlashcardDTO {
 
         return vocabList.toArray(new String[0]);
     }
-
 
     public boolean hasAtLeastOneVocabPair() {
         return (vocabWord1 != null && !vocabWord1.isEmpty() && vocabMeaning1 != null && !vocabMeaning1.isEmpty()) ||

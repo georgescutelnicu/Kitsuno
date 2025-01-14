@@ -85,9 +85,10 @@ public class FlashcardRestController {
     }
 
     @Operation(summary = "Create a new flashcard",
-            description = "Create a new flashcard for the user linked to the provided API key.")
+            description = "Create a new flashcard for the user linked to the provided API key." +
+                    " At least one vocabulary word-meaning pair must be provided.")
     @ApiResponses({
-            @ApiResponse(responseCode = "200", description = "Successfully created flashcard",
+            @ApiResponse(responseCode = "201", description = "Successfully created flashcard",
                     content = @Content),
             @ApiResponse(responseCode = "400", description = "Invalid request body",
                     content = @Content),
@@ -113,7 +114,7 @@ public class FlashcardRestController {
 
     @Operation(summary = "Update a flashcard",
             description = "Update an existing flashcard by its ID, ensuring it belongs to the user linked " +
-                    "to the provided API key.")
+                    "to the provided API key.  At least one vocabulary word-meaning pair must be provided.")
     @ApiResponses({
             @ApiResponse(responseCode = "200", description = "Successfully updated flashcard",
                     content = @Content),
