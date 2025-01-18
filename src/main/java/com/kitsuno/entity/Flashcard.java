@@ -5,7 +5,7 @@ import jakarta.persistence.*;
 import java.util.Arrays;
 
 @Entity
-@Table(name = "flashcards")
+@Table(name = "flashcard")
 public class Flashcard {
 
     @Id
