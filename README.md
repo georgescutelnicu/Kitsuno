@@ -1,6 +1,8 @@
 # Kitsuno
 
-<img src="extras/banner_repo.png" alt="Kitsuno Banner">
+<p align="center">
+  <img src="extras/banner_repo.png" alt="Kitsuno Banner">
+</p>
 
 Kitsuno is a free platform focused on helping you learn hiragana, katakana, and kanji. With features like customizable flashcards and engaging practice games, Kitsuno makes it easy to study and retain Japanese characters at your own pace. Whether you're just starting or looking to improve, Kitsuno offers interactive tools to enhance your kana and kanji learning experience.
 
@@ -15,7 +17,7 @@ Explore Kitsuno and its features through the links below:
     <img src="https://img.shields.io/badge/Kitsuno-000?logo=render&logoColor=fff&style=for-the-badge"></img>
 </a>
 <br><br>
-Please note that it may take up to 30 seconds to start when first accessed, as I am using a free instance on Render.
+Please note that it may take up to 50 seconds to start when first accessed, as I am using a free instance on Render.<br>
 This is due to the instance spinning down after a period of inactivity. Once it's warmed up, the loading times will be faster.
 <br><br>
 *Hosted with [Render](https://render.com/)*
@@ -39,7 +41,7 @@ Kitsuno offers a range of useful features to help you learn and practice Japanes
 **Deployment:** Render.<br>
 **API Docs:** SpringDoc OpenAPI.<br>
 **API Integration:** Jotoba API.  <br>
-**Testing:** JUnit5
+**Testing:** JUnit5.
 
 # Kitsuno API
 
@@ -88,6 +90,77 @@ To authenticate an API request, you should provide your API key in the API-KEY h
 | 404 | Not Found               | Resource not found.                                               |
 | 500 | Internal Server Error   | Internal server error.                                           |
 
+## Examples
+Kana(hiragana & katakana) response format:<br>
+
+```
+{
+  "id": 1,
+  "character": "あ",
+  "romaji": "a",
+  "audio": "https://files.tofugu.com/articles/japanese/2014-06-30-learn-hiragana/あ.mp3",
+  "mnemonic": "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d9/01-A.png/500px-01-A.png",
+  "story": "あ is an Astronaut.",
+  "strokeOrder": "https://upload.wikimedia.org/wikipedia/commons/d/d8/Hiragana_%E3%81%82_stroke_order_animation.gif?20100306181611"
+}
+```
+
+<br>Kanji response format:<br>
+
+```
+{
+  "id": 2,
+  "character": "日",
+  "jlpt": "N5",
+  "meanings": "day, sun, Japan, counter for days",
+  "onyomiReadings": [
+    "ニチ",
+    "ジツ"
+  ],
+  "kunyomiReadings": [
+    "ひ",
+    "-び",
+    "-か"
+  ],
+  "onyomiVocab": [
+    "毎日 【まいにち】every day",
+    "日光 【にっこう】sunlight",
+    "翌日 【よくじつ】next day"
+  ],
+  "kunyomiVocab": [
+    "日 【ひ】day,  days",
+    "記念日 【きねんび】anniversary,  memorial day"
+  ],
+  "category": "Time",
+  "strokeCount": 4
+}
+```
+
+<br>Flashcard response format:<br>
+
+```
+{
+  "id": 4,
+  "kanjiCharacter": "日",
+  "kanjiJlpt": "N5",
+  "kanjiMeanings": "day, sun, Japan, counter for days",
+  "onyomiReadings": [
+    "ニチ",
+    "ジツ"
+  ],
+  "kunyomiReadings": [
+    "ひ",
+    "-び",
+    "-か"
+  ],
+  "vocabulary": [
+    "まいにち every day",
+    "にほんご japanese language",
+    "いちにちじゅう all day long"
+  ],
+  "notes": "Whenever you see 日, remember this window with the sun shining through, starting a brand-new day."
+}
+```
 
 ---
 ## Credits
@@ -98,7 +171,7 @@ To authenticate an API request, you should provide your API key in the API-KEY h
 - Images collected from Freepik: [catalyststuff](https://www.freepik.com/author/catalyststuff) and [macrovector](https://www.freepik.com/author/macrovector).
 - Icons used from [Lineicons](https://lineicons.com/).
 - [Jotoba API](https://jotoba.de/docs.html) to retrieve vocabulary/sentences by word.
-- [Swagger UI](https://swagger.io/tools/swagger-ui/) for Kitsuno API documentation."
+- [Swagger UI](https://swagger.io/tools/swagger-ui/) for Kitsuno API documentation.
 
 ## License
 
