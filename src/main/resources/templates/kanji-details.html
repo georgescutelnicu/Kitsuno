@@ -95,7 +95,7 @@
         </nav>
 
         <div id="main-section">
-            <a href="/kanji" class="back-button"><img th:src=@{/images/kanji/arrow.png}></a>
+            <a href="/kanji" class="back-button"><img th:src=@{/images/kanji/arrow.png} alt="Go Back"></a>
 
             <div class="kanji-character">
 
@@ -161,35 +161,51 @@
                     <div class="vocabulary-grid">
                         <div class="vocab-input">
                             <label><h3>#1</h3></label>
-                            <input type="text" th:field="*{vocabWord1}" placeholder="Word" class="character-limit"
-                                   data-limit="8" oninput="convertToHiragana(this)">
-                            <input type="text" th:field="*{vocabMeaning1}" placeholder="Meaning" class="character-limit"
-                                   data-limit="24">
+                            <label>
+                                <input type="text" th:field="*{vocabWord1}" placeholder="Word" class="character-limit"
+                                       data-limit="8" oninput="convertToHiragana(this)">
+                            </label>
+                            <label>
+                                <input type="text" th:field="*{vocabMeaning1}" placeholder="Meaning" class="character-limit"
+                                       data-limit="24">
+                            </label>
 
                         </div>
 
                         <div class="vocab-input">
                             <label><h3>#2</h3></label>
-                            <input type="text" th:field="*{vocabWord2}" placeholder="Word" class="character-limit"
-                                   data-limit="8" oninput="convertToHiragana(this)">
-                            <input type="text" th:field="*{vocabMeaning2}" placeholder="Meaning" class="character-limit"
-                                   data-limit="24">
+                            <label>
+                                <input type="text" th:field="*{vocabWord2}" placeholder="Word" class="character-limit"
+                                       data-limit="8" oninput="convertToHiragana(this)">
+                            </label>
+                            <label>
+                                <input type="text" th:field="*{vocabMeaning2}" placeholder="Meaning" class="character-limit"
+                                       data-limit="24">
+                            </label>
                         </div>
 
                         <div class="vocab-input">
                             <label><h3>#3</h3></label>
-                            <input type="text" th:field="*{vocabWord3}" placeholder="Word" class="character-limit"
-                                   data-limit="8" oninput="convertToHiragana(this)">
-                            <input type="text" th:field="*{vocabMeaning3}" placeholder="Meaning" class="character-limit"
-                                   data-limit="24">
+                            <label>
+                                <input type="text" th:field="*{vocabWord3}" placeholder="Word" class="character-limit"
+                                       data-limit="8" oninput="convertToHiragana(this)">
+                            </label>
+                            <label>
+                                <input type="text" th:field="*{vocabMeaning3}" placeholder="Meaning" class="character-limit"
+                                       data-limit="24">
+                            </label>
                         </div>
 
                         <div class="vocab-input">
                             <label><h3>#4</h3></label>
-                            <input type="text" th:field="*{vocabWord4}" placeholder="Word" class="character-limit"
-                                   data-limit="8" oninput="convertToHiragana(this)">
-                            <input type="text" th:field="*{vocabMeaning4}" placeholder="Meaning" class="character-limit"
-                                   data-limit="24">
+                            <label>
+                                <input type="text" th:field="*{vocabWord4}" placeholder="Word" class="character-limit"
+                                       data-limit="8" oninput="convertToHiragana(this)">
+                            </label>
+                            <label>
+                                <input type="text" th:field="*{vocabMeaning4}" placeholder="Meaning" class="character-limit"
+                                       data-limit="24">
+                            </label>
                         </div>
                     </div>
 
