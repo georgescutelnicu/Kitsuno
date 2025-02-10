@@ -51,45 +51,82 @@ document.addEventListener('DOMContentLoaded', function () {
 
 
 // Dynamically creates a modal window displaying detailed information about a kana character
-function showInfo(character, romaji, audio, story, mnemonic, strokeOrder) {
+let currentModal = null;
 
-    const modalOverlay = document.createElement('div');
-    modalOverlay.className = 'modal';
+function showInfo(id) {
+    if (!currentModal) {
+        const modalOverlay = document.createElement('div');
+        modalOverlay.className = 'modal';
 
-    const modalContent = document.createElement('div');
-    modalContent.className = 'modal-content';
+        const modalContent = document.createElement('div');
+        modalContent.className = 'modal-content';
+
+        modalOverlay.appendChild(modalContent);
+        document.body.appendChild(modalOverlay);
+
+        modalOverlay.style.display = 'flex';
+        currentModal = modalOverlay;
+    }
+
+    const kanaData = getKanaDataById(id);
+
+    const modalContent = currentModal.querySelector('.modal-content');
     modalContent.innerHTML = `
-            <h2>${character} (${romaji})</h2>
-            <button class="audio-button" data-audio="${audio}" onclick="playAudio(this.dataset.audio)">🔊</button>
-            <div class="flip-container">
-                <div class="flipper">
-                    <div class="front">
-                        <img src="${mnemonic}" alt="Mnemonic for ${character}">
-                        <p class="mnemonic-text">${story}</p>
-                    </div>
-                    <div class="back">
-                        <img src="${strokeOrder}" alt="Stroke Order for ${character}">
-                    </div>
+        <div class="modal-header">
+            <button class="navigate-button" onclick="navigateKana(${id}, 'back')">←</button>
+            <h2>${kanaData.character} (${kanaData.romaji})</h2>
+            <button class="navigate-button" onclick="navigateKana(${id}, 'next')">→</button>
+        </div>
+        <button class="audio-button" data-audio="${kanaData.audio}" onclick="playAudio(this.dataset.audio)">🔊</button>
+        <div class="flip-container">
+            <div class="flipper">
+                <div class="front">
+                    <img src="${kanaData.mnemonic}" alt="Mnemonic for ${kanaData.character}">
+                    <p class="mnemonic-text">${kanaData.story}</p>
                 </div>
-            </div>`;
+                <div class="back">
+                    <img src="${kanaData.strokeOrder}" alt="Stroke Order for ${kanaData.character}">
+                </div>
+            </div>
+        </div>
 
-    modalOverlay.appendChild(modalContent);
 
-    document.body.appendChild(modalOverlay);
-    modalOverlay.style.display = 'flex';
+    `;
 
     requestAnimationFrame(() => {
         modalContent.style.transform = 'scale(1)';
     });
 
-    modalOverlay.addEventListener('click', function (e) {
-        if (e.target === modalOverlay) {
+    currentModal.addEventListener('click', function (e) {
+        if (e.target === currentModal) {
             modalContent.style.transform = 'scale(0)';
             setTimeout(() => {
-                document.body.removeChild(modalOverlay);
+                document.body.removeChild(currentModal);
+                currentModal = null;
             }, 300);
         }
     });
+}
+
+function getKanaDataById(id) {
+    return kanaList.find(kana => kana.id === id);
+}
+
+function navigateKana(currentId, direction) {
+    const currentIndex = kanaList.findIndex(kana => kana.id === currentId);
+    let newIndex = currentIndex;
+
+    if (direction === 'next') {
+        do {
+            newIndex = (newIndex + 1) % kanaList.length;
+        } while (kanaList[newIndex] === null || kanaList[newIndex].romaji === null);
+    } else if (direction === 'back') {
+        do {
+            newIndex = (newIndex - 1 + kanaList.length) % kanaList.length;
+        } while (kanaList[newIndex] === null || kanaList[newIndex].romaji === null);
+    }
+
+    showInfo(kanaList[newIndex].id);
 }
 
 

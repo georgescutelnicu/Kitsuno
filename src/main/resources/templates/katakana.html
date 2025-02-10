@@ -94,9 +94,7 @@
                         <button class="kana-button"
                                 th:if="${katakana.romaji != null}"
                                 th:title="${katakana.character}"
-                                th:attr="onclick=|showInfo('${katakana.character}', '${katakana.romaji}',
-                                '${katakana.audio}', '${#strings.escapeJavaScript(katakana.story)}',
-                                '${katakana.mnemonic}', '${katakana.strokeOrder}')|">
+                                th:attr="onclick=|showInfo(${katakana.id})|">
                             <span th:text="${katakana.character}"></span>
                             <span class="romaji" th:text="${katakana.romaji}"></span>
                         </button>
@@ -146,6 +144,9 @@
             <a href="/practice-katakana" class="flashcard-button practice-button">Start Practicing Katakana</a>
         </div>
 
+        <script th:inline="javascript">
+        var kanaList = /*[[${katakanaList}]]*/;
+        </script>
         <script src="js/script.js"></script>
     </body>
 </html>
