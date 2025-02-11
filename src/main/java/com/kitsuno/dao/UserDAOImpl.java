@@ -64,6 +64,21 @@ public class UserDAOImpl implements UserDAO {
     }
 
     @Override
+    public Optional<User> findByVerificationToken(String token) {
+        TypedQuery<User> query = entityManager.createQuery("SELECT u FROM User u WHERE u.verificationToken = " +
+                ":verificationToken", User.class);
+
+        query.setParameter("verificationToken", token);
+
+        try {
+            User user = query.getSingleResult();
+            return Optional.of(user);
+        } catch (NoResultException e) {
+            return Optional.empty();
+        }
+    }
+
+    @Override
     @Transactional
     public User save(User user) {
         entityManager.persist(user);

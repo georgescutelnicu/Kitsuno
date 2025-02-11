@@ -44,7 +44,10 @@ public class User {
     private String apiKey;
 
     @Column(name = "enabled")
-    private boolean enabled = true;
+    private boolean enabled;
+
+    @Column(name = "verification_token", length = 64, unique = true)
+    private String verificationToken;
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Flashcard> flashcards;
@@ -91,7 +94,6 @@ public class User {
         return flashcards;
     }
 
-
     public LocalDate getJoinDate() { return joinDate; }
 
     public String getApiKey() { return apiKey; }
@@ -99,6 +101,8 @@ public class User {
     public boolean isEnabled() {
         return enabled;
     }
+
+    public String getVerificationToken() { return verificationToken; }
 
     public void setId(int id) {
         this.id = id;
@@ -121,6 +125,8 @@ public class User {
     public void setEnabled(boolean enabled) {
         this.enabled = enabled;
     }
+
+    public void setVerificationToken(String token) { this.verificationToken = token; }
 
     public void setJoinDate(LocalDate joinDate) { this.joinDate = joinDate; }
 

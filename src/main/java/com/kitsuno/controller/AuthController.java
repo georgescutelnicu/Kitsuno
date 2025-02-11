@@ -11,6 +11,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 @Controller
@@ -57,6 +58,17 @@ public class AuthController {
         userService.registerUser(userDTO, bindingResult);
 
         modelAndView.setViewName("redirect:/login");
+        return modelAndView;
+    }
+
+    @GetMapping("/verify")
+    public ModelAndView verify(@RequestParam String token) {
+        ModelAndView modelAndView = new ModelAndView();
+        if (userService.verifyUser(token)) {
+            modelAndView.setViewName("redirect:/login");
+        } else {
+            modelAndView.setViewName("redirect:/login");
+        }
         return modelAndView;
     }
 

@@ -11,5 +11,6 @@ public interface UserDAO {
     Optional<User> findByUsername(String username);
     Optional<User> findByEmail(String email);
     Optional<User> findByApiKey(String apiKey);
+    Optional<User> findByVerificationToken(String token);
     User save(User user);
 }

@@ -22,12 +22,15 @@ public class UserServiceImpl implements UserService {
     private final UserDAO userDAO;
     private final PasswordEncoder passwordEncoder;
     private final UserDetailsService userDetailsService;
+    private final EmailService emailService;
 
     @Autowired
-    public UserServiceImpl(UserDAO userDAO, PasswordEncoder passwordEncoder, UserDetailsService userDetailsService) {
+    public UserServiceImpl(UserDAO userDAO, PasswordEncoder passwordEncoder, UserDetailsService userDetailsService,
+                           EmailService emailService) {
         this.userDAO = userDAO;
         this.passwordEncoder = passwordEncoder;
         this.userDetailsService = userDetailsService;
+        this.emailService = emailService;
     }
 
     @Override
@@ -51,6 +54,9 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public Optional<User> findByVerificationToken(String token) { return userDAO.findByVerificationToken(token); }
+
+    @Override
     public User save(User user) {
         return userDAO.save(user);
     }
@@ -63,10 +69,27 @@ public class UserServiceImpl implements UserService {
         user.setEmail(userDTO.getEmail());
         user.setPassword(passwordEncoder.encode(userDTO.getPassword()));
         user.setApiKey(generateApiKey());
-        user.setEnabled(true);
+        user.setVerificationToken(UUID.randomUUID().toString().replace("-", "") +
+                UUID.randomUUID().toString().replace("-", ""));
         save(user);
 
+        emailService.sendVerificationEmail(user.getEmail(), user.getVerificationToken());
+
         return true;
+    }
+
+    @Override
+    public boolean verifyUser(String token) {
+
+        Optional<User> userOptional = userDAO.findByVerificationToken(token);
+        if (userOptional.isPresent()) {
+            User user = userOptional.get();
+            user.setEnabled(true);
+            user.setVerificationToken(null);
+            userDAO.save(user);
+            return true;
+        }
+        return false;
     }
 
     @Override
