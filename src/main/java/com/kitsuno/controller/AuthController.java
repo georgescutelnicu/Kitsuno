@@ -64,10 +64,13 @@ public class AuthController {
     @GetMapping("/verify")
     public ModelAndView verify(@RequestParam String token) {
         ModelAndView modelAndView = new ModelAndView();
+        modelAndView.setViewName("verify");
         if (userService.verifyUser(token)) {
-            modelAndView.setViewName("redirect:/login");
+            modelAndView.addObject("message", "Congratulations, " +
+                    "your account has been verified!");
         } else {
-            modelAndView.setViewName("redirect:/login");
+            modelAndView.addObject("message", "Sorry, we couldn't verify your account. " +
+                    "It may already be verified or the token might be invalid.");
         }
         return modelAndView;
     }
