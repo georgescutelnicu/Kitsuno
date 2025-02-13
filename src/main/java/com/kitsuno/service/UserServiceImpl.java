@@ -93,6 +93,25 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public void updateVerificationToken(String email) {
+        Optional<User> userOptional = userDAO.findByEmail(email);
+
+        if (userOptional.isPresent()) {
+            User user = userOptional.get();
+
+            if (user.isEnabled()) {
+                return;
+            }
+
+            user.setVerificationToken(UUID.randomUUID().toString().replace("-", "") +
+                    UUID.randomUUID().toString().replace("-", ""));
+            userDAO.save(user);
+
+            emailService.sendVerificationEmail(user.getEmail(), user.getVerificationToken());
+        }
+    }
+
+    @Override
     public void updateUsernameAndRefreshAuthentication(User user, String newUsername) {
 
         user.setUsername(newUsername);

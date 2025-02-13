@@ -16,6 +16,7 @@ public interface UserService {
     User save(User user);
     boolean registerUser(UserDTO userDTO, BindingResult bindingResult);
     boolean verifyUser(String token);
+    void updateVerificationToken(String email);
     void updateUsernameAndRefreshAuthentication(User user, String newUsername);
     void updatePassword(User user, String newPassword);
     String generateApiKey();

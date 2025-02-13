@@ -1,10 +1,13 @@
 package com.kitsuno.controller;
 
 import com.kitsuno.dto.UserDTO;
+import com.kitsuno.dto.VerificationTokenUpdateDTO;
 import com.kitsuno.service.UserService;
 import jakarta.validation.Valid;
+import jakarta.validation.constraints.Email;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
@@ -13,6 +16,9 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
+
+import java.util.Optional;
+import java.util.UUID;
 
 @Controller
 public class AuthController {
@@ -72,6 +78,28 @@ public class AuthController {
             modelAndView.addObject("message", "Sorry, we couldn't verify your account. " +
                     "It may already be verified or the token might be invalid.");
         }
+        return modelAndView;
+    }
+
+    @GetMapping("/resend-verification")
+    public ModelAndView showResendVerificationForm() {
+        ModelAndView modelAndView = new ModelAndView("resend-verification");
+        modelAndView.addObject("verificationTokenUpdateDTO", new VerificationTokenUpdateDTO());
+        return modelAndView;
+    }
+
+    @PostMapping("/resend-verification")
+    public ModelAndView resendVerificationEmail(@ModelAttribute("verificationTokenUpdateDTO")
+                                                    @Valid VerificationTokenUpdateDTO dto, BindingResult bindingResult) {
+        ModelAndView modelAndView = new ModelAndView("resend-verification");
+
+        if (bindingResult.hasErrors()) {
+            return modelAndView;
+        }
+
+        userService.updateVerificationToken(dto.getEmail());
+        modelAndView.addObject("message", "If the email is linked to an unverified" +
+                " account, a new verification email has been sent.");
         return modelAndView;
     }
 
