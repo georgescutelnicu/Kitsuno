@@ -126,7 +126,16 @@
                 <p>Already have an account? <a href="/login">Login here</a></p>
             </div>
         </div>
+        <script>
+            window.onload = function() {
+                const form = document.querySelector('form');
+                const signupForm = document.getElementById('signup-form');
 
+                if (form.offsetHeight > 600) {
+                    signupForm.classList.add('form-margin-top');
+                }
+            };
+        </script>
         <script src="js/script.js"></script>
     </body>
 </html>
