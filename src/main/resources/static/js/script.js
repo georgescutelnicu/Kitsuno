@@ -271,11 +271,10 @@ dropdowns.forEach(link => {
 
 // Go back to the last page
 function goBack() {
-    if (window.history.length > 1) {
+    if (document.referrer && document.referrer.includes("/vocabulary")) {
+        window.location.href = "/vocabulary";
+    } else if (window.history.length > 1) {
         window.history.back();
-        if (window.location.href === document.referrer) {
-            window.location.href = "/vocabulary";
-        }
     } else {
         window.location.href = "/vocabulary";
     }
