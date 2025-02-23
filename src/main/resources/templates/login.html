@@ -99,6 +99,9 @@
                         <label for="password">Password</label>
                         <input type="password" id="password" name="password" required/>
                     </div>
+                    <div th:if="${verificationMessage}" class="green">
+                        <p th:text="${verificationMessage}"></p>
+                    </div>
                     <div th:if="${param.error}" class="error">
                         <p>Username or Password is invalid</p>
                     </div>

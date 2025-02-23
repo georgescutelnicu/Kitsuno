@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.Optional;
 import java.util.UUID;
@@ -38,7 +39,8 @@ public class AuthController {
     }
 
     @PostMapping("/register")
-    public ModelAndView registerUser(@Valid @ModelAttribute("user") UserDTO userDTO, BindingResult bindingResult) {
+    public ModelAndView registerUser(@Valid @ModelAttribute("user") UserDTO userDTO, BindingResult bindingResult,
+                                     RedirectAttributes redirectAttributes) {
         ModelAndView modelAndView = new ModelAndView();
 
         if (userService.findByUsername(userDTO.getUsername()).isPresent()) {
@@ -62,6 +64,8 @@ public class AuthController {
             return modelAndView;
         }
         userService.registerUser(userDTO, bindingResult);
+        redirectAttributes.addFlashAttribute("verificationMessage",
+                "We've sent you a verification email. Click the link inside to activate your account.");
 
         modelAndView.setViewName("redirect:/login");
         return modelAndView;
