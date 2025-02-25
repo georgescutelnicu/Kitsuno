@@ -1252,6 +1252,14 @@ hr {
     transform: scale(1.05);
 }
 
+.export-buttons {
+    text-align: center;
+}
+
+.anki-button {
+    margin-top: 12px;
+}
+
 @media (max-width: 1068px) {
     .flashcard-container {
         display: block;

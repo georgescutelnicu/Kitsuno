@@ -1,5 +1,6 @@
 package com.kitsuno.controller;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.kitsuno.dto.FlashcardDTO;
 import com.kitsuno.entity.Flashcard;
 import com.kitsuno.entity.Kanji;
@@ -16,7 +17,11 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
-import java.io.PrintWriter;
+import java.io.*;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -75,7 +80,7 @@ public class FlashcardController {
         return "flashcard";
     }
 
-    @PostMapping("/flashcards/export_flashcards")
+    @PostMapping("/flashcards/export_flashcards_csv")
     public void export_flashcards(HttpServletResponse response) {
         Optional<User> authenticatedUser = SecurityUtils.getAuthenticatedUser(userService);
 
@@ -88,7 +93,7 @@ public class FlashcardController {
                     "_flashcards.csv");
 
             try (PrintWriter writer = response.getWriter()) {
-                writer.write('\uFEFF'); // Add BOM to fix Excel UTF-8 issues 🚀
+                writer.write('\uFEFF');
                 writer.println("Kanji,Kunyomi,Onyomi,Meaning,Notes,Vocabulary");
 
                 for (Flashcard flashcard : flashcardsList) {
@@ -104,6 +109,55 @@ public class FlashcardController {
                     writer.printf("\"%s\",\"%s\",\"%s\",\"%s\",\"%s\",\"%s\"%n",
                             kanji, kunyomi, onyomi, meanings, notes, vocabulary);
                 }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    @PostMapping("/flashcards/export_flashcards_anki")
+    public void exportFlashcardsAsAnki(HttpServletResponse response) {
+        Optional<User> authenticatedUser = SecurityUtils.getAuthenticatedUser(userService);
+
+        if (authenticatedUser.isPresent()) {
+            User user = authenticatedUser.get();
+            List<Flashcard> flashcardsList = flashcardService.getAllFlashcardsByUserId(user.getId());
+            List<List<String>> flashcardsData = new ArrayList<>();
+
+            for (Flashcard flashcard : flashcardsList) {
+                List<String> flashcardInfo = new ArrayList<>();
+                flashcardInfo.add(flashcard.getKanji().getCharacter());
+                flashcardInfo.add(flashcard.getNotes());
+                flashcardInfo.add(String.join(", ", flashcard.getKanji().getKunyomiReadings()));
+                flashcardInfo.add(String.join(", ", flashcard.getKanji().getOnyomiReadings()));
+                flashcardInfo.add(flashcard.getKanji().getMeanings());
+                flashcardInfo.add(String.join(", ", flashcard.getVocabulary()));
+                flashcardsData.add(flashcardInfo);
+            }
+
+            String outputFilePath = "src/main/resources/static/" + user.getUsername() + "_flashcards.apkg";
+
+            try {
+                String jsonFlashcardsData = new ObjectMapper().writeValueAsString(flashcardsData);
+                jsonFlashcardsData = jsonFlashcardsData.replace("\"", "\\\"");
+
+                ProcessBuilder processBuilder = new ProcessBuilder("python3",
+                        "src/main/resources/static/python/flashcards_to_anki.py",
+                        jsonFlashcardsData, outputFilePath);
+                processBuilder.redirectErrorStream(true);
+
+                Process process = processBuilder.start();
+                process.waitFor();
+
+                response.setContentType("application/octet-stream");
+                response.setHeader("Content-Disposition", "attachment; filename=\""
+                        + new File(outputFilePath).getName() + "\"");
+
+                Path path = Paths.get(outputFilePath);
+                Files.copy(path, response.getOutputStream());
+                response.flushBuffer();
+
+                Files.deleteIfExists(path);
             } catch (Exception e) {
                 e.printStackTrace();
             }

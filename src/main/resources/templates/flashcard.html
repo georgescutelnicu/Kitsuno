@@ -165,9 +165,13 @@
                 </div>
             </div>
 
-            <div sec:authorize="isAuthenticated()" th:if="${flashcardsList.size() > 0}">
-                <form th:action="@{/flashcards/export_flashcards}" method="post">
-                    <button type="submit" class="flashcard-button practice-button">Export Flashcards to CSV</button>
+            <div class="export-buttons" sec:authorize="isAuthenticated()" th:if="${flashcardsList.size() > 0}">
+                <form th:action="@{/flashcards/export_flashcards_csv}" method="post">
+                    <button type="submit" class="flashcard-button practice-button">Export to CSV</button>
+                </form>
+                <form th:action="@{/flashcards/export_flashcards_anki}" method="post">
+                    <button type="submit" class="flashcard-button practice-button anki-button">
+                        Export to Anki Deck</button>
                 </form>
             </div>
         </div>
