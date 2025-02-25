@@ -33,7 +33,7 @@ public class SecurityConfig {
                 )
                 .authorizeHttpRequests(authorize -> authorize
                         .requestMatchers("/logout", "/updateUsername", "/updatePassword", "/updateApiKey",
-                                "/profile").authenticated()
+                                "/profile, /flashcards/export_flashcards").authenticated()
                         .anyRequest().permitAll()
                 )
                 .formLogin(form -> form

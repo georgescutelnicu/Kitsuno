@@ -165,10 +165,10 @@
                 </div>
             </div>
 
-            <div sec:authorize="!isAuthenticated()">
-                <div class="info-div">
-                    <p class="info">You need to be authenticated to see your flashcards!</p>
-                </div>
+            <div sec:authorize="isAuthenticated()" th:if="${flashcardsList.size() > 0}">
+                <form th:action="@{/flashcards/export_flashcards}" method="post">
+                    <button type="submit" class="flashcard-button practice-button">Export Flashcards to CSV</button>
+                </form>
             </div>
         </div>
 

@@ -8,6 +8,7 @@ import com.kitsuno.service.FlashcardService;
 import com.kitsuno.service.KanjiService;
 import com.kitsuno.service.UserService;
 import com.kitsuno.utils.SecurityUtils;
+import jakarta.servlet.http.HttpServletResponse;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -15,6 +16,7 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
+import java.io.PrintWriter;
 import java.util.List;
 import java.util.Optional;
 
@@ -71,6 +73,41 @@ public class FlashcardController {
             }
 
         return "flashcard";
+    }
+
+    @PostMapping("/flashcards/export_flashcards")
+    public void export_flashcards(HttpServletResponse response) {
+        Optional<User> authenticatedUser = SecurityUtils.getAuthenticatedUser(userService);
+
+        if (authenticatedUser.isPresent()) {
+            User user = authenticatedUser.get();
+            List<Flashcard> flashcardsList = flashcardService.getAllFlashcardsByUserId(user.getId());
+
+            response.setContentType("text/csv; charset=UTF-8");
+            response.setHeader("Content-Disposition", "attachment; filename=" + user.getUsername() +
+                    "_flashcards.csv");
+
+            try (PrintWriter writer = response.getWriter()) {
+                writer.write('\uFEFF'); // Add BOM to fix Excel UTF-8 issues 🚀
+                writer.println("Kanji,Kunyomi,Onyomi,Meaning,Notes,Vocabulary");
+
+                for (Flashcard flashcard : flashcardsList) {
+                    String kanji = flashcard.getKanji().getCharacter();
+                    String kunyomi = flashcard.getKanji().getKunyomiReadings() != null
+                            ? String.join(", ", flashcard.getKanji().getKunyomiReadings()) : "-";
+                    String onyomi = flashcard.getKanji().getOnyomiReadings() != null
+                            ? String.join(", ", flashcard.getKanji().getOnyomiReadings()) : "-";
+                    String meanings = flashcard.getKanji().getMeanings();
+                    String notes = flashcard.getNotes() != null ? flashcard.getNotes() : "-";
+                    String vocabulary = String.join("; ", flashcard.getVocabulary());
+
+                    writer.printf("\"%s\",\"%s\",\"%s\",\"%s\",\"%s\",\"%s\"%n",
+                            kanji, kunyomi, onyomi, meanings, notes, vocabulary);
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
     }
 
     @PostMapping("/flashcards/delete/{id}")
