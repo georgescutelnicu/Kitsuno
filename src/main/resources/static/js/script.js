@@ -279,3 +279,20 @@ function goBack() {
         window.location.href = "/vocabulary";
     }
 }
+
+
+document.querySelectorAll('.export-form').forEach(form => {
+    form.addEventListener('submit', function(event) {
+        const buttons = document.querySelectorAll('.export-button');
+        buttons.forEach(button => {
+            button.disabled = true;
+            button.classList.add('inactive');
+        });
+        setTimeout(() => {
+            buttons.forEach(button => {
+                button.disabled = false;
+                button.classList.remove('inactive');
+            });
+        }, 10000);
+    });
+});
