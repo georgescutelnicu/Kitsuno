@@ -1290,6 +1290,12 @@ hr {
     pointer-events: none;
 }
 
+#loadingMessage {
+    display: none;
+    text-align: center;
+    margin-top: 18px;
+}
+
 @media (max-width: 1068px) {
     .flashcard-container {
         display: block;

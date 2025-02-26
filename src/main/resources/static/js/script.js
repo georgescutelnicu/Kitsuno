@@ -284,15 +284,22 @@ function goBack() {
 document.querySelectorAll('.export-form').forEach(form => {
     form.addEventListener('submit', function(event) {
         const buttons = document.querySelectorAll('.export-button');
+        const loadingMessage = document.getElementById('loadingMessage');
+
+        loadingMessage.style.display = 'block';
+
         buttons.forEach(button => {
             button.disabled = true;
             button.classList.add('inactive');
         });
+
         setTimeout(() => {
+            loadingMessage.style.display = 'none';
+
             buttons.forEach(button => {
                 button.disabled = false;
                 button.classList.remove('inactive');
             });
-        }, 10000);
+        }, 8000);
     });
 });
