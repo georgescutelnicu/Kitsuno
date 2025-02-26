@@ -1254,10 +1254,35 @@ hr {
 
 .export-buttons {
     text-align: center;
+    margin-top: 5%;
 }
 
-.anki-button {
-    margin-top: 12px;
+.export-buttons p {
+    font-size: 24px;
+    font-family: "Kalam", cursive !important;
+    font-weight: 400;
+    letter-spacing: 1px;
+}
+
+.export-buttons form {
+    display: inline;
+}
+
+.export-button img {
+    height: 36px;
+}
+
+.export-button {
+    background: none;
+    border: none;
+    padding: 0;
+    margin: 0 10px;
+    cursor: pointer;
+    transition: transform 0.2s;
+}
+
+.export-button:hover {
+    transform: scale(1.1);
 }
 
 @media (max-width: 1068px) {
