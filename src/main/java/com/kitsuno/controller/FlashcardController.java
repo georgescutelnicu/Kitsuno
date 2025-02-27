@@ -18,9 +18,6 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import java.io.*;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -135,30 +132,31 @@ public class FlashcardController {
                 flashcardsData.add(flashcardInfo);
             }
 
-            String outputFilePath = System.getenv("FLASHCARD_OUTPUT_DIR") + File.separator + user.getUsername()
-                    + "_flashcards.apkg";
-
             try {
                 String jsonFlashcardsData = new ObjectMapper().writeValueAsString(flashcardsData);
                 jsonFlashcardsData = jsonFlashcardsData.replace("\"", "\\\"");
 
                 ProcessBuilder processBuilder = new ProcessBuilder("python3",
-                        "src/main/resources/static/python/flashcards_to_anki.py",
-                        jsonFlashcardsData, outputFilePath);
+                        "src/main/resources/static/python/flashcards_to_anki.py", jsonFlashcardsData);
                 processBuilder.redirectErrorStream(true);
 
                 Process process = processBuilder.start();
+                ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+                InputStream inputStream = process.getInputStream();
+                byte[] buffer = new byte[1024];
+
+                while (inputStream.read(buffer) != -1) {
+                    outputStream.write(buffer);
+                }
+
                 process.waitFor();
 
                 response.setContentType("application/octet-stream");
-                response.setHeader("Content-Disposition", "attachment; filename=\""
-                        + new File(outputFilePath).getName() + "\"");
+                response.setHeader("Content-Disposition", "attachment; filename=\"" + user.getUsername() +
+                        "_flashcards.apkg\"");
 
-                Path path = Paths.get(outputFilePath);
-                Files.copy(path, response.getOutputStream());
+                outputStream.writeTo(response.getOutputStream());
                 response.flushBuffer();
-
-                Files.deleteIfExists(path);
             } catch (Exception e) {
                 e.printStackTrace();
             }

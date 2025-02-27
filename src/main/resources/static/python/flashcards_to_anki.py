@@ -2,10 +2,9 @@ import sys
 import genanki
 import json
 import random
-
+import io
 
 flashcards_data = json.loads(sys.argv[1])
-output_file_path = sys.argv[2]
 
 model = genanki.Model(
     random.randint(1000000000, 9999999999),
@@ -49,6 +48,10 @@ for card in flashcards_data:
     deck.add_note(note)
 
 package = genanki.Package(deck)
-package.write_to_file(output_file_path)
 
-print(f"Anki deck generated: {output_file_path}")
+output_stream = io.BytesIO()
+package.write_to_file(output_stream)
+
+output_stream.seek(0)
+
+sys.stdout.buffer.write(output_stream.read())
