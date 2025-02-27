@@ -135,7 +135,8 @@ public class FlashcardController {
                 flashcardsData.add(flashcardInfo);
             }
 
-            String outputFilePath = "src/main/resources/static/" + user.getUsername() + "_flashcards.apkg";
+            String outputFilePath = System.getenv("FLASHCARD_OUTPUT_DIR") + File.separator + user.getUsername()
+                    + "_flashcards.apkg";
 
             try {
                 String jsonFlashcardsData = new ObjectMapper().writeValueAsString(flashcardsData);
