@@ -4,7 +4,8 @@ import json
 import random
 import io
 
-flashcards_data = json.loads(sys.argv[1])
+with open(sys.argv[1], 'r', encoding='utf-8') as json_file:
+    flashcards_data = json.load(json_file)
 
 model = genanki.Model(
     random.randint(1000000000, 9999999999),

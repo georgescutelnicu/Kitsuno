@@ -136,7 +136,12 @@ public class FlashcardController {
 
             try {
                 String jsonFlashcardsData = new ObjectMapper().writeValueAsString(flashcardsData);
-                jsonFlashcardsData = jsonFlashcardsData.replace("\"", "\\\"");
+
+                File tempJsonFile = File.createTempFile("flashcards_data", ".json");
+                tempJsonFile.deleteOnExit();
+                try (BufferedWriter writer = new BufferedWriter(new FileWriter(tempJsonFile))) {
+                    writer.write(jsonFlashcardsData);
+                }
 
                 InputStream scriptInputStream = getClass().getResourceAsStream(
                         "/static/python/flashcards_to_anki.py");
@@ -149,7 +154,7 @@ public class FlashcardController {
                 Files.copy(scriptInputStream, tempScript.toPath(), StandardCopyOption.REPLACE_EXISTING);
 
                 ProcessBuilder processBuilder = new ProcessBuilder("python3", tempScript.getAbsolutePath(),
-                        jsonFlashcardsData);
+                        tempJsonFile.getAbsolutePath());
                 processBuilder.redirectErrorStream(true);
 
                 Process process = processBuilder.start();
@@ -164,11 +169,9 @@ public class FlashcardController {
 
                 process.waitFor();
 
-                // Set response for file download
                 response.setContentType("application/octet-stream");
                 response.setHeader("Content-Disposition", "attachment; filename=\"" + user.getUsername() +
                         "_flashcards.apkg\"");
-
                 outputStream.writeTo(response.getOutputStream());
                 response.flushBuffer();
             } catch (Exception e) {
@@ -176,7 +179,6 @@ public class FlashcardController {
             }
         }
     }
-
 
     @PostMapping("/flashcards/delete/{id}")
     public String deleteFlashcard(@PathVariable("id") int id) {
