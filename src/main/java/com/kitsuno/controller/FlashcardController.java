@@ -18,6 +18,8 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import java.io.*;
+import java.nio.file.Files;
+import java.nio.file.StandardCopyOption;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -136,8 +138,18 @@ public class FlashcardController {
                 String jsonFlashcardsData = new ObjectMapper().writeValueAsString(flashcardsData);
                 jsonFlashcardsData = jsonFlashcardsData.replace("\"", "\\\"");
 
-                ProcessBuilder processBuilder = new ProcessBuilder("python3",
-                        "src/main/resources/static/python/flashcards_to_anki.py", jsonFlashcardsData);
+                InputStream scriptInputStream = getClass().getResourceAsStream(
+                        "/static/python/flashcards_to_anki.py");
+                if (scriptInputStream == null) {
+                    throw new FileNotFoundException("Python script not found in resources.");
+                }
+
+                File tempScript = File.createTempFile("flashcards_to_anki", ".py");
+                tempScript.deleteOnExit();
+                Files.copy(scriptInputStream, tempScript.toPath(), StandardCopyOption.REPLACE_EXISTING);
+
+                ProcessBuilder processBuilder = new ProcessBuilder("python3", tempScript.getAbsolutePath(),
+                        jsonFlashcardsData);
                 processBuilder.redirectErrorStream(true);
 
                 Process process = processBuilder.start();
@@ -145,12 +157,14 @@ public class FlashcardController {
                 InputStream inputStream = process.getInputStream();
                 byte[] buffer = new byte[1024];
 
-                while (inputStream.read(buffer) != -1) {
-                    outputStream.write(buffer);
+                int bytesRead;
+                while ((bytesRead = inputStream.read(buffer)) != -1) {
+                    outputStream.write(buffer, 0, bytesRead);
                 }
 
                 process.waitFor();
 
+                // Set response for file download
                 response.setContentType("application/octet-stream");
                 response.setHeader("Content-Disposition", "attachment; filename=\"" + user.getUsername() +
                         "_flashcards.apkg\"");
@@ -162,6 +176,7 @@ public class FlashcardController {
             }
         }
     }
+
 
     @PostMapping("/flashcards/delete/{id}")
     public String deleteFlashcard(@PathVariable("id") int id) {
