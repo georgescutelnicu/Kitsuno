@@ -273,7 +273,7 @@ dropdowns.forEach(link => {
 function goBack() {
     if (document.referrer && document.referrer.includes("/vocabulary")) {
         window.location.href = "/vocabulary";
-    } else if (window.history.length > 1) {
+    } else if (window.history.length > 1 && document.referrer !== window.location.href) {
         window.history.back();
     } else {
         window.location.href = "/vocabulary";
