@@ -1562,6 +1562,38 @@ input {
     margin-right: 10px;
 }
 
+#apiKey {
+    position: relative;
+    display: inline-block;
+    cursor: pointer;
+}
+
+#apiKey::before {
+    content: "*****";
+    position: absolute;
+    top: 0;
+    left: 0;
+    background-color: #ff3b3b;
+    width: 100%;
+    height: 100%;
+    color: transparent;
+}
+
+#apiKey.revealed::before {
+    content: "";
+    background-color: transparent;
+    color: black;
+}
+
+@keyframes fadeOut {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
 .form-columns {
     display: flex;
     gap: 20px;

@@ -281,6 +281,7 @@ function goBack() {
 }
 
 
+// Disables export buttons and shows a message during flashcard export
 document.querySelectorAll('.export-form').forEach(form => {
     form.addEventListener('submit', function(event) {
         const buttons = document.querySelectorAll('.export-button');
@@ -302,4 +303,11 @@ document.querySelectorAll('.export-form').forEach(form => {
             });
         }, 8000);
     });
+});
+
+
+// Reveal Api Key
+document.getElementById('apiKey').addEventListener('click', function() {
+    var apiKeyElement = document.getElementById('apiKey');
+    apiKeyElement.classList.toggle('revealed');
 });
