@@ -14,7 +14,7 @@ public class EmailServiceImpl implements EmailService {
     private String fromEmail;
 
     public void sendVerificationEmail(String to, String token) {
-        String link = "http://localhost:8080/verify?token=" + token;
+        String link = "https://kitsuno.onrender.com/verify?token=" + token;
         SimpleMailMessage message = new SimpleMailMessage();
         message.setFrom(fromEmail);
         message.setTo(to);
