@@ -28,6 +28,7 @@ Kitsuno offers a range of useful features to help you learn and practice Japanes
 
 - **Learn Kana and Kanji**: Focused resources to help you master hiragana, katakana, and kanji characters.
 - **Customizable Flashcards**: Create your own flashcards to focus on specific characters or vocabulary.
+- **Flashcard Export**: Export flashcards to CSV or Anki decks for flexible studying.
 - **Interactive Practice Games**: Engage in fun and effective games to test your knowledge and reinforce learning.
 - **Kitsuno API**: Access endpoints for kana, kanji, and flashcards to enhance your personalized learning experience.
 - **Jotoba API Integration**: Discover real-world sentences and examples that help you understand word usage in context.
@@ -36,7 +37,7 @@ Kitsuno offers a range of useful features to help you learn and practice Japanes
 ## Technologies Used
 
 **Front-End Development:** HTML, CSS, JS, Thymeleaf.<br>
-**Back-End Development:** Java (Spring Boot), PostgreSQL.<br>
+**Back-End Development:** Java (Spring Boot), PostgreSQL, Python (genanki).<br>
 **Containerization:** Docker.<br>
 **Deployment:** Render.<br>
 **API Docs:** SpringDoc OpenAPI.<br>
