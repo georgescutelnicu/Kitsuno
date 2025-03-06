@@ -1306,12 +1306,12 @@ hr {
 }
 
 
-/* Resources */
-.resources-h1 {
+/* Particles */
+.particles-h1 {
     margin: 40px 0;
 }
 
-.resource-header {
+.particles-header {
     display: flex;
     align-items: center;
     padding: 20px 25px;
@@ -1319,25 +1319,25 @@ hr {
     border-bottom: 1px solid #ddd;
 }
 
-.resource-header h3 {
+.particles-header h3 {
     margin: 0;
     padding-left: 20px;
 }
 
-.resource-header.active-rss .dropdown-arrow {
+.particles-header.active-rss .dropdown-arrow {
     transform: rotate(180deg);
 }
 
-.resource-header.active-rss .dropdown-arrow {
+.particles-header.active-rss .dropdown-arrow {
     transform: rotate(180deg);
 }
 
-.resource-header img {
+.particles-header img {
     width: 50px;
     margin-bottom: 3px;
 }
 
-.resource-item {
+.particles-item {
     width: 90%;
     cursor: pointer;
     margin-bottom: 3.75%;
@@ -1351,12 +1351,16 @@ hr {
     font-size: 15px;
 }
 
-.resource-header:hover {
+.particles-header:hover {
     background-color: #f0f0f0;
 }
 
-.resource-header.active-rss {
-    background-color: #f0f0f0;
+.particles-description {
+    font-family: "Quicksand", sans-serif;
+}
+
+.particles-h3 {
+    margin: 36px 0 0 0 !important;
 }
 
 .dropdown-content {
@@ -1394,14 +1398,13 @@ hr {
 }
 
 @media (max-width: 368px) {
-    .resource-header h3 {
+    .particles-header h3 {
         font-size: 18px;
     }
-    .resource-header .dropdown-arrow {
+    .particles-header .dropdown-arrow {
         font-size: 12px;
     }
 }
-
 
 /* Forms */
 #form-section {

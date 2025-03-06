@@ -25,15 +25,18 @@ public class WebController {
     private final KanjiService kanjiService;
     private final UserService userService;
     private final FlashcardService flashcardService;
+    private final ParticleService particleService;
 
     public WebController(HiraganaService hiraganaService, KatakanaService katakanaService, KanjiService kanjiService,
-                         UserService userService, FlashcardService flashcardService, ApiService apiService) {
+                         UserService userService, FlashcardService flashcardService, ApiService apiService,
+                         ParticleService particleService) {
         this.hiraganaService = hiraganaService;
         this.katakanaService = katakanaService;
         this.kanjiService = kanjiService;
         this.userService = userService;
         this.flashcardService = flashcardService;
         this.apiService = apiService;
+        this.particleService = particleService;
     }
 
     @GetMapping("/")
@@ -117,9 +120,11 @@ public class WebController {
         return "kanji-details";
     }
 
-    @GetMapping("/resources")
-    public String showResources() {
-        return "resources";
+    @GetMapping("/particles")
+    public String showParticles(Model model) {
+        List<Particle> particlesList = this.particleService.findAll();
+        model.addAttribute("particlesList", particlesList);
+        return "particles";
     }
 
     @GetMapping("/about")
