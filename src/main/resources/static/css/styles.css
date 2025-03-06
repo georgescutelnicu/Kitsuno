@@ -1368,6 +1368,7 @@ hr {
     overflow: hidden;
     transition: max-height 0.5s ease;
     padding: 0 25px;
+    overflow-y: auto;
 }
 
 .dropdown-content ul {
