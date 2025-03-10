@@ -44,6 +44,9 @@ public class WebControllerTest {
     private FlashcardService flashcardService;
 
     @MockBean
+    private ParticleService particleService;
+
+    @MockBean
     private ApiService apiService;
 
     @Test
@@ -227,10 +230,25 @@ public class WebControllerTest {
     }
 
     @Test
-    public void testShowResources() throws Exception {
-        mockMvc.perform(get("/resources"))
+    public void testShowParticles() throws Exception {
+        Particle mockParticle = new Particle(
+                "は (wa)",
+                "topic marker",
+                "は (wa) follows the topic the speaker wants to talk about. Therefore, " +
+                        "wa（は）is often called topic marking particle. The “topic” is often the grammatical subject, " +
+                        "but can be anything (including the grammatical object, and sometimes the verb), " +
+                        "and it may also follow some other particles.",
+                "[ A ] wa [ B ] desu. [ A ] is [ B ].",
+                "Kinō wa ame datta 【昨日は雨だった】 It was rainy yesterday"
+        );
+
+        List<Particle> particlesList = List.of(mockParticle);
+        when(particleService.findAll()).thenReturn(particlesList);
+
+        mockMvc.perform(get("/particles"))
                 .andExpect(status().isOk())
-                .andExpect(view().name("resources"));
+                .andExpect(view().name("particles"))
+                .andExpect(model().attribute("particlesList", particlesList));
     }
 
     @Test
