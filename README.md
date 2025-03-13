@@ -9,11 +9,11 @@ Kitsuno is a free platform focused on helping you learn hiragana, katakana, and 
 ## Explore
 Explore Kitsuno and its features through the links below:
 <br><br>
-<a href="https://kitsuno.onrender.com/v1/swagger-ui/index.html">
+<a href="https://kitsuno-app.onrender.com/v1/swagger-ui/index.html">
     <img src="https://img.shields.io/badge/API Docs-85EA2D?logo=swagger&logoColor=000&style=for-the-badge"></img>
 </a>
 <br>
-<a href="https://kitsuno.onrender.com/">
+<a href="https://kitsuno-app.onrender.com/">
     <img src="https://img.shields.io/badge/Kitsuno-000?logo=render&logoColor=fff&style=for-the-badge"></img>
 </a>
 <br><br>
