@@ -74,6 +74,7 @@ To authenticate an API request, you should provide your API key in the API-KEY h
 | GET    | /api/katakana/{romaji}                      | Retrieve a specific Katakana character by romaji.         | romaji (Katakana romaji character)                                          |
 | GET    | /api/kanji                                  | Retrieve a list of all Kanji characters.                  | - / -                                                                         |
 | GET    | /api/kanji/{id}                             | Retrieve a specific Kanji character by ID.                | id (Kanji character ID)                                                    |
+| GET    | /api/particles                                  | Retrieve a list of all particles.                  | - / -                                                                         |
 | GET    | /api/flashcards                             | Retrieve all your flashcards.                       | - / -                                                                         |
 | GET    | /api/flashcards/{flashcardId}                | Retrieve one of your flashcards by ID.                               | flashcardId (ID of the flashcard)                                          |
 | POST   | /api/flashcards                             | Create a new flashcard.                        | Flashcard data (check API Docs)                          |
