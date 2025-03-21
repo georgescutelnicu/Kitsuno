@@ -235,7 +235,7 @@
                         th:text="${kanji.character}"></span>'</p>
 
                 <div class="vocabulary-list">
-                    <div th:if="${kanji.onyomiVocab.length > 1}">
+                    <div th:if="${kanji.onyomiVocab.length > 0}">
                         <div th:each="vocabItem : ${kanji.onyomiVocab}">
                             <div class="vocab-item">
                                 <p class="kanji-word" th:if="${vocabItem.contains('】')}"
@@ -247,7 +247,7 @@
                         </div>
                     </div>
 
-                    <div th:if="${kanji.onyomiVocab.length > 1}">
+                    <div th:if="${kanji.kunyomiVocab.length > 0}">
                         <div th:each="vocabItem : ${kanji.kunyomiVocab}">
                             <div class="vocab-item">
                                 <p class="kanji-word" th:if="${vocabItem.contains('】')}"
