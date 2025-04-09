@@ -22,6 +22,8 @@ import java.nio.file.Files;
 import java.nio.file.StandardCopyOption;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
+import java.util.HashMap;
 import java.util.Optional;
 
 @Controller
@@ -80,7 +82,7 @@ public class FlashcardController {
     }
 
     @PostMapping("/flashcards/export_flashcards_csv")
-    public void export_flashcards(HttpServletResponse response) {
+    public void exportFlashcards(HttpServletResponse response) {
         Optional<User> authenticatedUser = SecurityUtils.getAuthenticatedUser(userService);
 
         if (authenticatedUser.isPresent()) {
@@ -175,6 +177,43 @@ public class FlashcardController {
                 outputStream.writeTo(response.getOutputStream());
                 response.flushBuffer();
             } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    @PostMapping("/flashcards/export_flashcards_json")
+    public void exportFlashcardsAsJson(HttpServletResponse response) {
+        Optional<User> authenticatedUser = SecurityUtils.getAuthenticatedUser(userService);
+
+        if (authenticatedUser.isPresent()) {
+            User user = authenticatedUser.get();
+            List<Flashcard> flashcardsList = flashcardService.getAllFlashcardsByUserId(user.getId());
+
+            List<Map<String, Object>> jsonData = new ArrayList<>();
+
+            for (Flashcard flashcard : flashcardsList) {
+                Map<String, Object> data = new HashMap<>();
+                data.put("kanji", flashcard.getKanji().getCharacter());
+                data.put("kunyomi", flashcard.getKanji().getKunyomiReadings() != null ?
+                        String.join(", ", flashcard.getKanji().getKunyomiReadings()) : "-");
+                data.put("onyomi", flashcard.getKanji().getOnyomiReadings() != null ?
+                        String.join(", ", flashcard.getKanji().getOnyomiReadings()) : "-");
+                data.put("meaning", flashcard.getKanji().getMeanings());
+                data.put("notes", flashcard.getNotes() != null ? flashcard.getNotes() : "-");
+                data.put("vocabulary", String.join("; ", flashcard.getVocabulary()));
+                jsonData.add(data);
+            }
+
+            response.setContentType("application/json");
+            response.setHeader("Content-Disposition", "attachment; filename=" + user.getUsername() +
+                    "_flashcards.json");
+
+            try {
+                ObjectMapper mapper = new ObjectMapper();
+                response.setCharacterEncoding("UTF-8");
+                mapper.writeValue(response.getOutputStream(), jsonData);
+            } catch (IOException e) {
                 e.printStackTrace();
             }
         }

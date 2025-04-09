@@ -175,6 +175,10 @@
                         <button type="submit" class="export-button"><img src="images/flashcards/anki.png"
                                                                          alt="Export to Anki"></button>
                     </form>
+                    <form th:action="@{/flashcards/export_flashcards_json}" method="post" class="export-form">
+                        <button type="submit" class="export-button"><img src="images/flashcards/json.png"
+                                                                         alt="Export to JSON"></button>
+                </form>
             </div>
             <div id="loadingMessage">
                 <img src="images/gif/loading.gif" alt="Loading gif" />
