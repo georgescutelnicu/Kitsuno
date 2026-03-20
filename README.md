@@ -7,20 +7,7 @@
 Kitsuno is a free platform focused on helping you learn hiragana, katakana, and kanji. With features like customizable flashcards and engaging practice games, Kitsuno makes it easy to study and retain Japanese characters at your own pace. Whether you're just starting or looking to improve, Kitsuno offers interactive tools to enhance your kana and kanji learning experience.
 
 ## Explore
-Explore Kitsuno and its features through the links below:
-<br><br>
-<a href="https://kitsuno-app.onrender.com/v1/swagger-ui/index.html">
-    <img src="https://img.shields.io/badge/API Docs-85EA2D?logo=swagger&logoColor=000&style=for-the-badge"></img>
-</a>
-<br>
-<a href="https://kitsuno-app.onrender.com/">
-    <img src="https://img.shields.io/badge/Kitsuno-000?logo=render&logoColor=fff&style=for-the-badge"></img>
-</a>
-<br><br>
-Please note that it may take up to 50 seconds to start when first accessed, as I am using a free instance on Render.<br>
-This is due to the instance spinning down after a period of inactivity. Once it's warmed up, the loading times will be faster.
-<br><br>
-*Hosted with [Render](https://render.com/)*
+⚠️ **The live instance is no longer available. You can run the project locally to explore its features.**
 
 ## About
 
