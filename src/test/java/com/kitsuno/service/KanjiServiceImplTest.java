@@ -33,31 +33,26 @@ class KanjiServiceImplTest {
 
     @BeforeEach
     void setUp() {
-        kanji1 = new Kanji("日", "N5",
+        kanji1 = new Kanji("日", 4, 1,
                 "day, sun, Japan, counter for days",
                 new String[]{"ニチ", "ジツ"},
                 new String[]{"ひ", "-び", "-か"},
-                new String[]{"毎日 【まいにち】every day", "日光 【にっこう】sunlight", "翌日 【よくじつ】next day"},
-                new String[]{"日 【ひ】day, days", "記念日 【きねんび】anniversary, memorial day"},
-                "Time", 4);
+                "<svg>...</svg>",
+                new String[]{"毎日", "日光"});
 
-        kanji2 = new Kanji("月", "N5",
+        kanji2 = new Kanji("月", 4, 1,
                 "month, moon",
                 new String[]{"ゲツ", "ガツ"},
                 new String[]{"つき"},
-                new String[]{"月曜 【げつよう】 Monday", "来月 【らいげつ】 next month", "満月 【まんげつ】 full moon"},
-                new String[]{"一月 【ひとつき】 one month", "毎月 【まいつき】 every month"},
-                "Time", 4);
+                "<svg>...</svg>",
+                new String[]{"月曜", "来月"});
 
-        kanji3 = new Kanji("人", "N5",
+        kanji3 = new Kanji("人", 2, 2,
                 "person",
                 new String[]{"ジン", "ニン"},
                 new String[]{"ひと"},
-                new String[]{"~人 【じん】 often used for citizenship after a country (American, Chinese, etc..)",
-                        "友人 【ゆうじん】friend"},
-                new String[]{"人 【ひと】 man, person, people", "いい人 【いいひと】 good-natured person, " +
-                        "good person, lover"},
-                "People", 2);
+                "<svg>...</svg>",
+                new String[]{"友人", "いい人"});
     }
 
     @Test
@@ -68,7 +63,7 @@ class KanjiServiceImplTest {
 
         assertThat(result).isNotNull();
         assertThat(result.getCharacter()).isEqualTo("日");
-        assertThat(result.getCategory()).isEqualTo("Time");
+        assertThat(result.getGrade()).isEqualTo(1);
     }
 
     @Test
@@ -88,7 +83,7 @@ class KanjiServiceImplTest {
 
         assertThat(result).isNotNull();
         assertThat(result.getCharacter()).isEqualTo("日");
-        assertThat(result.getCategory()).isEqualTo("Time");
+        assertThat(result.getGrade()).isEqualTo(1);
     }
 
     @Test
@@ -111,33 +106,33 @@ class KanjiServiceImplTest {
     }
 
     @Test
-    void testFindAllCategories() {
-        when(kanjiDAO.findAllCategories()).thenReturn(Arrays.asList("Time", "People"));
+    void testFindAllGrades() {
+        when(kanjiDAO.findAllGrades()).thenReturn(Arrays.asList(1, 2));
 
-        List<String> result = kanjiService.findAllCategories();
+        List<Integer> result = kanjiService.findAllGrades();
 
         assertThat(result.size()).isEqualTo(2);
-        assertThat(result).containsExactlyInAnyOrder("Time", "People");
+        assertThat(result).containsExactlyInAnyOrder(1, 2);
     }
 
     @Test
-    void testFindAllByCategory() {
-        when(kanjiDAO.findAllByCategory("Time")).thenReturn(Arrays.asList(kanji1, kanji2));
+    void testFindAllByGrade() {
+        when(kanjiDAO.findAllByGrade(1)).thenReturn(Arrays.asList(kanji1, kanji2));
 
-        List<Kanji> result = kanjiService.findAllByCategory("Time");
+        List<Kanji> result = kanjiService.findAllByGrade(1);
 
         assertThat(result).hasSize(2);
         assertThat(result).extracting(Kanji::getCharacter).containsExactlyInAnyOrder("日", "月");
     }
 
     @Test
-    void testFindAllGroupedByCategory() {
+    void testFindAllGroupedByGrade() {
         when(kanjiDAO.findAll()).thenReturn(Arrays.asList(kanji1, kanji2, kanji3));
 
-        Map<String, List<Kanji>> result = kanjiService.findAllGroupedByCategory();
+        Map<Integer, List<Kanji>> result = kanjiService.findAllGroupedByGrade();
 
         assertThat(result.size()).isEqualTo(2);
-        assertThat(result.get("Time")).containsExactlyInAnyOrder(kanji1, kanji2);
-        assertThat(result.get("People")).containsExactlyInAnyOrder(kanji3);
+        assertThat(result.get(1)).containsExactlyInAnyOrder(kanji1, kanji2);
+        assertThat(result.get(2)).containsExactlyInAnyOrder(kanji3);
     }
 }

@@ -3,11 +3,6 @@
 	font-family: "Quicksand", sans-serif;
 }
 
-h1, h2,  h3, h4, h5, h6 {
-	font-family: "Kalam", cursive;
-	font-weight: 400;
-}
-
 button {
 	font-family: "Poppins", sans-serif;
 	font-weight: 500;
@@ -733,9 +728,7 @@ body {
 }
 
 .kanji-lesson h3 {
-    font-weight: 500;
     font-size: 20px;
-    margin-bottom: 5px;
 }
 
 .kanji-lesson p {
@@ -812,17 +805,16 @@ body {
     transform: rotate(90deg);
 }
 
-.kanji-character h1 {
-    font-size: 150px;
-    color: #333;
+.stroke-order-svg {
+    display: block;
     border: 1px solid #333;
     height: 225px;
     width: 225px;
     margin: 100px auto 0;
-    cursor: default;
+    cursor: pointer;
 }
 
-.kanji-character h1:hover {
+.stroke-order-svg:hover {
     border: 1px solid #007BFF;
 }
 
@@ -897,12 +889,14 @@ body {
 
 hr {
     border: 1px solid #eee;
-    width: 95%;
-    margin-left: 0;
+    width: 96%;
+    margin: auto;
 }
 
-.hr-header {
-    margin-left: 20px;
+.vocabulary-list hr {
+    width: 98%;
+    position: relative;
+    left: -20px;
 }
 
 .button-container {
@@ -1259,7 +1253,6 @@ hr {
 
 .export-buttons p {
     font-size: 24px;
-    font-family: "Kalam", cursive !important;
     font-weight: 400;
     letter-spacing: 1px;
 }

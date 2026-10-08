@@ -6,10 +6,11 @@ import com.kitsuno.exception.rest.CharacterNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.Map;
-import java.util.List;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.Map;
 
 @Service
 public class KanjiServiceImpl implements KanjiService {
@@ -45,32 +46,34 @@ public class KanjiServiceImpl implements KanjiService {
     }
 
     @Override
-    public List<Kanji> findAllByCategory(String category) {
-        List<Kanji> kanjiList =  kanjiDAO.findAllByCategory(category);
+    public List<Kanji> findAllByGrade(int grade) {
+        List<Kanji> kanjiList = kanjiDAO.findAllByGrade(grade);
         if (kanjiList.isEmpty()) {
-            throw new CharacterNotFoundException("Kanji characters not found for category: " + category);
+            throw new CharacterNotFoundException("Kanji characters not found for grade: " + grade);
         }
         return kanjiList;
     }
 
     @Override
-    public List<String> findAllCategories() {
-        return kanjiDAO.findAllCategories();
+    public List<Integer> findAllGrades() {
+        return kanjiDAO.findAllGrades();
     }
 
     @Override
-    public Map<String, List<Kanji>> findAllGroupedByCategory() {
+    public Map<Integer, List<Kanji>> findAllGroupedByGrade() {
         List<Kanji> kanjiList = this.kanjiDAO.findAll();
-        Map<String, List<Kanji>> kanjiMap = new LinkedHashMap<>();
+        kanjiList.sort(Comparator.comparingInt(Kanji::getGrade));
 
-        for(Kanji kanji: kanjiList) {
-            String category = kanji.getCategory();
+        Map<Integer, List<Kanji>> kanjiMap = new LinkedHashMap<>();
 
-            if(!kanjiMap.containsKey(category)) {
-                kanjiMap.put(category, new ArrayList<>());
+        for (Kanji kanji : kanjiList) {
+            int grade = kanji.getGrade();
+
+            if (!kanjiMap.containsKey(grade)) {
+                kanjiMap.put(grade, new ArrayList<>());
             }
 
-            kanjiMap.get(category).add(kanji);
+            kanjiMap.get(grade).add(kanji);
         }
 
         return kanjiMap;

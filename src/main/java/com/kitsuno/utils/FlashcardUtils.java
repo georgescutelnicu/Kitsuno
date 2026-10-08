@@ -13,7 +13,7 @@ public class FlashcardUtils {
         return new FlashcardResponseDTO(
                 flashcard.getId(),
                 flashcard.getKanji().getCharacter(),
-                flashcard.getKanji().getJlpt(),
+                flashcard.getKanji().getGrade(),
                 flashcard.getKanji().getMeanings(),
                 flashcard.getKanji().getOnyomiReadings(),
                 flashcard.getKanji().getKunyomiReadings(),

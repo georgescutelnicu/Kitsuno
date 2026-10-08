@@ -84,10 +84,9 @@
         </nav>
 
         <div id="main-section">
-            <h1 class="kana-h1">JLPT N5 Kanji</h1>
-            <div class="kanji-lesson" th:each="entry, idx : ${kanjiMap}">
-                <h3>Lesson <span th:text="${idx.count}"></span></h3>
-                <p th:text="${entry.key}"></p>
+            <h2 class="kana-h1">Kanji by Grade</h2>
+            <div class="kanji-lesson" th:each="entry : ${kanjiMap}">
+                <h3>Grade <span th:text="${entry.key == 7 ? '7+' : entry.key}"></span></h3>
                 <div class="kanji-grid">
                     <a th:each="kanji : ${entry.value}"
                        th:href="@{'/kanji/' + ${kanji.character}}"

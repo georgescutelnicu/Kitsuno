@@ -47,12 +47,11 @@ public class FlashcardControllerTest {
 
     @BeforeEach
     public void setup() {
-        kanji1 = new Kanji("日", "N5", "day, sun, Japan, counter for days",
+        kanji1 = new Kanji("日", 4, 1, "day, sun, Japan, counter for days",
                 new String[]{"ニチ", "ジツ"},
                 new String[]{"ひ", "-び", "-か"},
-                new String[]{"毎日 【まいにち】every day", "日光 【にっこう】sunlight", "翌日 【よくじつ】next day"},
-                new String[]{"日 【ひ】day, days", "記念日 【きねんび】anniversary, memorial day"},
-                "Time", 4);
+                "<svg>...</svg>",
+                new String[]{"毎日", "日光"});
 
         user1 = new User("user1", "user1@example.com", "hashedpassword1", true);
 
@@ -85,8 +84,7 @@ public class FlashcardControllerTest {
                 .andExpect(status().is3xxRedirection())
                 .andExpect(redirectedUrl("/flashcards"));
 
-        verify(flashcardService, times(1)).saveOrUpdateFlashcard(flashcardDTO, userId,
-                kanjiCharacter);
+        verify(flashcardService, times(1)).saveOrUpdateFlashcard(flashcardDTO, userId, kanjiCharacter);
 
         mockedStatic.close();
     }
@@ -113,8 +111,7 @@ public class FlashcardControllerTest {
                 .andExpect(model().attributeExists("hasError"))
                 .andExpect(model().attribute("hasFlashcard", false));
 
-        verify(flashcardService, times(0)).saveOrUpdateFlashcard(flashcardDTO, userId,
-                kanjiCharacter);
+        verify(flashcardService, times(0)).saveOrUpdateFlashcard(flashcardDTO, userId, kanjiCharacter);
 
         mockedStatic.close();
     }
@@ -155,7 +152,7 @@ public class FlashcardControllerTest {
 
     @Test
     public void testDeleteFlashcard() throws Exception {
-       when(flashcardService.getFlashcardById(flashcard1.getId())).thenReturn(flashcard1);
+        when(flashcardService.getFlashcardById(flashcard1.getId())).thenReturn(flashcard1);
 
         mockMvc.perform(post("/flashcards/delete/{id}", flashcard1.getId())
                         .with(csrf()))

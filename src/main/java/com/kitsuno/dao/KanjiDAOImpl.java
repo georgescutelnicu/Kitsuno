@@ -7,7 +7,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Repository
 public class KanjiDAOImpl implements KanjiDAO {
@@ -26,44 +25,36 @@ public class KanjiDAOImpl implements KanjiDAO {
 
     @Override
     public Kanji findKanjiByCharacter(String character) {
-        TypedQuery<Kanji> query = entityManager.createQuery("FROM Kanji k WHERE k.character =: character",
-                Kanji.class);
+        TypedQuery<Kanji> query = entityManager.createQuery(
+                "FROM Kanji k WHERE k.character = :character", Kanji.class);
         query.setParameter("character", character);
 
         List<Kanji> kanjiList = query.getResultList();
-
+        
         return kanjiList.isEmpty() ? null : kanjiList.get(0);
     }
 
     @Override
     public List<Kanji> findAll() {
-        TypedQuery<Kanji> query = entityManager.createQuery("Select k from Kanji k ORDER BY k.id", Kanji.class);
+        TypedQuery<Kanji> query = entityManager.createQuery(
+                "SELECT k FROM Kanji k ORDER BY k.id", Kanji.class);
 
         return query.getResultList();
     }
 
     @Override
-    public List<String> findAllCategories() {
-        TypedQuery<String> query = entityManager.createQuery(
-                "SELECT DISTINCT k.category FROM Kanji k WHERE k.category IS NOT NULL ORDER BY k.category",
-                String.class
-        );
+    public List<Integer> findAllGrades() {
+        TypedQuery<Integer> query = entityManager.createQuery(
+                "SELECT DISTINCT k.grade FROM Kanji k ORDER BY k.grade", Integer.class);
 
-        List<String> categories = query.getResultList();
-        categories = categories.stream()
-                .map(category -> category.replace(" ", "-"))
-                .collect(Collectors.toList());
-
-        return categories;
+        return query.getResultList();
     }
 
     @Override
-    public List<Kanji> findAllByCategory(String category) {
+    public List<Kanji> findAllByGrade(int grade) {
         TypedQuery<Kanji> query = entityManager.createQuery(
-                "SELECT k FROM Kanji k WHERE k.category = :category ORDER BY k.id",
-                Kanji.class
-        );
-        query.setParameter("category", category);
+                "SELECT k FROM Kanji k WHERE k.grade = :grade ORDER BY k.id", Kanji.class);
+        query.setParameter("grade", grade);
 
         return query.getResultList();
     }

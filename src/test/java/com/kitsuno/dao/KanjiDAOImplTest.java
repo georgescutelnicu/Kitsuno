@@ -25,7 +25,7 @@ class KanjiDAOImplTest {
 
         assertThat(result).isNotNull();
         assertThat(result.getCharacter()).isEqualTo("日");
-        assertThat(result.getCategory()).isEqualTo("Time");
+        assertThat(result.getGrade()).isEqualTo(1);
     }
 
     @Test
@@ -41,7 +41,7 @@ class KanjiDAOImplTest {
 
         assertThat(result).isNotNull();
         assertThat(result.getCharacter()).isEqualTo("日");
-        assertThat(result.getCategory()).isEqualTo("Time");
+        assertThat(result.getGrade()).isEqualTo(1);
     }
 
     @Test
@@ -60,16 +60,16 @@ class KanjiDAOImplTest {
     }
 
     @Test
-    void testFindAllCategories() {
-        List<String> result = kanjiDAO.findAllCategories();
+    void testFindAllGrades() {
+        List<Integer> result = kanjiDAO.findAllGrades();
 
         assertThat(result).hasSize(2);
-        assertThat(result).containsExactlyInAnyOrder("Time", "People");
+        assertThat(result).containsExactlyInAnyOrder(1, 2);
     }
 
     @Test
-    void testFindAllByCategory() {
-        List<Kanji> result = kanjiDAO.findAllByCategory("Time");
+    void testFindAllByGrade() {
+        List<Kanji> result = kanjiDAO.findAllByGrade(1);
 
         assertThat(result).hasSize(2);
         assertThat(result).extracting(Kanji::getCharacter).containsExactlyInAnyOrder("日", "月");

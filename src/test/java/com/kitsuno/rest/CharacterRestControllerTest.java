@@ -54,20 +54,27 @@ class CharacterRestControllerTest {
         katakana2 = new Katakana("イ", "i", "audio_i.mp3", "mnemonic_i", "story_i",
                 "stroke_order_i.png");
 
-        kanji1 = new Kanji("日", "N5", "day, sun, Japan, counter for days",
+        kanji1 = new Kanji(
+                "日",
+                4,
+                1,
+                "day, sun, Japan, counter for days",
                 new String[]{"ニチ", "ジツ"},
                 new String[]{"ひ", "-び", "-か"},
-                new String[]{"毎日 【まいにち】every day", "日光 【にっこう】sunlight", "翌日 【よくじつ】next day"},
-                new String[]{"日 【ひ】day, days", "記念日 【きねんび】anniversary, memorial day"},
-                "Time", 4);
+                "<svg>...</svg>",
+                new String[]{"毎日 【まいにち】every day", "日光 【にっこう】sunlight", "翌日 【よくじつ】next day"}
+        );
 
-        kanji2 = new Kanji("人", "N5", "person",
+        kanji2 = new Kanji(
+                "人",
+                2,
+                1,
+                "person",
                 new String[]{"ジン", "ニン"},
                 new String[]{"ひと"},
-                new String[]{"~人 【じん】 often used for citizenship after a country (American, Chinese, etc..)",
-                        "友人 【ゆうじん】friend"},
-                new String[]{"人 【ひと】 man, person, people", "いい人 【いいひと】 good-natured person, good person"},
-                "People", 2);
+                "<svg>...</svg>",
+                new String[]{"~人 【じん】 often used for citizenship after a country", "友人 【ゆうじん】friend"}
+        );
     }
 
     @Test
@@ -134,7 +141,7 @@ class CharacterRestControllerTest {
                 .andExpect(status().isOk())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON))
                 .andExpect(jsonPath("$.character").value("日"))
-                .andExpect(jsonPath("$.onyomiVocab").isArray())
-                .andExpect(jsonPath("$.onyomiVocab[0]").value("毎日 【まいにち】every day"));
+                .andExpect(jsonPath("$.vocab").isArray())
+                .andExpect(jsonPath("$.vocab[0]").value("毎日 【まいにち】every day"));
     }
 }

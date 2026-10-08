@@ -1,7 +1,6 @@
 package com.kitsuno.entity;
 
 import jakarta.persistence.*;
-
 import java.util.Arrays;
 
 @Entity
@@ -16,8 +15,11 @@ public class Kanji {
     @Column(name = "character")
     private String character;
 
-    @Column(name = "jlpt")
-    private String jlpt;
+    @Column(name = "stroke_count")
+    private int strokeCount;
+
+    @Column(name = "grade")
+    private int grade;
 
     @Column(name = "meanings")
     private String meanings;
@@ -28,32 +30,26 @@ public class Kanji {
     @Column(name = "kunyomi_readings")
     private String[] kunyomiReadings;
 
-    @Column(name = "onyomi_vocab")
-    private String[] onyomiVocab;
+    @Column(name = "stroke_order_svg")
+    private String strokeOrderSvg;
 
-    @Column(name = "kunyomi_vocab")
-    private String[] kunyomiVocab;
-
-    @Column(name = "category")
-    private String category;
-
-    @Column(name = "stroke_count")
-    private int strokeCount;
+    @Column(name = "vocab")
+    private String[] vocab;
 
     public Kanji() {
     }
 
-    public Kanji(String character, String jlpt, String meanings, String[] onyomiReadings, String[] kunyomiReadings,
-                 String[] onyomiVocab, String[] kunyomiVocab, String category, int strokeCount) {
+    public Kanji(String character, int strokeCount, int grade, String meanings, 
+                 String[] onyomiReadings, String[] kunyomiReadings, 
+                 String strokeOrderSvg, String[] vocab) {
         this.character = character;
-        this.jlpt = jlpt;
+        this.strokeCount = strokeCount;
+        this.grade = grade;
         this.meanings = meanings;
         this.onyomiReadings = onyomiReadings;
         this.kunyomiReadings = kunyomiReadings;
-        this.onyomiVocab = onyomiVocab;
-        this.kunyomiVocab = kunyomiVocab;
-        this.category = category;
-        this.strokeCount = strokeCount;
+        this.strokeOrderSvg = strokeOrderSvg;
+        this.vocab = vocab;
     }
 
     @Override
@@ -61,14 +57,13 @@ public class Kanji {
         return "Kanji{" +
                 "id=" + id +
                 ", character='" + character + '\'' +
-                ", jlpt='" + jlpt + '\'' +
+                ", strokeCount=" + strokeCount +
+                ", grade=" + grade +
                 ", meanings='" + meanings + '\'' +
                 ", onyomiReadings=" + Arrays.toString(onyomiReadings) +
                 ", kunyomiReadings=" + Arrays.toString(kunyomiReadings) +
-                ", onyomiVocab=" + Arrays.toString(onyomiVocab) +
-                ", kunyomiVocab=" + Arrays.toString(kunyomiVocab) +
-                ", category='" + category + '\'' +
-                ", strokeCount=" + strokeCount +
+                ", strokeOrderSvg='" + strokeOrderSvg + '\'' +
+                ", vocab=" + Arrays.toString(vocab) +
                 '}';
     }
 
@@ -76,79 +71,71 @@ public class Kanji {
         return id;
     }
 
-    public String getCharacter() {
-        return character;
-    }
-
-    public String getJlpt() {
-        return jlpt;
-    }
-
-    public String getMeanings() {
-        return meanings;
-    }
-
-    public String[] getOnyomiReadings() {
-        return onyomiReadings;
-    }
-
-    public String[] getKunyomiReadings() {
-        return kunyomiReadings;
-    }
-
-    public String[] getOnyomiVocab() {
-        return onyomiVocab;
-    }
-
-    public String[] getKunyomiVocab() {
-        return kunyomiVocab;
-    }
-
-    public String getCategory() {
-        return category;
-    }
-
-    public int getStrokeCount() {
-        return strokeCount;
-    }
-
     public void setId(int id) {
         this.id = id;
+    }
+
+    public String getCharacter() {
+        return character;
     }
 
     public void setCharacter(String character) {
         this.character = character;
     }
 
-    public void setJlpt(String jlpt) {
-        this.jlpt = jlpt;
+    public int getStrokeCount() {
+        return strokeCount;
+    }
+
+    public void setStrokeCount(int strokeCount) {
+        this.strokeCount = strokeCount;
+    }
+
+    public int getGrade() {
+        return grade;
+    }
+
+    public void setGrade(int grade) {
+        this.grade = grade;
+    }
+
+    public String getMeanings() {
+        return meanings;
     }
 
     public void setMeanings(String meanings) {
         this.meanings = meanings;
     }
 
+    public String[] getOnyomiReadings() {
+        return onyomiReadings;
+    }
+
     public void setOnyomiReadings(String[] onyomiReadings) {
         this.onyomiReadings = onyomiReadings;
+    }
+
+    public String[] getKunyomiReadings() {
+        return kunyomiReadings;
     }
 
     public void setKunyomiReadings(String[] kunyomiReadings) {
         this.kunyomiReadings = kunyomiReadings;
     }
 
-    public void setOnyomiVocab(String[] onyomiVocab) {
-        this.onyomiVocab = onyomiVocab;
+    public String getStrokeOrderSvg() {
+        return strokeOrderSvg;
     }
 
-    public void setKunyomiVocab(String[] kunyomiVocab) {
-        this.kunyomiVocab = kunyomiVocab;
+    public void setStrokeOrderSvg(String strokeOrderSvg) {
+        this.strokeOrderSvg = strokeOrderSvg;
     }
 
-    public void setCategory(String category) {
-        this.category = category;
+    public String[] getVocab() {
+        return vocab;
     }
 
-    public void setStrokeCount(int strokeCount) {
-        this.strokeCount = strokeCount;
+    public void setVocab(String[] vocab) {
+        this.vocab = vocab;
     }
 }

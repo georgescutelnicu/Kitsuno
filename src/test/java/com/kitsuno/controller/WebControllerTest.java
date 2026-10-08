@@ -135,9 +135,9 @@ public class WebControllerTest {
 
     @Test
     public void testShowKanji() throws Exception {
-        Map<String, List<Kanji>> kanjiMap = Map.of("category", List.of(new Kanji()));
+        Map<Integer, List<Kanji>> kanjiMap = Map.of(1, List.of(new Kanji()));
 
-        when(kanjiService.findAllGroupedByCategory()).thenReturn(kanjiMap);
+        when(kanjiService.findAllGroupedByGrade()).thenReturn(kanjiMap);
 
         mockMvc.perform(get("/kanji"))
                 .andExpect(status().isOk())
@@ -147,12 +147,11 @@ public class WebControllerTest {
 
     @Test
     public void testShowKanjiDetailsAuthenticatedUserWithFlashcard() throws Exception {
-        Kanji kanji = new Kanji("日", "N5", "day, sun, Japan, counter for days",
+        Kanji kanji = new Kanji("日", 4, 1, "day, sun, Japan, counter for days",
                 new String[]{"ニチ", "ジツ"},
                 new String[]{"ひ", "-び", "-か"},
-                new String[]{"毎日 【まいにち】every day", "日光 【にっこう】sunlight", "翌日 【よくじつ】next day"},
-                new String[]{"日 【ひ】day, days", "記念日 【きねんび】anniversary, memorial day"},
-                "Time", 4);
+                "<svg>...</svg>",
+                new String[]{"毎日", "日光"});
         User user = new User();
         String character = "日";
 
@@ -176,12 +175,11 @@ public class WebControllerTest {
 
     @Test
     public void testShowKanjiDetailsAuthenticatedUserWithoutFlashcard() throws Exception {
-        Kanji kanji = new Kanji("日", "N5", "day, sun, Japan, counter for days",
+        Kanji kanji = new Kanji("日", 4, 1, "day, sun, Japan, counter for days",
                 new String[]{"ニチ", "ジツ"},
                 new String[]{"ひ", "-び", "-か"},
-                new String[]{"毎日 【まいにち】every day", "日光 【にっこう】sunlight", "翌日 【よくじつ】next day"},
-                new String[]{"日 【ひ】day, days", "記念日 【きねんび】anniversary, memorial day"},
-                "Time", 4);
+                "<svg>...</svg>",
+                new String[]{"毎日", "日光"});
         User user = new User();
         String character = "日";
 
@@ -205,12 +203,11 @@ public class WebControllerTest {
 
     @Test
     public void testShowKanjiDetailsUnauthenticatedUser() throws Exception {
-        Kanji kanji = new Kanji("日", "N5", "day, sun, Japan, counter for days",
+        Kanji kanji = new Kanji("日", 4, 1, "day, sun, Japan, counter for days",
                 new String[]{"ニチ", "ジツ"},
                 new String[]{"ひ", "-び", "-か"},
-                new String[]{"毎日 【まいにち】every day", "日光 【にっこう】sunlight", "翌日 【よくじつ】next day"},
-                new String[]{"日 【ひ】day, days", "記念日 【きねんび】anniversary, memorial day"},
-                "Time", 4);
+                "<svg>...</svg>",
+                new String[]{"毎日", "日光"});
         String character = "日";
 
         when(kanjiService.findKanjiByCharacter(character)).thenReturn(kanji);
@@ -223,7 +220,7 @@ public class WebControllerTest {
                 .andExpect(view().name("kanji-details"))
                 .andExpect(model().attributeExists("kanji"))
                 .andExpect(model().attributeExists("flashcardDTO"))
-                .andExpect(model().attribute("userId",  Matchers.nullValue()))
+                .andExpect(model().attribute("userId", Matchers.nullValue()))
                 .andExpect(model().attribute("hasFlashcard", false));
 
         mockedStatic.close();
@@ -234,10 +231,7 @@ public class WebControllerTest {
         Particle mockParticle = new Particle(
                 "は (wa)",
                 "topic marker",
-                "は (wa) follows the topic the speaker wants to talk about. Therefore, " +
-                        "wa（は）is often called topic marking particle. The “topic” is often the grammatical subject, " +
-                        "but can be anything (including the grammatical object, and sometimes the verb), " +
-                        "and it may also follow some other particles.",
+                "は (wa) follows the topic the speaker wants to talk about.",
                 "[ A ] wa [ B ] desu. [ A ] is [ B ].",
                 "Kinō wa ame datta 【昨日は雨だった】 It was rainy yesterday"
         );

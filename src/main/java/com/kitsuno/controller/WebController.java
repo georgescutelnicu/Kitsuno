@@ -91,7 +91,7 @@ public class WebController {
 
     @GetMapping("/kanji")
     public String showKanji(Model model) {
-        Map<String, List<Kanji>> kanjiMap = this.kanjiService.findAllGroupedByCategory();
+        Map<Integer, List<Kanji>> kanjiMap = this.kanjiService.findAllGroupedByGrade();
         model.addAttribute("kanjiMap", kanjiMap);
         return "kanji";
     }

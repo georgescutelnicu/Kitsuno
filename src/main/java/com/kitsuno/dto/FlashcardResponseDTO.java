@@ -3,17 +3,17 @@ package com.kitsuno.dto;
 public class FlashcardResponseDTO {
     private int id;
     private String kanjiCharacter;
-    private String kanjiJlpt;
+    private int kanjiGrade;
     private String kanjiMeanings;
     private String[] onyomiReadings;
     private String[] kunyomiReadings;
     private String[] vocabulary;
     private String notes;
 
-    public FlashcardResponseDTO(int id, String kanjiCharacter, String kanjiJlpt, String kanjiMeanings, String[] onyomiReadings, String[] kunyomiReadings, String[] vocabulary, String notes) {
+    public FlashcardResponseDTO(int id, String kanjiCharacter, int kanjiGrade, String kanjiMeanings, String[] onyomiReadings, String[] kunyomiReadings, String[] vocabulary, String notes) {
         this.id = id;
         this.kanjiCharacter = kanjiCharacter;
-        this.kanjiJlpt = kanjiJlpt;
+        this.kanjiGrade = kanjiGrade;
         this.kanjiMeanings = kanjiMeanings;
         this.onyomiReadings = onyomiReadings;
         this.kunyomiReadings = kunyomiReadings;
@@ -29,8 +29,8 @@ public class FlashcardResponseDTO {
         return kanjiCharacter;
     }
 
-    public String getKanjiJlpt() {
-        return kanjiJlpt;
+    public int getKanjiGrade() {
+        return kanjiGrade;
     }
 
     public String getKanjiMeanings() {
@@ -61,8 +61,8 @@ public class FlashcardResponseDTO {
         this.kanjiCharacter = kanjiCharacter;
     }
 
-    public void setKanjiJlpt(String kanjiJlpt) {
-        this.kanjiJlpt = kanjiJlpt;
+    public void setKanjiGrade(int kanjiGrade) {
+        this.kanjiGrade = kanjiGrade;
     }
 
     public void setKanjiMeanings(String kanjiMeanings) {

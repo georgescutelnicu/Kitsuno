@@ -30,6 +30,9 @@ class UserServiceImplTest {
     private PasswordEncoder passwordEncoder;
 
     @Mock
+    private EmailService emailService;
+
+    @Mock
     private UserDetailsService userDetailsService;
 
     @Mock
