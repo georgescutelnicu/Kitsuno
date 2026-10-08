@@ -307,7 +307,55 @@ document.querySelectorAll('.export-form').forEach(form => {
 
 
 // Reveal Api Key
-document.getElementById('apiKey').addEventListener('click', function() {
-    var apiKeyElement = document.getElementById('apiKey');
-    apiKeyElement.classList.toggle('revealed');
+const apiKeyElement = document.getElementById('apiKey');
+if (apiKeyElement) {
+    apiKeyElement.addEventListener('click', function () {
+        apiKeyElement.classList.toggle('revealed');
+    });
+}
+
+
+// Kanji stroke order svg
+function colorStrokes(box) {
+    const paths = box.querySelectorAll('svg path');
+
+    paths.forEach((p, i) => {
+        const hue = (i * 137.5) % 360;
+        p.style.stroke = `hsl(${hue}, 85%, 45%)`;
+    });
+}
+
+document.addEventListener('DOMContentLoaded', function () {
+    const box = document.getElementById('stroke-order');
+    if (!box || !box.dataset.src) return;
+
+    fetch(box.dataset.src)
+        .then(r => r.text())
+        .then(text => {
+            const start = text.indexOf('<svg');
+            const end = text.lastIndexOf('</svg>') + '</svg>'.length;
+            box.innerHTML = text.slice(start, end);
+            colorStrokes(box);
+        })
+        .catch(err => console.error('Could not load stroke order SVG', err));
+
+    box.addEventListener('click', () => {
+        const paths = box.querySelectorAll('svg path');
+        let delay = 0;
+
+        paths.forEach(p => {
+            const len = p.getTotalLength();
+
+            p.style.transition = 'none';
+            p.style.strokeDasharray = len;
+            p.style.strokeDashoffset = len;
+            p.getBoundingClientRect();
+
+            const duration = Math.max(0.4, len / 150);
+            p.style.transition = `stroke-dashoffset ${duration}s ease-in-out ${delay}s`;
+            p.style.strokeDashoffset = 0;
+
+            delay += duration + 0.1;
+        });
+    });
 });
