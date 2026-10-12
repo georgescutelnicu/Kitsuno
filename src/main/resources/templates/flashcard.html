@@ -15,9 +15,7 @@
               rel="stylesheet">
 
         <link rel="stylesheet" href="https://cdn.lineicons.com/5.0/lineicons.css"/>
-
         <link rel="stylesheet" href="css/styles.css">
-
     </head>
     <body>
         <nav class="navbar">
@@ -86,103 +84,122 @@
         </nav>
 
         <div id="main-section">
-            <div sec:authorize="isAuthenticated()">
-                <div th:if="${flashcardsList.size() > 0}">
-                    <div class="flashcard-container">
-                        <div th:each="flashcard : ${flashcardsList}">
+            <h2 class="kana-h1">Flashcards</h2>
 
-                            <div class="flashcard-kana-section">
-                                <div class="flip-container" style="height: 360px;">
-                                    <div class="flipper">
-                                        <div class="flashcard-front">
-                                            <div class="flashcard-kanji-character">
-                                                <h1 th:text="${flashcard.kanji.character}"></h1>
-                                                <p th:text="${flashcard.notes}"></p>
-                                            </div>
-                                        </div>
+            <div class="fc-wrapper" sec:authorize="isAuthenticated()">
+                
+                <div class="fc-top-controls" th:if="${!flashcardsList.isEmpty()}">
+                    <div class="fc-search-box">
+                        <i class="lni lni-search-1"></i>
+                        <input type="text" id="fcSearchInput" placeholder="Search by Kanji or Meaning..." />
+                    </div>
 
-                                        <div class="flashcard-back">
-                                            <div class="flashcard-kanji-details">
-                                                <div class="flashcard-left-column">
-                                                    <p><strong>Kunyomi:</strong></p>
-                                                    <p>
-                                                        <span th:if="${flashcard.kanji.kunyomiReadings == null}">-</span>
-                                                        <span th:if="${flashcard.kanji.kunyomiReadings != null}"
-                                                              th:each="kunyomi, stat : ${flashcard.kanji.kunyomiReadings}">
-                                                        <span th:text="${kunyomi}"></span>
-                                                        <span th:if="${!stat.last}"> &nbsp; </span>
-                                                    </span>
-                                                    </p>
-                                                </div>
+                    <div class="fc-top-exports">
+                        <div class="fc-export-buttons-group">
+                            <form th:action="@{/flashcards/export_flashcards_csv}" method="post">
+                                <button type="submit" class="fc-export-btn" title="Export to CSV">
+                                    <img src="images/flashcards/csv.png" alt="CSV"> CSV
+                                </button>
+                            </form>
+                            <form th:action="@{/flashcards/export_flashcards_anki}" method="post">
+                                <button type="submit" class="fc-export-btn" title="Export to Anki">
+                                    <img src="images/flashcards/anki.png" alt="Anki"> Anki
+                                </button>
+                            </form>
+                            <form th:action="@{/flashcards/export_flashcards_json}" method="post">
+                                <button type="submit" class="fc-export-btn" title="Export to JSON">
+                                    <img src="images/flashcards/json.png" alt="JSON"> JSON
+                                </button>
+                            </form>
+                        </div>
 
-                                                <div class="flashcard-right-column">
-                                                    <p><strong>Onyomi:</strong></p>
-                                                    <p>
-                                                        <span th:if="${flashcard.kanji.onyomiReadings == null}">-</span>
-                                                        <span th:if="${flashcard.kanji.onyomiReadings != null}"
-                                                              th:each="kunyomi, stat : ${flashcard.kanji.onyomiReadings}">
-                                                        <span th:text="${kunyomi}"></span>
-                                                        <span th:if="${!stat.last}"> &nbsp; </span>
-                                                    </span>
-                                                    </p>
-                                                </div>
-                                            </div>
-
-                                            <p class="flashcard-kanji-meaning"
-                                               th:text="${flashcard.kanji.meanings}"></p>
-
-                                            <hr>
-
-                                            <div class="flashcard-vocabulary">
-                                                <ul>
-                                                    <li th:each="vocab : ${flashcard.vocabulary}">
-                                                        <span th:text="${vocab.substring(0, vocab.indexOf(' '))}"></span>
-                                                        <span class="flashcard-vocabulary-meaning"
-                                                              th:text="${vocab.substring(vocab.indexOf(' ') + 1)}"></span>
-                                                    </li>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <a th:href="@{/kanji/{character}(character=${flashcard.kanji.character})}">
-                                    <button class="update-button"><i class="lni lni-pencil-1"></i></button>
-                                </a>
-                                <form th:action="@{/flashcards/delete/{flashcard_id}(flashcard_id=${flashcard.id})}"
-                                      method="post">
-                                    <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
-                                    <button type="submit" class="delete-button"><i class="lni lni-trash-3"></i></button>
-                                </form>
-                            </div>
-
+                        <!-- Shared Loading Status (Appears dynamically via JS) -->
+                        <div class="fc-exporting-status">
+                            <i class="lni lni-spinner-g fc-spinner"></i> Exporting flashcards...
                         </div>
                     </div>
                 </div>
-                <div class="info-div" th:if="${flashcardsList.size() == 0}">
-                    <p class="info">You can create custom flashcards by navigating to the Kanji page, selecting a Kanji,
-                        and creating a flashcard from there.</p>
-                </div>
-            </div>
 
-            <div class="export-buttons" sec:authorize="isAuthenticated()" th:if="${flashcardsList.size() > 0}">
-                <p>Export your flashcards</p>
-                    <form th:action="@{/flashcards/export_flashcards_csv}" method="post" class="export-form">
-                        <button type="submit" class="export-button"><img src="images/flashcards/csv.png"
-                                                                         alt="Export to CSV"></button>
-                    </form>
-                    <form th:action="@{/flashcards/export_flashcards_anki}" method="post" class="export-form">
-                        <button type="submit" class="export-button"><img src="images/flashcards/anki.png"
-                                                                         alt="Export to Anki"></button>
-                    </form>
-                    <form th:action="@{/flashcards/export_flashcards_json}" method="post" class="export-form">
-                        <button type="submit" class="export-button"><img src="images/flashcards/json.png"
-                                                                         alt="Export to JSON"></button>
-                </form>
-            </div>
-            <div id="loadingMessage">
-                <img src="images/gif/loading.gif" alt="Loading gif" />
-                <p>Please wait a few seconds while your download is being processed.</p>
+                <div class="fc-grid" th:if="${!flashcardsList.isEmpty()}">
+                    <div class="fc-card" th:each="flashcard : ${flashcardsList}"
+                         th:data-kanji="${flashcard.kanji.character}"
+                         th:data-meaning="${flashcard.kanji.meanings}"
+                         th:data-grade="${flashcard.kanji.grade}"
+                         th:data-kunyomi="${flashcard.kanji.kunyomiReadings != null ? #strings.arrayJoin(flashcard.kanji.kunyomiReadings, ', ') : '-'}"
+                         th:data-onyomi="${flashcard.kanji.onyomiReadings != null ? #strings.arrayJoin(flashcard.kanji.onyomiReadings, ', ') : '-'}"
+                         th:data-notes="${flashcard.notes}"
+                         th:data-vocab="${flashcard.vocabulary != null ? #strings.arrayJoin(flashcard.vocabulary, '|||') : ''}"
+                         role="button" tabindex="0">
+                        <div class="fc-actions">
+                            <a class="fc-btn fc-btn-edit" title="Edit"
+                               th:href="@{/kanji/{character}(character=${flashcard.kanji.character})}">
+                                <i class="lni lni-pencil-1"></i>
+                            </a>
+                            <form th:action="@{/flashcards/delete/{id}(id=${flashcard.id})}" method="post">
+                                <button type="submit" class="fc-btn fc-btn-delete" title="Delete">
+                                    <i class="lni lni-trash-3"></i>
+                                </button>
+                            </form>
+                        </div>
+
+                        <div class="fc-card-inner">
+                            <div class="fc-face fc-front">
+                                <div class="fc-kanji" th:text="${flashcard.kanji.character}"></div>
+                                <span class="fc-hint">Click to view details</span>
+                            </div>
+                            <div class="fc-face fc-back">
+                                <span class="fc-back-title">Notes</span>
+                                <div class="fc-notes"
+                                     th:classappend="${#strings.isEmpty(flashcard.notes)} ? 'fc-empty'"
+                                     th:text="${#strings.isEmpty(flashcard.notes)} ? 'No notes added.' : ${flashcard.notes}"></div>
+                                <span class="fc-hint">Click to view details</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- SINGLE REUSABLE MODAL (NO CSS CHANGES) -->
+                <div class="fc-overlay" id="fcSingleModal">
+                    <div class="fc-modal">
+                        <button type="button" class="fc-close" aria-label="Close">&times;</button>
+
+                        <div class="fc-modal-head">
+                            <div class="fc-modal-kanji" id="modalKanji"></div>
+                            <div>
+                                <h2 id="modalMeaning"></h2>
+                                <span class="fc-badge" id="modalGrade"></span>
+                            </div>
+                        </div>
+
+                        <div class="fc-section">
+                            <h3>Readings</h3>
+                            <div class="fc-readings">
+                                <div class="fc-reading">
+                                    <span class="fc-reading-label">Kunyomi</span>
+                                    <span class="fc-reading-value" id="modalKunyomi"></span>
+                                </div>
+                                <div class="fc-reading">
+                                    <span class="fc-reading-label">Onyomi</span>
+                                    <span class="fc-reading-value" id="modalOnyomi"></span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="fc-section" id="modalVocabSection">
+                            <h3>Vocabulary</h3>
+                            <ul class="fc-vocab" id="modalVocabList"></ul>
+                        </div>
+
+                        <div class="fc-section" id="modalNotesSection">
+                            <h3>Notes</h3>
+                            <p class="fc-modal-notes" id="modalNotes"></p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="info-div" th:if="${flashcardsList.size() == 0}">
+                    <p class="info">You can create custom flashcards by visiting the Kanji page, selecting a character, and clicking 'Create Flashcard'.</p>
+                </div>
             </div>
         </div>
 

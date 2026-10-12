@@ -240,6 +240,129 @@ document.querySelectorAll('.export-form').forEach(form => {
 });
 
 
+// Flashcards Modal, Search Bar, Export Loading
+document.addEventListener('DOMContentLoaded', function () {
+    const cards = document.querySelectorAll('.fc-card');
+    const searchInput = document.getElementById('fcSearchInput');
+    const modalOverlay = document.getElementById('fcSingleModal');
+
+    if (cards.length > 0 && modalOverlay) {
+        const modalKanji = document.getElementById('modalKanji');
+        const modalMeaning = document.getElementById('modalMeaning');
+        const modalGrade = document.getElementById('modalGrade');
+        const modalKunyomi = document.getElementById('modalKunyomi');
+        const modalOnyomi = document.getElementById('modalOnyomi');
+        const modalVocabSection = document.getElementById('modalVocabSection');
+        const modalVocabList = document.getElementById('modalVocabList');
+        const modalNotesSection = document.getElementById('modalNotesSection');
+        const modalNotes = document.getElementById('modalNotes');
+
+        function openModal(card) {
+            modalKanji.textContent = card.dataset.kanji || '';
+            modalMeaning.textContent = card.dataset.meaning || '';
+            modalGrade.textContent = 'Grade ' + (card.dataset.grade || '');
+            modalKunyomi.textContent = card.dataset.kunyomi || '-';
+            modalOnyomi.textContent = card.dataset.onyomi || '-';
+
+            // Populate Vocabulary safely from dataset
+            const rawVocab = card.dataset.vocab || '';
+            modalVocabList.innerHTML = '';
+            if (rawVocab.trim() !== '') {
+                if (modalVocabSection) modalVocabSection.style.display = '';
+                const vocabItems = rawVocab.split('|||');
+                vocabItems.forEach(vocab => {
+                    const split = vocab.indexOf(' ');
+                    const jp = split > 0 ? vocab.substring(0, split) : vocab;
+                    const en = split > 0 ? vocab.substring(split + 1) : '';
+
+                    const li = document.createElement('li');
+                    li.innerHTML = `<div class="fc-vocab-jp">${jp}</div>` + (en ? `<div class="fc-vocab-en">${en}</div>` : '');
+                    modalVocabList.appendChild(li);
+                });
+            } else {
+                if (modalVocabSection) modalVocabSection.style.display = 'none';
+            }
+
+            // Populate Notes
+            const notes = card.dataset.notes || '';
+            if (notes.trim() !== '' && notes !== 'null' && notes !== '-') {
+                if (modalNotesSection) modalNotesSection.style.display = '';
+                if (modalNotes) modalNotes.textContent = notes;
+            } else {
+                if (modalNotesSection) modalNotesSection.style.display = 'none';
+            }
+
+            modalOverlay.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeModal() {
+            modalOverlay.classList.remove('active');
+            document.body.style.overflow = '';
+        }
+
+        cards.forEach(card => {
+            card.addEventListener('click', e => {
+                if (e.target.closest('.fc-actions')) return;
+                openModal(card);
+            });
+
+            card.addEventListener('keydown', e => {
+                if ((e.key === 'Enter' || e.key === ' ') && e.target === card) {
+                    e.preventDefault();
+                    openModal(card);
+                }
+            });
+        });
+
+        modalOverlay.addEventListener('click', e => {
+            if (e.target === modalOverlay || e.target.closest('.fc-close')) closeModal();
+        });
+
+        document.addEventListener('keydown', e => {
+            if (e.key === 'Escape') closeModal();
+        });
+    }
+
+    // Search Filter
+    if (searchInput) {
+        searchInput.addEventListener('input', function (e) {
+            const term = e.target.value.toLowerCase().trim();
+            const gridCards = document.querySelectorAll('.fc-card');
+
+            gridCards.forEach(card => {
+                const kanji = (card.dataset.kanji || '').toLowerCase();
+                const meaning = (card.dataset.meaning || '').toLowerCase();
+
+                if (kanji.includes(term) || meaning.includes(term)) {
+                    card.style.display = '';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+        });
+    }
+
+    // Export Loading
+    const exportContainer = document.querySelector('.fc-top-exports');
+    const exportForms = document.querySelectorAll('.fc-top-exports form');
+    if (exportContainer && exportForms.length > 0) {
+        exportForms.forEach(form => {
+            form.addEventListener('submit', function () {
+                const actionUrl = form.getAttribute('action') || '';
+                const timeoutDuration = actionUrl.includes('anki') ? 6000 : 2000;
+
+                exportContainer.classList.add('is-exporting');
+
+                setTimeout(() => {
+                    exportContainer.classList.remove('is-exporting');
+                }, timeoutDuration);
+            });
+        });
+    }
+});
+
+
 // Reveal Api Key
 const apiKeyElement = document.getElementById('apiKey');
 if (apiKeyElement) {
