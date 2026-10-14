@@ -1,211 +1,175 @@
 <!DOCTYPE html>
-<html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/spring-security">
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <title>Learn Kanji, Kana, and Vocabulary words with Kitsuno</title>
+        <meta name="description" content="Learn hiragana, katakana, kanji and Japanese grammar for free, with animated stroke order, example sentences and your own flashcards.">
 
         <link rel="icon" href="/images/favicon/favicon-32x32.png" sizes="32x32" type="image/png">
         <link rel="icon" href="/images/favicon/favicon-64x64.png" sizes="64x64" type="image/png">
 
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        <link href="https://fonts.googleapis.com/css2?family=Kalam:wght@300;400;700&family=Poppins:ital,wght@0,100;0,400;0,500;0,600;1,400;1,500;1,600&family=Quicksand:wght@300..700&display=swap"
+        <link href="https://fonts.googleapis.com/css2?family=Kalam:wght@300;400;700&family=Poppins:wght@500;600&family=Quicksand:wght@300..700&display=swap"
               rel="stylesheet">
 
-        <link rel="stylesheet" href="css/welcome.css">
-
+        <link rel="stylesheet" href="/css/welcome.css">
     </head>
     <body>
-        <nav class="navbar">
-            <div class="logo">
-                <a href="/">
-                    <img src="images/welcome/logo.png" alt="Logo">
+        <header class="site-nav">
+            <div class="nav-pill">
+                <a class="nav-logo" href="/">
+                    <img src="/images/welcome/logo.png" alt="Kitsuno">
                 </a>
-            </div>
-            <div class="dropdown">
-                <button class="dropbtn">Explore <span>▼</span></button>
-                <div class="dropdown-content">
-                    <a href="/vocabulary">Vocabulary</a>
+
+                <nav class="nav-menu">
                     <a href="/hiragana">Hiragana</a>
                     <a href="/katakana">Katakana</a>
                     <a href="/kanji">Kanji</a>
+                    <a href="/grammar">Grammar</a>
+                    <a href="/vocabulary">Vocabulary</a>
                     <a href="/flashcards">Flashcards</a>
-                    <a href="/particles">Particles</a>
-                </div>
-            </div>
-        </nav>
+                </nav>
 
-        <section>
-            <div class="welcome">
-                <div class="welcome-content">
-                    <img src="images/welcome/kitsuno.png" alt="Kitsune" class="kitsune-image">
-                    <h1>Learn Japanese with <br> Kitsuno</h1>
-                    <div class="welcome-buttons">
-                        <a href="/register" class="get-started">Get Started</a>
-                        <a href="/login" class="already-have-account">I Already Have an Account</a>
-                    </div>
-                    <a>
-                        <img src="images/welcome/arrow.png" alt="Down Arrow" class="arrow-down">
+                <div class="nav-user">
+                    <a class="nav-login" href="/login" sec:authorize="!isAuthenticated()">Log in</a>
+                    <a class="nav-profile" href="/profile" sec:authorize="isAuthenticated()">
+                        Hi <span sec:authentication="name">!</span>
                     </a>
                 </div>
             </div>
-            <div id="target"></div>
-        </section>
+        </header>
 
-        <section id="text-section">
-            <h1>How Will Kitsuno Enhance Your Learning?</h1>
-            <div class="grid">
-                <div class="row">
-                    <img src="images/welcome/main1.png" alt="Vocabulary Image" class="row-image">
-                    <div class="row-text">
-                        <h3>Expand your vocabulary</h3>
-                        <p>Broaden your Japanese vocabulary with Kitsuno. Master essential words, phrases, and
-                            kanji-based terms to enhance your language proficiency and deepen your understanding
-                            of Japanese.</p>
-                        <br>
-                       <a class="learn-more" href="/vocabulary">Learn More</a>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="row-text">
-                        <h3>Master kana and kanji</h3>
-                        <p>Build a strong foundation in Japanese by mastering hiragana, katakana, and kanji. Kitsuno
-                            will guide you through the essentials of reading and writing, helping you practice
-                            stroke order, character recognition and usage.</p>
-                        <br>
-                        <a class="learn-more" href="/kanji">Learn More</a>
-                    </div>
-                    <img src="images/welcome/main2.png" alt="Kana Image" class="row-image">
-                </div>
-                <div class="row">
-                    <img src="images/welcome/main3.png" alt="Flashcards Image" class="row-image">
-                    <div class="row-text">
-                        <h3>Create your own flashcards</h3>
-                        <p>Boost your kanji learning by creating personalized flashcards. Tailor your study materials
-                            with specific kanji characters you want to focus on. Regularly review and test yourself to
-                            enhance memory retention and master both the meaning and readings of each kanji!</p>
-                        <br>
-                        <a class="learn-more" href="/flashcards">Learn More</a>
-                    </div>
-                </div>
-            </div>
-        </section>
+        <main class="page">
+            <section class="hero">
+                <div class="hero-text">
+                    <h1>Learn Japanese,<br>one step at a time</h1>
+                    <p>Free lessons for hiragana, katakana, kanji and grammar, with animated stroke order, example
+                        sentences and flashcards you make yourself.</p>
 
-        <section id="card-section">
-            <h1>Embrace the Joy of Learning Japanese!</h1>
-            <div class="card-container">
-                <div class="card">
-                    <img src="images/welcome/card1.png" alt="Card 1" class="card-image">
-                    <div class="card-text">
-                        <h3>Self-Paced Learning</h3>
+                    <div class="hero-buttons" sec:authorize="!isAuthenticated()">
+                        <a href="/register" class="gold-button">Get started</a>
+                        <a href="/login" class="outline-button">I already have an account</a>
+                    </div>
+                    <div class="hero-buttons" sec:authorize="isAuthenticated()">
+                        <a href="/kanji" class="gold-button">Continue learning</a>
+                        <a href="/flashcards" class="outline-button">My flashcards</a>
+                    </div>
+
+                    <ul class="perks">
+                        <li>100% free</li>
+                        <li>Stroke order animations</li>
+                        <li>Export to Anki</li>
+                    </ul>
+                </div>
+
+                <div class="hero-demo">
+                    <div id="stroke-order" class="stroke-order-svg" data-autoplay
+                         data-src="https://cdn.jsdelivr.net/gh/KanjiVG/kanjivg/kanji/065e5.svg"
+                         title="Click to see stroke order"></div>
+                    <p class="demo-hint">Click the kanji to watch it being drawn</p>
+
+                    <div class="reading-row">
+                        <div class="reading">
+                            <span class="reading-label">Onyomi</span>
+                            <span class="reading-box">ニチ &nbsp; ジツ</span>
+                        </div>
+                        <div class="reading">
+                            <span class="reading-label">Kunyomi</span>
+                            <span class="reading-box">ひ</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="block">
+                <h2>Where to start</h2>
+                <p class="block-intro">New to Japanese? Begin with <strong>hiragana</strong>, then katakana, and move
+                    on to kanji and grammar when you feel ready.</p>
+
+                <div class="start-grid">
+                    <a class="start-tile" href="/hiragana">
+                        <span class="tile-glyph">あ</span>
+                        <span class="tile-label">Hiragana</span>
+                        <span class="tile-sub">Read and write</span>
+                    </a>
+                    <a class="start-tile" href="/katakana">
+                        <span class="tile-glyph">ア</span>
+                        <span class="tile-label">Katakana</span>
+                        <span class="tile-sub">Loanwords</span>
+                    </a>
+                    <a class="start-tile" href="/kanji">
+                        <span class="tile-glyph">日</span>
+                        <span class="tile-label">Kanji</span>
+                        <span class="tile-sub">By grade</span>
+                    </a>
+                    <a class="start-tile" href="/grammar">
+                        <span class="tile-glyph">文</span>
+                        <span class="tile-label">Grammar</span>
+                        <span class="tile-sub">Short lessons</span>
+                    </a>
+                    <a class="start-tile" href="/vocabulary">
+                        <span class="tile-glyph">語</span>
+                        <span class="tile-label">Vocabulary</span>
+                        <span class="tile-sub">Example sentences</span>
+                    </a>
+                    <a class="start-tile" href="/flashcards">
+                        <span class="tile-glyph">札</span>
+                        <span class="tile-label">Flashcards</span>
+                        <span class="tile-sub">Make your own</span>
+                    </a>
+                </div>
+            </section>
+
+            <section class="block">
+                <h2>Learning that fits you</h2>
+                <p class="block-intro">No pressure, no paywall. Just a simple place to practice every day.</p>
+
+                <div class="why-grid">
+                    <div class="why-card">
+                        <img src="/images/welcome/card1.png" alt="Self-paced learning">
+                        <h3>Self-paced learning</h3>
                         <p>Progress through each step of your Japanese journey at a comfortable pace.</p>
                     </div>
-                </div>
-                <div class="card">
-                    <img src="images/welcome/card2.png" alt="Card 1" class="card-image">
-                    <div class="card-text">
-                        <h3>Practice Made Fun</h3>
-                        <p>Enjoy kana practice games, kanji flashcards, and explore new vocabulary words
-                            to enhance your learning.</p>
-
+                    <div class="why-card">
+                        <img src="/images/welcome/card2.png" alt="Practice made fun">
+                        <h3>Practice made fun</h3>
+                        <p>Enjoy kana practice games, kanji flashcards, and explore new vocabulary words.</p>
                     </div>
-                </div>
-                <div class="card">
-                    <img src="images/welcome/card3.png" alt="Card 1" class="card-image">
-                    <div class="card-text">
-                        <h3>Completely Free</h3>
+                    <div class="why-card">
+                        <img src="/images/welcome/card3.png" alt="Completely free">
+                        <h3>Completely free</h3>
                         <p>Enjoy all learning resources without any cost, making language learning accessible to
                             everyone.</p>
                     </div>
                 </div>
-            </div>
-        </section>
+            </section>
 
-        <section id="faq-section">
-            <h1>FAQ</h1>
-            <div class="faq-item">
-                <img src="images/welcome/faq.png" alt="Q Icon" class="faq-icon">
-                <div class="faq-content">
-                    <h3>Is it okay for beginners?</h3>
-                    <p>Absolutely! Kitsuno starts from the basics, so no prior knowledge is needed. It’s perfect
-                        for anyone new to the japanese language.</p>
+            <section class="cta-banner" sec:authorize="!isAuthenticated()">
+                <div class="cta-text">
+                    <h2>Start with your first character</h2>
+                    <p>Create a free account in a minute and keep your flashcards in one place.</p>
+                    <a href="/register" class="dark-button">Create free account</a>
                 </div>
-            </div>
-            <div class="faq-item">
-                <img src="images/welcome/faq.png" alt="Q Icon" class="faq-icon">
-                <div class="faq-content">
-                    <h3>What will I learn on this platform?</h3>
-                    <p>Kitsuno focuses on three key areas of Japanese learning: kana, kanji, and essential
-                        vocabulary. You’ll learn how to read and write both kana systems, understand and recognize
-                        kanji, and build a solid foundation of commonly used words.</p>
-                </div>
-            </div>
-            <div class="faq-item">
-                <img src="images/welcome/faq.png" alt="Q Icon" class="faq-icon">
-                <div class="faq-content">
-                    <h3>How does the flashcard system work?</h3>
-                    <p>Our flashcard system is designed to help you master kanji efficiently. You can create your own
-                        flashcards by adding words or notes to kanji characters to support your learning.
-                        The flashcards can be exported directly to an Anki deck or in CSV format for easy use.</p>
-                </div>
-            </div>
-            <div class="faq-item">
-                <img src="images/welcome/faq.png" alt="Q Icon" class="faq-icon">
-                <div class="faq-content">
-                    <h3>What does Kitsuno API cover?</h3>
-                    <p>Kitsuno API provides endpoints for working with Hiragana, Katakana, and Kanji characters,
-                        as well as managing flashcards to support and personalize your learning experiecne.
-                        To access the API, you’ll need to register and obtain an API key from your profile page.</p>
-                </div>
-            </div>
-            <div class="faq-item">
-                <img src="images/welcome/faq.png" alt="Q Icon" class="faq-icon">
-                <div class="faq-content">
-                    <h3>Is there any cost to use the platform?</h3>
-                    <p>No, Kitsuno is entirely free to use. All the content, resources, and practice tools are
-                        accessible without any subscription fees or hidden costs. The goal is to make learning Japanese
-                        fun and easy to start.</p>
-                </div>
-            </div>
-        </section>
+                <span class="cta-glyph" aria-hidden="true">始</span>
+            </section>
+        </main>
 
-        <section id="footer-section">
-            <div class="footer-container">
-                <div class="footer-column">
-                    <h3>Learn Japanese</h3>
-                    <ul>
-                        <li><a href="/hiragana">Learn hiragana</a></li>
-                        <li><a href="/katakana">Learn katakana</a></li>
-                        <li><a href="/kanji">Learn kanji</a></li>
-                        <li><a href="/vocabulary">Learn vocabulary</a></li>
-                        <li><a href="/particles">Learn particles</a></li>
-                    </ul>
-                </div>
-                <div class="footer-column">
-                    <h3>Explore More</h3>
-                    <ul>
-                        <li><a href="/practice-hiragana">Practice hiragana</a></li>
-                        <li><a href="/practice-katakana">Practice katakana</a></li>
-                        <li><a href="/flashcards">Create your own flashcards</a></li>
-                        <li><a href="/v1/api-docs">Check API Docs</a></li>
-                        <li><a href="/about">About Kitsuno</a></li>
-                    </ul>
-                </div>
-                <div class="footer-column">
-                    <h3>Links</h3>
-                    <ul>
-                        <li><a href="/privacypolicy">Privacy Policy</a></li>
-                        <li><a href="/tos">Terms of Service</a></li>
-                    </ul>
-                    <h3>Contact Us</h3>
-                    <ul>
-                        <li><p>kitsunojapanese@aol.com</p></li>
-                    </ul>
-                </div>
+        <footer class="site-footer">
+            <div class="footer-links">
+                <a href="/about">About</a>
+                <a href="/v1/api-docs">API docs</a>
+                <a href="/privacypolicy">Privacy Policy</a>
+                <a href="/tos">Terms of Service</a>
+                <a href="mailto:kitsunojapanese@aol.com">Contact</a>
             </div>
-        </section>
+            <p>Stroke order data from <a href="https://kanjivg.tagaini.net" target="_blank" rel="noopener">KanjiVG</a>,
+                licensed under <a href="https://creativecommons.org/licenses/by-sa/3.0/" target="_blank"
+                                  rel="noopener">CC BY-SA 3.0</a>.</p>
+        </footer>
 
-        <script src="js/welcome.js"></script>
+        <script src="/js/welcome.js"></script>
     </body>
 </html>

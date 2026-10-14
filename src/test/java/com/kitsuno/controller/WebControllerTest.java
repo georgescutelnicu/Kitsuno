@@ -227,25 +227,6 @@ public class WebControllerTest {
     }
 
     @Test
-    public void testShowParticles() throws Exception {
-        Particle mockParticle = new Particle(
-                "は (wa)",
-                "topic marker",
-                "は (wa) follows the topic the speaker wants to talk about.",
-                "[ A ] wa [ B ] desu. [ A ] is [ B ].",
-                "Kinō wa ame datta 【昨日は雨だった】 It was rainy yesterday"
-        );
-
-        List<Particle> particlesList = List.of(mockParticle);
-        when(particleService.findAll()).thenReturn(particlesList);
-
-        mockMvc.perform(get("/particles"))
-                .andExpect(status().isOk())
-                .andExpect(view().name("particles"))
-                .andExpect(model().attribute("particlesList", particlesList));
-    }
-
-    @Test
     public void testShowAbout() throws Exception {
         mockMvc.perform(get("/about"))
                 .andExpect(status().isOk())

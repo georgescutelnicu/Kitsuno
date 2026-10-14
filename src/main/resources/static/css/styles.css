@@ -2050,3 +2050,266 @@ input {
 .error-container button:hover {
     background-color: #ff3b3b;
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* Grammar */
+.lesson-list {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    width: 90%;
+    margin: 10px 0 20px;
+}
+
+.lesson-row {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+    padding: 14px 22px 14px 14px;
+    text-decoration: none;
+    color: #333;
+    background: #fff;
+    border: 2px solid #f3e8c0;
+    border-radius: 18px;
+    transition: border-color 0.2s, background-color 0.2s, transform 0.2s;
+}
+
+.lesson-row:hover {
+    background: #fff5cc;
+    border-color: #ffcc00;
+    transform: translateY(-2px);
+}
+
+.lesson-row:active {
+    background: #ffd966;
+    transform: none;
+}
+
+.lesson-number {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    width: 64px;
+    height: 64px;
+    line-height: 1.1;
+    color: #333;
+    background: #ffcc00;
+    border-radius: 14px;
+}
+
+.lesson-number small {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+}
+
+.lesson-number b {
+    font-family: "Kalam", cursive;
+    font-size: 26px;
+}
+
+.lesson-title {
+    flex: 1;
+    font-size: 18px;
+    font-weight: 700;
+}
+
+.lesson-arrow {
+    font-size: 22px;
+    color: #bfa34a;
+    transition: transform 0.2s, color 0.2s;
+}
+
+.lesson-row:hover .lesson-arrow {
+    color: #333;
+    transform: translateX(4px);
+}
+
+.lesson-header {
+    width: 90%;
+    margin: 70px 0 28px;
+    text-align: center;
+}
+
+.lesson-header h1 {
+    margin: 14px 0 0;
+    font-size: 30px;
+    line-height: 1.25;
+}
+
+.lesson-badge {
+    display: inline-block;
+    padding: 4px 16px;
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 0.8px;
+    text-transform: uppercase;
+    color: brown;
+    background: #fff5cc;
+    border: 1px solid #ffcc00;
+    border-radius: 25px;
+}
+
+.lesson-content {
+    width: 90%;
+    margin-bottom: 30px;
+    font-size: 17px;
+    line-height: 1.8;
+    color: #333;
+}
+
+.lesson-content p {
+    margin: 0 0 16px;
+}
+
+.lesson-content ul {
+    margin: 0 0 16px;
+    padding-left: 24px;
+}
+
+.lesson-content li {
+    margin-bottom: 6px;
+}
+
+.lesson-content b,
+.lesson-content strong {
+    color: brown;
+}
+
+.lesson-content pre {
+    margin: 0 0 18px;
+    padding: 16px 20px;
+    font-size: 18px;
+    line-height: 1.7;
+    white-space: pre-wrap;
+    background: #fffdf5;
+    border: 1px solid #f3e8c0;
+    border-left: 4px solid #ffcc00;
+    border-radius: 4px 12px 12px 4px;
+    overflow-x: auto;
+}
+
+.lesson-content .warning {
+    margin: 0 0 18px;
+    padding: 14px 18px;
+    font-size: 16px;
+    line-height: 1.6;
+    background: #fff5cc;
+    border: 1px solid #ffcc00;
+    border-radius: 12px;
+}
+
+.lesson-content .warning::before {
+    content: "Heads up";
+    display: block;
+    margin-bottom: 4px;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.8px;
+    text-transform: uppercase;
+    color: brown;
+}
+
+.lesson-content .table-wrapper {
+    margin: 0 0 20px;
+    overflow-x: auto;
+    border: 1px solid #f3e8c0;
+    border-radius: 14px;
+}
+
+.lesson-content table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.lesson-content th {
+    padding: 10px 16px;
+    font-size: 13px;
+    letter-spacing: 0.6px;
+    text-align: left;
+    text-transform: uppercase;
+    color: brown;
+    background: #fff5cc;
+}
+
+.lesson-content th:empty {
+    padding: 0;
+    background: none;
+}
+
+.lesson-content td {
+    padding: 12px 16px;
+    font-size: 18px;
+    border-top: 1px solid #f3e8c0;
+}
+
+.lesson-content tbody tr:nth-child(even) {
+    background: #fffdf5;
+}
+
+.lesson-nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    width: 90%;
+    padding-top: 24px;
+    border-top: 1px solid #eee;
+}
+
+.lesson-nav a {
+    text-decoration: none;
+}
+
+@media (max-width: 468px) {
+    .lesson-row {
+        gap: 12px;
+        padding: 10px 14px 10px 10px;
+    }
+
+    .lesson-number {
+        width: 52px;
+        height: 52px;
+    }
+
+    .lesson-number b {
+        font-size: 22px;
+    }
+
+    .lesson-title {
+        font-size: 16px;
+    }
+
+    .lesson-header h1 {
+        font-size: 24px;
+    }
+
+    .lesson-content {
+        font-size: 16px;
+    }
+
+    .lesson-content pre {
+        padding: 12px 14px;
+        font-size: 16px;
+    }
+
+    .lesson-content td {
+        padding: 10px 12px;
+        font-size: 16px;
+    }
+}

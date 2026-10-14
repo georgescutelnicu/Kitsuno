@@ -25,18 +25,18 @@ public class WebController {
     private final KanjiService kanjiService;
     private final UserService userService;
     private final FlashcardService flashcardService;
-    private final ParticleService particleService;
+    private final GrammarService grammarService;
 
     public WebController(HiraganaService hiraganaService, KatakanaService katakanaService, KanjiService kanjiService,
                          UserService userService, FlashcardService flashcardService, ApiService apiService,
-                         ParticleService particleService) {
+                         GrammarService grammarService) {
         this.hiraganaService = hiraganaService;
         this.katakanaService = katakanaService;
         this.kanjiService = kanjiService;
         this.userService = userService;
         this.flashcardService = flashcardService;
         this.apiService = apiService;
-        this.particleService = particleService;
+        this.grammarService = grammarService;
     }
 
     @GetMapping("/")
@@ -120,11 +120,20 @@ public class WebController {
         return "kanji-details";
     }
 
-    @GetMapping("/particles")
-    public String showParticles(Model model) {
-        List<Particle> particlesList = this.particleService.findAll();
-        model.addAttribute("particlesList", particlesList);
-        return "particles";
+    @GetMapping("/grammar")
+    public String showGrammar(Model model) {
+        model.addAttribute("grammarList", this.grammarService.findAll());
+        return "grammar";
+    }
+
+    @GetMapping("/grammar/{id}")
+    public String showLesson(@PathVariable("id") int id, Model model) {
+        Grammar lesson = this.grammarService.findById(id);
+
+        model.addAttribute("lesson", lesson);
+        model.addAttribute("prevLesson", this.grammarService.findPrevious(id));
+        model.addAttribute("nextLesson", this.grammarService.findNext(id));
+        return "grammar-lesson";
     }
 
     @GetMapping("/about")
