@@ -1,124 +1,124 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
       xmlns:sec="http://www.thymeleaf.org/spring-security">
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title>Explore vocabulary | Kitsuno</title>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Explore vocabulary | Kitsuno</title>
 
-        <link rel="icon" href="/images/favicon/favicon-32x32.png" sizes="32x32" type="image/png">
-        <link rel="icon" href="/images/favicon/favicon-64x64.png" sizes="64x64" type="image/png">
+    <link rel="icon" href="/images/favicon/favicon-32x32.png" sizes="32x32" type="image/png">
+    <link rel="icon" href="/images/favicon/favicon-64x64.png" sizes="64x64" type="image/png">
 
-        <link rel="preconnect" href="https://fonts.googleapis.com">
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        <link href="https://fonts.googleapis.com/css2?family=Kalam:wght@300;400;700&family=Poppins:ital,wght@0,100;0,400;0,500;0,600;1,400;1,500;1,600&family=Quicksand:wght@300..700&display=swap"
-              rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Kalam:wght@300;400;700&family=Poppins:ital,wght@0,100;0,400;0,500;0,600;1,400;1,500;1,600&family=Quicksand:wght@300..700&display=swap"
+          rel="stylesheet">
 
-        <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/styles.css">
 
-    </head>
-    <body>
-        <nav class="navbar">
-            <div class="logo">
-                <a href="/">
-                    <img src="images/navbar/logo.png" alt="Logo">
-                </a>
-            </div>
-            <ul class="nav-links">
-                <li class="active"><a href="/vocabulary"><img src="images/navbar/vocabulary_icon.png"
-                                                              alt="Vocabulary Icon">
-                    <span>Vocabulary</span></a>
-                </li>
-                <li><a href="/hiragana"><img src="images/navbar/hiragana_icon.png" alt="Hiragana Icon">
-                    <span>Hiragana</span></a></li>
-                <li><a href="/katakana"><img src="images/navbar/katakana_icon.png" alt="Katakana Icon">
-                    <span>Katakana</span></a></li>
-                <li><a href="/kanji"><img src="images/navbar/kanji_icon.png" alt="Kanji Icon"> <span>Kanji</span></a>
-                </li>
-                <li><a href="/flashcards"><img src="images/navbar/flashcard_icon.png" alt="Flashcards Icon">
-                    <span>Flashcards</span></a></li>
-                <li><a href="/particles"><img src="images/navbar/particle_icon.png" alt="Particle Icon">
-                    <span>Particles</span></a></li>
-            </ul>
-            <div class="user-section">
-                <a href="#" class="user-link">
-                    <h6 sec:authorize="isAuthenticated()">Hi <span sec:authentication="name">!</span></h6>
-                    <h6 sec:authorize="!isAuthenticated()">Hi Guest!</h6>
-                    <img src="images/navbar/user_icon.png" alt="User Icon" class="user-icon">
-                </a>
-                <ul class="user-dropdown">
-                    <li sec:authorize="!isAuthenticated()">
-                        <a href="/login"><img src="images/navbar/login.png" alt="Login Icon"> Login</a>
-                    </li>
-                    <li sec:authorize="!isAuthenticated()">
-                        <a href="/register"><img src="images/navbar/register.png" alt="Register Icon"> Register</a>
-                    </li>
-                    <li sec:authorize="isAuthenticated()">
-                        <a href="/profile"><img src="images/navbar/profile.png" alt="Profile Icon"> Profile</a>
-                    </li>
-                    <li sec:authorize="isAuthenticated()">
-                        <a href="/logout"><img src="images/navbar/logout.png" alt="Logout Icon"> Logout</a>
-                    </li>
-                    <li>
-                        <a href="/v1/api-docs"><img src="images/navbar/api.png" alt="Api-Docs Icon"> ApiDocs</a>
-                    </li>
-                </ul>
-            </div>
-        </nav>
+</head>
+<body>
+<nav class="navbar">
+    <div class="logo">
+        <a href="/">
+            <img src="images/navbar/logo.png" alt="Logo">
+        </a>
+    </div>
+    <ul class="nav-links">
+        <li class="active"><a href="/vocabulary"><img src="images/navbar/vocabulary_icon.png"
+                                                      alt="Vocabulary Icon">
+            <span>Vocabulary</span></a>
+        </li>
+        <li><a href="/hiragana"><img src="images/navbar/hiragana_icon.png" alt="Hiragana Icon">
+            <span>Hiragana</span></a></li>
+        <li><a href="/katakana"><img src="images/navbar/katakana_icon.png" alt="Katakana Icon">
+            <span>Katakana</span></a></li>
+        <li><a href="/kanji"><img src="images/navbar/kanji_icon.png" alt="Kanji Icon"> <span>Kanji</span></a>
+        </li>
+        <li><a href="/flashcards"><img src="images/navbar/flashcard_icon.png" alt="Flashcards Icon">
+            <span>Flashcards</span></a></li>
+        <li><a href="/grammar"><img src="images/navbar/grammar_icon.png" alt="Grammar Icon">
+            <span>Grammar</span></a></li>
+    </ul>
+    <div class="user-section">
+        <a href="#" class="user-link">
+            <h6 sec:authorize="isAuthenticated()">Hi <span sec:authentication="name">!</span></h6>
+            <h6 sec:authorize="!isAuthenticated()">Hi Guest!</h6>
+            <img src="images/navbar/user_icon.png" alt="User Icon" class="user-icon">
+        </a>
+        <ul class="user-dropdown">
+            <li sec:authorize="!isAuthenticated()">
+                <a href="/login"><img src="images/navbar/login.png" alt="Login Icon"> Login</a>
+            </li>
+            <li sec:authorize="!isAuthenticated()">
+                <a href="/register"><img src="images/navbar/register.png" alt="Register Icon"> Register</a>
+            </li>
+            <li sec:authorize="isAuthenticated()">
+                <a href="/profile"><img src="images/navbar/profile.png" alt="Profile Icon"> Profile</a>
+            </li>
+            <li sec:authorize="isAuthenticated()">
+                <a href="/logout"><img src="images/navbar/logout.png" alt="Logout Icon"> Logout</a>
+            </li>
+            <li>
+                <a href="/v1/api-docs"><img src="images/navbar/api.png" alt="Api-Docs Icon"> ApiDocs</a>
+            </li>
+        </ul>
+    </div>
+</nav>
 
-        <nav class="bottom-navbar">
-            <ul class="nav-links">
-                <li class="active"><a href="/vocabulary"><img src="images/navbar/vocabulary_icon.png"
-                                                              alt="Vocabulary Icon">
-                    <span>Vocabulary</span></a>
-                </li>
-                <li><a href="/hiragana"><img src="images/navbar/hiragana_icon.png" alt="Hiragana Icon">
-                    <span>Hiragana</span></a></li>
-                <li><a href="/katakana"><img src="images/navbar/katakana_icon.png" alt="Katakana Icon">
-                    <span>Katakana</span></a></li>
-                <li><a href="/kanji"><img src="images/navbar/kanji_icon.png" alt="Kanji Icon"> <span>Kanji</span></a>
-                </li>
-                <li><a href="/flashcards"><img src="images/navbar/flashcard_icon.png" alt="Flashcards Icon">
-                    <span>Flashcards</span></a></li>
-                <li><a href="/particles"><img src="images/navbar/particle_icon.png" alt="Particle Icon">
-                    <span>Particles</span></a></li>
-            </ul>
-        </nav>
+<nav class="bottom-navbar">
+    <ul class="nav-links">
+        <li class="active"><a href="/vocabulary"><img src="images/navbar/vocabulary_icon.png"
+                                                      alt="Vocabulary Icon">
+            <span>Vocabulary</span></a>
+        </li>
+        <li><a href="/hiragana"><img src="images/navbar/hiragana_icon.png" alt="Hiragana Icon">
+            <span>Hiragana</span></a></li>
+        <li><a href="/katakana"><img src="images/navbar/katakana_icon.png" alt="Katakana Icon">
+            <span>Katakana</span></a></li>
+        <li><a href="/kanji"><img src="images/navbar/kanji_icon.png" alt="Kanji Icon"> <span>Kanji</span></a>
+        </li>
+        <li><a href="/flashcards"><img src="images/navbar/flashcard_icon.png" alt="Flashcards Icon">
+            <span>Flashcards</span></a></li>
+        <li><a href="/grammar"><img src="images/navbar/grammar_icon.png" alt="Grammar Icon">
+            <span>Grammar</span></a></li>
+    </ul>
+</nav>
 
-        <div id="main-section">
-            <form id="vocabForm" th:action="@{/vocabulary}" method="post">
-                <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>
-                <div class="vocab-input-container">
-                    <input type="text" id="query" name="query" required pattern="^(?!\s*$).+"
-                           title="Please enter a word, not just spaces."
-                           placeholder="Enter kanji, kana or english word"/>
-                    <button type="submit">Search</button>
+<div id="main-section">
+    <form id="vocabForm" th:action="@{/vocabulary}" method="post">
+        <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>
+        <div class="vocab-input-container">
+            <input type="text" id="query" name="query" required pattern="^(?!\s*$).+"
+                   title="Please enter a word, not just spaces."
+                   placeholder="Enter kanji, kana or english word"/>
+            <button type="submit">Search</button>
+        </div>
+        <div class="vocab-container">
+            <img src="images/vocabulary/vocab_icon.png" alt="Vocabulary Icon"/>
+            <p>Discover real sentences that show how words are used in different contexts</p>
+        </div>
+    </form>
+
+    <div class="related-words" th:if="${apiResponse != null}">
+        <hr class="hr-header">
+        <h3>Sentences</h3>
+        <p class="related-words-p">Common sentences and meanings related to the word '<span
+                th:text="${query}"></span>'</p>
+
+        <div class="vocabulary-list">
+            <div th:each="sentence : ${apiResponse.sentences}">
+                <div class="vocab-item">
+                    <p class="kanji-word" th:text="${sentence.furigana}"></p>
+                    <p class="meaning" th:text="${sentence.translation}"></p>
                 </div>
-                <div class="vocab-container">
-                    <img src="images/vocabulary/vocab_icon.png" alt="Vocabulary Icon"/>
-                    <p>Discover real sentences that show how words are used in different contexts</p>
-                </div>
-            </form>
-
-            <div class="related-words" th:if="${apiResponse != null}">
-                <hr class="hr-header">
-                <h3>Sentences</h3>
-                <p class="related-words-p">Common sentences and meanings related to the word '<span
-                        th:text="${query}"></span>'</p>
-
-                <div class="vocabulary-list">
-                    <div th:each="sentence : ${apiResponse.sentences}">
-                        <div class="vocab-item">
-                            <p class="kanji-word" th:text="${sentence.furigana}"></p>
-                            <p class="meaning" th:text="${sentence.translation}"></p>
-                        </div>
-                        <hr>
-                    </div>
-                </div>
-
+                <hr>
             </div>
         </div>
 
-        <script src="js/script.js"></script>
-    </body>
+    </div>
+</div>
+
+<script src="js/script.js"></script>
+</body>
 </html>

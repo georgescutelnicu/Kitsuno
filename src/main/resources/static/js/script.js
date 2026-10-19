@@ -1,3 +1,51 @@
+
+// Landing page scroll reveal
+document.addEventListener('DOMContentLoaded', function () {
+    const revealElements = document.querySelectorAll('.wl-reveal');
+    if (revealElements.length === 0) return;
+
+    if (!('IntersectionObserver' in window)) {
+        revealElements.forEach(el => el.classList.add('is-visible'));
+        return;
+    }
+
+    const observer = new IntersectionObserver(entries => {
+        entries.forEach(entry => {
+            if (!entry.isIntersecting) return;
+
+            const el = entry.target;
+            el.classList.add('is-visible');
+            observer.unobserve(el);
+
+            setTimeout(() => {
+                el.style.transitionDelay = '';
+            }, 900);
+        });
+    }, { threshold: 0.15 });
+
+    revealElements.forEach((el, i) => {
+        el.style.transitionDelay = (i % 3) * 80 + 'ms';
+        observer.observe(el);
+    });
+});
+
+
+// Landing page copy API example
+const copyCodeButton = document.getElementById('copyCode');
+const codeSample = document.getElementById('codeSample');
+
+if (copyCodeButton && codeSample && navigator.clipboard) {
+    copyCodeButton.addEventListener('click', function () {
+        navigator.clipboard.writeText(codeSample.innerText).then(() => {
+            copyCodeButton.textContent = 'Copied!';
+            setTimeout(() => {
+                copyCodeButton.textContent = 'Copy';
+            }, 1500);
+        });
+    });
+}
+
+
 // Redirect li items to their respective anchor tag link
 const navItems = document.querySelectorAll(".nav-links li");
 
@@ -416,3 +464,4 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     });
 });
+

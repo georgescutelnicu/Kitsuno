@@ -6,8 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title th:text="'Lesson ' + ${lesson.id} + ': ' + ${lesson.title} + ' | Kitsuno'"></title>
 
-    <link rel="icon" href="/images/favicon/favicon-32x32.png" sizes="32x32" type="image/png">
-    <link rel="icon" href="/images/favicon/favicon-64x64.png" sizes="64x64" type="image/png">
+    <link rel="icon" th:href="@{/images/favicon/favicon-32x32.png}" sizes="32x32" type="image/png">
+    <link rel="icon" th:href="@{/images/favicon/favicon-64x64.png}" sizes="64x64" type="image/png">
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -15,6 +15,7 @@
           rel="stylesheet">
 
     <link rel="stylesheet" th:href="@{/css/styles.css}">
+
 </head>
 <body>
 <nav class="navbar">
@@ -27,15 +28,15 @@
         <li><a href="/vocabulary"><img th:src="@{/images/navbar/vocabulary_icon.png}" alt="Vocabulary Icon">
             <span>Vocabulary</span></a>
         </li>
-        <li><a href="/hiragana"><img th:src="@{/images/navbar/hiragana_icon.png}" alt="Hiragana Icon">
+        <li class="active"><a href="/hiragana"><img th:src="@{/images/navbar/hiragana_icon.png}" alt="Hiragana Icon">
             <span>Hiragana</span></a></li>
         <li><a href="/katakana"><img th:src="@{/images/navbar/katakana_icon.png}" alt="Katakana Icon">
             <span>Katakana</span></a></li>
-        <li><a href="/kanji"><img th:src="@{/images/navbar/kanji_icon.png}" alt="Kanji Icon">
-            <span>Kanji</span></a></li>
+        <li><a href="/kanji"><img th:src="@{/images/navbar/kanji_icon.png}" alt="Kanji Icon"> <span>Kanji</span></a>
+        </li>
         <li><a href="/flashcards"><img th:src="@{/images/navbar/flashcard_icon.png}" alt="Flashcards Icon">
             <span>Flashcards</span></a></li>
-        <li class="active"><a href="/grammar"><img th:src="@{/images/navbar/particle_icon.png}" alt="Grammar Icon">
+        <li><a href="/grammar"><img th:src="@{/images/navbar/grammar_icon.png}" alt="Grammar Icon">
             <span>Grammar</span></a></li>
     </ul>
     <div class="user-section">
@@ -69,15 +70,15 @@
         <li><a href="/vocabulary"><img th:src="@{/images/navbar/vocabulary_icon.png}" alt="Vocabulary Icon">
             <span>Vocabulary</span></a>
         </li>
-        <li><a href="/hiragana"><img th:src="@{/images/navbar/hiragana_icon.png}" alt="Hiragana Icon">
+        <li class="active"><a href="/hiragana"><img th:src="@{/images/navbar/hiragana_icon.png}" alt="Hiragana Icon">
             <span>Hiragana</span></a></li>
         <li><a href="/katakana"><img th:src="@{/images/navbar/katakana_icon.png}" alt="Katakana Icon">
             <span>Katakana</span></a></li>
-        <li><a href="/kanji"><img th:src="@{/images/navbar/kanji_icon.png}" alt="Kanji Icon">
-            <span>Kanji</span></a></li>
+        <li><a href="/kanji"><img th:src="@{/images/navbar/kanji_icon.png}" alt="Kanji Icon"> <span>Kanji</span></a>
+        </li>
         <li><a href="/flashcards"><img th:src="@{/images/navbar/flashcard_icon.png}" alt="Flashcards Icon">
             <span>Flashcards</span></a></li>
-        <li class="active"><a href="/grammar"><img th:src="@{/images/navbar/particle_icon.png}" alt="Grammar Icon">
+        <li><a href="/grammar"><img th:src="@{/images/navbar/grammar_icon.png}" alt="Grammar Icon">
             <span>Grammar</span></a></li>
     </ul>
 </nav>

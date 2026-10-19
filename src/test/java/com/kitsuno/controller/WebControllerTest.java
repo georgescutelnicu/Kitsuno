@@ -227,13 +227,6 @@ public class WebControllerTest {
     }
 
     @Test
-    public void testShowAbout() throws Exception {
-        mockMvc.perform(get("/about"))
-                .andExpect(status().isOk())
-                .andExpect(view().name("about"));
-    }
-
-    @Test
     public void testShowPrivacyPolicy() throws Exception {
         mockMvc.perform(get("/privacypolicy"))
                 .andExpect(status().isOk())

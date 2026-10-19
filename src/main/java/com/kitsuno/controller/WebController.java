@@ -136,11 +136,6 @@ public class WebController {
         return "grammar-lesson";
     }
 
-    @GetMapping("/about")
-    public String showAbout() {
-        return "about";
-    }
-
     @GetMapping("/privacypolicy")
     public String showPrivacyPolicy() {
         return "privacypolicy";
