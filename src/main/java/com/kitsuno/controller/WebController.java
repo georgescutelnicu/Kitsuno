@@ -141,8 +141,8 @@ public class WebController {
         return "privacypolicy";
     }
 
-    @GetMapping("/tos")
-    public String showToS() {
-        return "tos";
+    @GetMapping("/about")
+    public String showAbout() {
+        return "about";
     }
 }

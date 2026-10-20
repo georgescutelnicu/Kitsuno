@@ -232,11 +232,4 @@ public class WebControllerTest {
                 .andExpect(status().isOk())
                 .andExpect(view().name("privacypolicy"));
     }
-
-    @Test
-    public void testShowToS() throws Exception {
-        mockMvc.perform(get("/tos"))
-                .andExpect(status().isOk())
-                .andExpect(view().name("tos"));
-    }
 }
