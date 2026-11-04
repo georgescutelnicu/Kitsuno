@@ -68,7 +68,7 @@ body {
 }
 
 .nav-links img {
-    height: 40px;
+    height: 50px;
     margin-bottom: 5px;
 }
 
@@ -169,7 +169,7 @@ body {
 }
 
 .bottom-navbar img {
-	height: 30px;
+	height: 36px;
 }
 
 .bottom-navbar span {
@@ -235,7 +235,7 @@ body {
         font-size: 8px;
     }
     .bottom-navbar img {
-        height: 18px;
+        height: 26px;
     }
 }
 
@@ -2330,6 +2330,7 @@ hr {
 .lesson-number b {
     font-family: "Kalam", cursive;
     font-size: 26px;
+    margin-top: 1px;
 }
 
 .lesson-title {
