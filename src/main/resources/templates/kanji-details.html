@@ -28,11 +28,11 @@
         <li><a href="/vocabulary"><img th:src="@{/images/navbar/vocabulary_icon.png}" alt="Vocabulary Icon">
             <span>Vocabulary</span></a>
         </li>
-        <li class="active"><a href="/hiragana"><img th:src="@{/images/navbar/hiragana_icon.png}" alt="Hiragana Icon">
+        <li><a href="/hiragana"><img th:src="@{/images/navbar/hiragana_icon.png}" alt="Hiragana Icon">
             <span>Hiragana</span></a></li>
         <li><a href="/katakana"><img th:src="@{/images/navbar/katakana_icon.png}" alt="Katakana Icon">
             <span>Katakana</span></a></li>
-        <li><a href="/kanji"><img th:src="@{/images/navbar/kanji_icon.png}" alt="Kanji Icon"> <span>Kanji</span></a>
+        <li class="active"><a href="/kanji"><img th:src="@{/images/navbar/kanji_icon.png}" alt="Kanji Icon"> <span>Kanji</span></a>
         </li>
         <li><a href="/flashcards"><img th:src="@{/images/navbar/flashcard_icon.png}" alt="Flashcards Icon">
             <span>Flashcards</span></a></li>
@@ -40,26 +40,35 @@
             <span>Grammar</span></a></li>
     </ul>
     <div class="user-section">
-        <a href="#" class="user-link">
-            <h6 sec:authorize="isAuthenticated()">Hi <span sec:authentication="name">!</span></h6>
-            <h6 sec:authorize="!isAuthenticated()">Hi Guest!</h6>
-            <img th:src="@{/images/navbar/user_icon.png}" alt="User Icon" class="user-icon">
+        <a href="#" class="user-link" aria-label="Account menu">
+            <img sec:authorize="isAuthenticated()" th:src="@{/images/navbar/user_loggedin.png}" alt="Your account" class="user-avatar">
+            <img sec:authorize="!isAuthenticated()" th:src="@{/images/navbar/user_guest.png}" alt="Guest" class="user-avatar">
+            <span sec:authorize="isAuthenticated()" class="status-dot online" title="Logged in"></span>
+            <span sec:authorize="!isAuthenticated()" class="status-dot offline" title="Logged out"></span>
         </a>
         <ul class="user-dropdown">
-            <li sec:authorize="!isAuthenticated()">
-                <a href="/login"><img th:src="@{/images/navbar/login.png}" alt="Login Icon"> LogIn</a>
+            <li class="user-menu-head" sec:authorize="isAuthenticated()">
+                <strong sec:authentication="name">name</strong>
+                <small>Logged in</small>
+            </li>
+            <li class="user-menu-head" sec:authorize="!isAuthenticated()">
+                <strong>Guest</strong>
+                <small>Log in to save your progress</small>
             </li>
             <li sec:authorize="!isAuthenticated()">
-                <a href="/register"><img th:src="@{/images/navbar/register.png}" alt="Register Icon"> Register</a>
+                <a th:href="@{/login}"><img th:src="@{/images/navbar/login.png}" alt="Login Icon"> Log in</a>
+            </li>
+            <li sec:authorize="!isAuthenticated()">
+                <a th:href="@{/register}"><img th:src="@{/images/navbar/register.png}" alt="Register Icon"> Register</a>
             </li>
             <li sec:authorize="isAuthenticated()">
-                <a href="/profile"><img th:src="@{/images/navbar/profile.png}" alt="Profile Icon"> Profile</a>
+                <a th:href="@{/profile}"><img th:src="@{/images/navbar/profile.png}" alt="Profile Icon"> Profile</a>
             </li>
             <li sec:authorize="isAuthenticated()">
-                <a href="/logout"><img th:src="@{/images/navbar/logout.png}" alt="Logout Icon"> Logout</a>
+                <a th:href="@{/logout}" class="danger"><img th:src="@{/images/navbar/logout.png}" alt="Logout Icon"> Log out</a>
             </li>
             <li>
-                <a href="/v1/api-docs"><img th:src="@{/images/navbar/api.png}" alt="Api-Docs Icon"> ApiDocs</a>
+                <a th:href="@{/v1/api-docs}"><img th:src="@{/images/navbar/api.png}" alt="Api-Docs Icon"> API docs</a>
             </li>
         </ul>
     </div>
@@ -70,11 +79,11 @@
         <li><a href="/vocabulary"><img th:src="@{/images/navbar/vocabulary_icon.png}" alt="Vocabulary Icon">
             <span>Vocabulary</span></a>
         </li>
-        <li class="active"><a href="/hiragana"><img th:src="@{/images/navbar/hiragana_icon.png}" alt="Hiragana Icon">
+        <li><a href="/hiragana"><img th:src="@{/images/navbar/hiragana_icon.png}" alt="Hiragana Icon">
             <span>Hiragana</span></a></li>
         <li><a href="/katakana"><img th:src="@{/images/navbar/katakana_icon.png}" alt="Katakana Icon">
             <span>Katakana</span></a></li>
-        <li><a href="/kanji"><img th:src="@{/images/navbar/kanji_icon.png}" alt="Kanji Icon"> <span>Kanji</span></a>
+        <li class="active"><a href="/kanji"><img th:src="@{/images/navbar/kanji_icon.png}" alt="Kanji Icon"> <span>Kanji</span></a>
         </li>
         <li><a href="/flashcards"><img th:src="@{/images/navbar/flashcard_icon.png}" alt="Flashcards Icon">
             <span>Flashcards</span></a></li>
